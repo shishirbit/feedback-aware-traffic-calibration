@@ -1,7 +1,7 @@
-Single-file manuscript source
+# Single-file manuscript source
 
-main.tex contains all sections, two algorithms, all 19 tables, eight figure environments/captions and the complete bibliography. There are no input/include dependencies or separate section/table/caption .tex files. Figures are external vector PDFs in figures/. Compile main.tex with Tectonic or LaTeX; no BibTeX step is required. The supplied Interact class is retained.
+`main.tex` is the authoritative source and contains every section, both algorithms, all 19 tables, eight figure environments and the complete bibliography. It has no input/include dependencies. External vector PDF figures are in `figures/`; no TikZ is used. Compile with Tectonic or LaTeX; no BibTeX step is required. The supplied Interact class is retained.
 
-Tables and figures are embedded after their first explanatory paragraph within the appropriate section, rather than collected at the end. Runtime material remains in the compute subsection. The user's explicit embedded-layout instruction supersedes the earlier separate-page submission layout. The compiled PDF has 33 pages. All visual/algorithm references resolve; no overfull boxes were reported. Numerical content and section prose lengths remain unchanged.
+The revised PDF has 35 pages. Introduction and Related Work contain 1,000 and 1,500 prose words, respectively. All visual and algorithm references resolve, with no overfull boxes. The bibliography contains 26 checked published references: 15 journal/Transactions papers and 11 original published conference papers, retained with the author's authorization. No arXiv or unpublished paper is cited. See `reference-audit.md` and `reference-verification.json` for source checks and resolved metadata discrepancies.
 
-main.tex is the authoritative manuscript source. Older asset builders can regenerate figures but also emit obsolete helper .tex files; do not use them to reconstruct the manuscript. The prior modular source is preserved outside the active manuscript in artifacts/manuscript-qa/pre-single-file.zip.
+`references.bib` is synchronized bibliographic metadata; the formatted bibliography is embedded directly in `main.tex`. Old asset builders emit obsolete helper TeX files and must not be used to reconstruct the manuscript. Results and claim limits remain unchanged.

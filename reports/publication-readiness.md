@@ -100,3 +100,8 @@ The expanded supplied-template redraft contains a 1,000-word introduction, 1,500
 ## Single-file manuscript layout — 2026-09-27
 
 At the author’s explicit request, all sections, bibliography, table definitions and figure captions are now in manuscript/main.tex. All 19 tables and eight figures appear within their relevant sections. The compiled PDF is 33 pages. Cross-references and rendered layout were checked. The earlier separate-page layout is superseded by this author-requested arrangement.
+
+
+## Published-reference revision - 27 September 2026
+
+The current single-file manuscript supersedes the earlier bibliography and page counts above. It has 35 pages and 26 checked published references (15 journal/Transactions papers and 11 original published conference papers retained with author authorization). No arXiv or unpublished study is cited. Two draft-only feedback studies were removed and their dependent prose replaced. Introduction and Related Work remain 1,000 and 1,500 words. All citations, tables, figures and algorithms resolve; no overfull boxes remain. Source checks and metadata corrections are recorded in manuscript/reference-audit.md and reference-verification.json. Experimental findings and the registered claim boundary are unchanged.

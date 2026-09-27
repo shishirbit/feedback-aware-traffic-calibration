@@ -1,14 +1,14 @@
 {
   "title": "Causal residual calibration for traffic forecasting with delayed and lost sensor feedback",
-  "pages": 33,
+  "pages": 35,
   "abstract_words": 150,
   "introduction": 1000,
   "related-work": 1500,
-  "approximate_prose_words": 8926,
+  "approximate_prose_words": 8920,
   "table_count": 19,
   "figure_count": 8,
   "algorithms": 2,
-  "references": 16,
+  "references": 26,
   "unresolved_references": 0,
   "unreferenced_tables_figures_algorithms": 0,
   "overfull_boxes": 0,
@@ -16,6 +16,9 @@
   "public_repository": "https://github.com/shishirbit/feedback-aware-traffic-calibration",
   "raw_real_datasets_redistributed": false,
   "author_declarations": "No funding, competing interests or additional contributors; user confirmed",
-  "pdf_sha256": "49a1488a7773496ab16dc41eb08de9dcdbd497325450d93edf5125c3c450115e",
-  "tex_files": 1
+  "pdf_sha256": "53ecf0fe7985ba713fa08e82f423467c32adf9eeeb4912df038933f3db1c8f49",
+  "tex_files": 1,
+  "journal_references": 15,
+  "published_conference_references": 11,
+  "arxiv_or_unpublished_references": 0
 }
