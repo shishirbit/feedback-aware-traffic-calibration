@@ -1,0 +1,720 @@
+{
+  "registry_path": "configs\\real_core_c1_c2_c5.json",
+  "registry_sha256": "a2573666abe8c7878510b78cbb91c561475de37e75091c9f3d861645a3ee70fb",
+  "runs": [
+    {
+      "run": "metr_la-seed11-calibration",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C1-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C2-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C5-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-calibration",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C1-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C2-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed22-C5-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-calibration",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C1-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C2-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed33-C5-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-calibration",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C1-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C2-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed11-C5-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-calibration",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C1-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C2-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed22-C5-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-calibration",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C1-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault101-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault202-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault202-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault202-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault303-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault303-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C2-fault303-farcal",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C5-fault303-farcal",
+      "status": "completed"
+    }
+  ],
+  "runtime_seconds": 29733.629472600005,
+  "schema_version": 1,
+  "scope_boundary": "This is the registered primary FAR-GW C0-C5 completion step. It does not replace the separately registered one-factor stress tests or the matched-rate independent control.",
+  "status": "completed",
+  "summaries": [
+    {
+      "dataset": "metr_la",
+      "far_cal_coverage": 0.898502637400034,
+      "scenario": "C1",
+      "superiority_rule_met": true
+    },
+    {
+      "dataset": "metr_la",
+      "far_cal_coverage": 0.898502637400034,
+      "scenario": "C2",
+      "superiority_rule_met": true
+    },
+    {
+      "dataset": "metr_la",
+      "far_cal_coverage": 0.8892831889049385,
+      "scenario": "C5",
+      "superiority_rule_met": true
+    },
+    {
+      "dataset": "pems_bay",
+      "far_cal_coverage": 0.9006397890946503,
+      "scenario": "C1",
+      "superiority_rule_met": false
+    },
+    {
+      "dataset": "pems_bay",
+      "far_cal_coverage": 0.9006397890946503,
+      "scenario": "C2",
+      "superiority_rule_met": false
+    },
+    {
+      "dataset": "pems_bay",
+      "far_cal_coverage": 0.8977146270694658,
+      "scenario": "C5",
+      "superiority_rule_met": false
+    }
+  ]
+}

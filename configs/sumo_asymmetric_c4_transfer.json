@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "registered_before_asymmetric_c4_evaluation",
+  "purpose": "Scenario-transfer evaluation of SUMO C3-locked asymmetric FAR-Cal under permanent feedback loss",
+  "scenario": "C4",
+  "candidate": "asym100",
+  "model_seeds": [11, 22, 33],
+  "fault_seeds": [101, 202, 303],
+  "episode_count_per_run": 30,
+  "comparators": ["rolling", "aci"],
+  "primary_endpoint": "equal-horizon mean 90% interval score",
+  "coverage_floor": 0.88,
+  "inference": "Average paired effects across model and fault seeds within each episode, then bootstrap the 30 episodes with 2000 resamples.",
+  "superiority_rule": "Both comparator-minus-candidate 95% episode-bootstrap lower bounds must exceed zero and aggregate 90% coverage must be at least 0.88.",
+  "interpretation_boundary": "The asymmetric design was locked using C3 evidence; this is a scenario-transfer test on the existing held-out SUMO episodes, not a newly generated episode confirmation."
+}

@@ -1,0 +1,59 @@
+project: ps1_feedback_traffic
+profile: paper
+sampling_minutes: 5
+history_bins: 12
+horizon_bins: 12
+report_horizons: [3, 6, 12]
+interval_levels: [0.90, 0.95]
+units: mph
+split:
+  train: 0.60
+  tune: 0.10
+  calibration: 0.10
+  test: 0.20
+training:
+  seeds: [11, 22, 33]
+  epochs: 100
+  patience: 15
+  batch_size: 32
+  learning_rate: 0.001
+  gradient_clip: 5.0
+  quantiles: [0.05, 0.50, 0.95]
+calibration:
+  method: far_cal
+  scale_floor_mph: 1.0
+  buffer_days: 7
+  age_decay_bins: 288
+  context_bandwidth: 1.0
+  support_reference: 50
+  stale_decay_bins: 288
+  beta_gap: 0.25
+  beta_missing: 0.25
+  inflation_cap: 3.0
+faults:
+  seeds: [101, 202, 303]
+  primary: C3
+  connected_fraction: 0.10
+  duration_bins: 6
+  backlog_release_bins: 3
+  events_per_day: 2
+sumo:
+  mainline_length_m: 10000
+  stations: 20
+  through_lanes: 2
+  step_seconds: 1
+  aggregation_seconds: 300
+  episode_seconds: 28800
+  warmup_seconds: 3600
+  train_episodes: 60
+  tune_episodes: 15
+  calibration_episodes: 15
+  test_episodes: 30
+  physical_families: [P0, P1, P2, P3]
+evaluation:
+  bootstrap_resamples: 2000
+  real_block_hours: 24
+  recovery_window_origins: 12
+  recovery_min_pairs: 100
+  recovery_tolerance: 0.02
+  recovery_consecutive_windows: 3

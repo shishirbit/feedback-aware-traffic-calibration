@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "locked_before_episode_generation",
+  "purpose": "Independent validation of regularized FAR-Cal after the original SUMO test was inspected",
+  "episode_count": 30,
+  "episode_seed_base": 50000,
+  "family_counts": {"P0": 7, "P1": 7, "P2": 8, "P3": 8},
+  "model_seeds": [11, 22, 33],
+  "fault_seeds": [101, 202, 303],
+  "scenario": "C3",
+  "locked_candidate": "v2s25",
+  "comparators": ["rolling", "aci"],
+  "primary_endpoint": "equal-horizon mean 90% interval score",
+  "coverage_floor": 0.88,
+  "inference": "Average paired effects across model and fault seeds within each episode, then bootstrap the 30 complete episodes with 2000 resamples.",
+  "superiority_rule": "Both comparator-minus-candidate 95% episode-bootstrap lower bounds must exceed zero and candidate aggregate 90% coverage must be at least 0.88.",
+  "data_boundary": "No episode with seed 50001 through 50030 existed in the replication directory when this registry was committed."
+}

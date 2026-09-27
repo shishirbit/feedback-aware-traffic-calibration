@@ -1,0 +1,31 @@
+# PS-1 evidence status
+
+Registry SHA-256: `73a438c5c5c78db0102d958d9f6768c1d46672341f201ff78341b12b6b98fb77`
+
+This report distinguishes executed software checks from pending research evidence.
+
+| Experiment | Dataset | Status | Evidence |
+|---|---|---|---|
+| smoke_cpu | sumo_synthetic_motorway | completed | artifacts/smoke-66538f1f9de7 |
+| metr_la_core | metr_la | planned | resumable predictor training is ready but full CPU run and replay are not yet executed |
+| pems_bay_core | pems_bay | planned | resumable predictor training is ready but full CPU run and replay are not yet executed |
+| metr_la_cpu_feasibility | metr_la | completed | artifacts/feasibility/metr_la-seed11.json |
+| metr_la_far_gw_seed11_training | metr_la | completed | artifacts/training/metr_la-seed11-803c69399a64/training_summary.json |
+| metr_la_far_gw_seed22_training | metr_la | running | artifacts/training/metr_la-seed22-803c69399a64/run_manifest.json |
+| metr_la_seed11_clean_c0 | metr_la | completed | artifacts/evaluation/metr_la-seed11-clean.json |
+| metr_la_seed11_c0_replay_validation | metr_la | completed | artifacts/validation/metr_la-seed11-C0-fault101.json |
+| metr_la_seed11_c3_fault101_static | metr_la | completed | artifacts/evaluation/metr_la-seed11-C3-fault101-static.json |
+| metr_la_seed11_c3_inputs_c2_feedback_fault101_online | metr_la | completed | artifacts/online/metr_la-seed11-C3-feedback-C2-fault101/manifest.json |
+| metr_la_seed11_c3_inputs_c3_feedback_fault101_online | metr_la | completed | artifacts/online/metr_la-seed11-C3-feedback-C3-fault101/manifest.json |
+| metr_la_seed11_feedback_timing_pair_fault101 | metr_la | completed | artifacts/evaluation/metr_la-seed11-C3-feedback-C2-vs-C3-fault101.json |
+| metr_la_simple_controls_clean_c0 | metr_la | completed | artifacts/evaluation/metr_la-simple-controls-clean.json |
+| pems_bay_cpu_feasibility | pems_bay | completed | artifacts/feasibility/pems_bay-seed11.json |
+| pems_bay_simple_controls_clean_c0 | pems_bay | completed | artifacts/evaluation/pems_bay-simple-controls-clean.json |
+| sumo_core | sumo | blocked | Installed SUMO executables stopped launching after restart with Windows integrity status 0xc0e90002; P1-P3 generation cannot proceed until a runnable build is available |
+| sumo_live_smoke | sumo_synthetic_motorway | completed | data/sumo/live-smoke/live_equivalence.json |
+
+## Scientific claim status
+
+H1 has preliminary single-seed/single-fault evidence where listed; it is not confirmed until registered replication. H2-H4 are not evaluated.
+
+No missing result has been replaced by a generated number or zero.

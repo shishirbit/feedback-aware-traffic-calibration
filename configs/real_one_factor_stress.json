@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "locked_before_execution",
+  "backbone": "far_gw",
+  "datasets": ["metr_la", "pems_bay"],
+  "scenarios": ["C3", "C4"],
+  "model_seeds": [11, 22, 33],
+  "fault_seeds": [101, 202, 303],
+  "baseline": {
+    "duration_bins": 6,
+    "connected_fraction": 0.10,
+    "backlog_release_bins": 3,
+    "additional_backlog_delay_bins": 0,
+    "C3_loss_within": 0.0,
+    "C4_loss_within": 0.50
+  },
+  "one_factor_values": {
+    "duration_bins": [3, 12, 24],
+    "connected_fraction": [0.05, 0.20],
+    "additional_backlog_delay_bins": [3, 12],
+    "loss_within": [0.0, 0.25, 0.50, 1.0]
+  },
+  "cold_calibration": "apply the same C3/C4 reporting process to calibration point inputs and received calibration labels",
+  "mnar": {
+    "low_speed_training_quantile": 0.20,
+    "additional_low_speed_loss_probability": 0.50,
+    "random_seed_offset": 2000000
+  },
+  "evaluation_stride_bins": 12,
+  "focus_recovery_bins": 12,
+  "bootstrap_resamples": 2000,
+  "coverage_floor": 0.88,
+  "scope_boundary": "These are one-factor C3/C4 stress tests and do not establish universal superiority or an identifiable MNAR correction. The low-speed truth is used only by the evaluator-side fault generator."
+}

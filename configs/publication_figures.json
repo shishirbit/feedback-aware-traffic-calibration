@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "target_venue": "IEEE Transactions on Intelligent Transportation Systems",
+  "rendering": {
+    "one_column_inches": 3.5,
+    "two_column_inches": 7.16,
+    "png_dpi": 600,
+    "formats": [
+      "pdf",
+      "png",
+      "csv"
+    ]
+  },
+  "selection_rules": {
+    "representative_outage": "METR-LA, model seed 11, C3, fault seed 101; select the event with median baseline 90% interval score at horizon 6 among registered events.",
+    "spatial_heatmap": "Use the same prespecified representative outage as the timeline; order sensors by graph index and show affected sensors only.",
+    "recovery": "Pool all registered SUMO model/fault seeds; display observed window trajectories and mark the formal registered endpoint as censored when minimum-pair requirements are unmet."
+  },
+  "figures": [
+    {
+      "id": "fig01",
+      "slug": "system-and-information-flow",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig02",
+      "slug": "scenario-design-matrix",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig03",
+      "slug": "clean-point-accuracy",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig04",
+      "slug": "clean-calibration-quality",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig05",
+      "slug": "cross-backbone-transfer",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig06",
+      "slug": "representative-outage-timeline",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig07",
+      "slug": "spatial-speed-error-heatmap",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig08",
+      "slug": "recovery-curves",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig09",
+      "slug": "component-ablation",
+      "role": "main",
+      "status": "available"
+    },
+    {
+      "id": "fig10",
+      "slug": "mechanism-isolation",
+      "role": "supplement",
+      "status": "available"
+    },
+    {
+      "id": "fig11",
+      "slug": "c0-c5-core-matrix",
+      "role": "main",
+      "status": "available",
+      "dependency": "artifacts/real-core-c1-c2-c5-matrix.json"
+    },
+    {
+      "id": "fig12",
+      "slug": "interval-score-vs-outage-duration",
+      "role": "main",
+      "status": "available",
+      "dependency": "artifacts/stress/one_factor/matrix.json"
+    },
+    {
+      "id": "fig13",
+      "slug": "compute-quality-tradeoff",
+      "role": "supplement",
+      "status": "available",
+      "dependency": "artifacts/compute-quality/matrix.json"
+    },
+    {
+      "id": "fig14",
+      "slug": "all-benchmark-comparison",
+      "role": "main",
+      "status": "available",
+      "dependency": "artifacts\\evaluation\\cross-backbone-transfer-synthesis-v3.json"
+    }
+  ]
+}

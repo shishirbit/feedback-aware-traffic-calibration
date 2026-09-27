@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "selection_partition": "tune",
+  "selection_metric": "equal-horizon mean 90% interval score",
+  "selection_model_seed": 11,
+  "selection_fault_seed": 101,
+  "constraint": "Retain at least one spatial neighbor and positive gap/missingness inflation coefficients.",
+  "candidates": [
+    {"id": "base", "parameters": {"maximum_neighbors": 4}},
+    {"id": "neighbors1", "parameters": {"maximum_neighbors": 1}},
+    {"id": "neighbors2", "parameters": {"maximum_neighbors": 2}},
+    {"id": "beta005", "parameters": {"maximum_neighbors": 4, "beta_gap": 0.05, "beta_missing": 0.05}},
+    {"id": "beta010", "parameters": {"maximum_neighbors": 4, "beta_gap": 0.10, "beta_missing": 0.10}},
+    {"id": "tau144", "parameters": {"maximum_neighbors": 4, "tau": 144.0}},
+    {"id": "tau576", "parameters": {"maximum_neighbors": 4, "tau": 576.0}},
+    {"id": "bandwidth05", "parameters": {"maximum_neighbors": 4, "bandwidth": 0.5}},
+    {"id": "bandwidth2", "parameters": {"maximum_neighbors": 4, "bandwidth": 2.0}},
+    {"id": "n1b005", "parameters": {"maximum_neighbors": 1, "beta_gap": 0.05, "beta_missing": 0.05}},
+    {"id": "n1b010t576", "parameters": {"maximum_neighbors": 1, "beta_gap": 0.10, "beta_missing": 0.10, "tau": 576.0}},
+    {"id": "n2b005w2", "parameters": {"maximum_neighbors": 2, "beta_gap": 0.05, "beta_missing": 0.05, "bandwidth": 2.0}}
+  ]
+}

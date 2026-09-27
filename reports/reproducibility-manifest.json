@@ -1,0 +1,309 @@
+{
+  "configs_and_locks": [
+    {
+      "bytes": 1219,
+      "path": "configs/base.yaml",
+      "sha256": "fa07714bbb02f9daae6229a6d298575ef4f38a4f6edb0222a2a9ea68416b0483"
+    },
+    {
+      "bytes": 460,
+      "path": "configs/metr_la.yaml",
+      "sha256": "1a0c2eb2620d0f35c15a3fd5481fbf607945e393b8f8b0e80a100840c129fa36"
+    },
+    {
+      "bytes": 435,
+      "path": "configs/pems_bay.yaml",
+      "sha256": "4546fd67189860b65d177c45e7a9bab493c7c5418ee7b25d461bb0d704dd43cf"
+    },
+    {
+      "bytes": 119,
+      "path": "configs/sumo.yaml",
+      "sha256": "ea86f0c6e17f4eec2a3c6470426c8183c24d65c273d526c08cf8816314a3bfa6"
+    },
+    {
+      "bytes": 23447,
+      "path": "configs/experiment_registry.yaml",
+      "sha256": "575c62f1744e2843fe76e2be03b2f222ba642f11e1b0d4d0af8d68f8b102a3d4"
+    },
+    {
+      "bytes": 1124,
+      "path": "requirements.lock",
+      "sha256": "6f672e8071c28a0b9f5f0e9a9dd5175c63923ec788a6486374a62c04ad89f387"
+    },
+    {
+      "bytes": 1040,
+      "path": "requirements-py311.lock",
+      "sha256": "fbb1445c984927d5a5f5b788592a3dae41ed4e7532ec4584fb8f1f42c5b11610"
+    }
+  ],
+  "cross_backbone_result": {
+    "cells_meeting_rule": 12,
+    "cells_total": 16,
+    "claim_boundary": "The result shows consistent METR-LA superiority across four tested backbones, but does not establish universal backbone-independent superiority because FAR-GW and STID fail the registered rule on PEMS-BAY C3 and C4.",
+    "dcrnn_cells_meeting_rule": 4,
+    "dcrnn_superiority_all_registered_cells": true,
+    "far_gw_cells_meeting_rule": 2,
+    "four_backbone_matrix_complete": true,
+    "metr_la_superiority_across_tested_backbones": true,
+    "staeformer_cells_meeting_rule": 4,
+    "staeformer_superiority_all_registered_cells": true,
+    "stid_cells_meeting_rule": 2,
+    "stid_superiority_all_registered_cells": false,
+    "universal_backbone_independent_superiority": false
+  },
+  "datasets": [
+    {
+      "bytes": 845,
+      "dataset": "metr_la",
+      "path": "data/prepared/metr_la.manifest.json",
+      "prepared_artifact_sha256": "c8c3270690c39ab47ec1c39b326a51d8f9d13b31d43f6af35d047ff925ba009e",
+      "sha256": "bb103af5c9f30502ef0cea818a4fd59dfb3d7a2ab5fee37d4e12ce50c1f7311a",
+      "source_sha256": "64784b76d6fb8ec9bff4b6decafb354da2bb37840468fdccee5044e511277c05"
+    },
+    {
+      "bytes": 846,
+      "dataset": "pems_bay",
+      "path": "data/prepared/pems_bay.manifest.json",
+      "prepared_artifact_sha256": "ed0a295770ac0291a6a4e45fd4a9182d77ff75f869a27deb56b85b7babdadf5d",
+      "sha256": "19202aa0318a97ee016c5d54f8f75f4c4ecae187d121dfeeaa1f6f0e29736514",
+      "source_sha256": "65d69fb0a2323dba9867179eb7af47c8b814186bc459ff0a4937d21614153c8f"
+    },
+    {
+      "bytes": 16880,
+      "dataset": "sumo",
+      "path": "data/prepared/sumo.manifest.json",
+      "prepared_artifact_sha256": "94d2de177c3ae8f79a6f794f2933c43d484e280009774489b662ad176f64c654",
+      "sha256": "a53bb394d831fd8ec32e2a5b8897f8d87ffcb391bef2cec652d7944203d6c27a",
+      "source_sha256": "c21ec42bd3ffbac7d1127a0df6b9151f113d57e23e5dca7a93609c6f18cfbeb4"
+    }
+  ],
+  "environment": {
+    "gpu_training_environment": "Python 3.11 / CUDA environment pinned by requirements-py311.lock",
+    "gpus": [
+      {
+        "driver": "591.91",
+        "name": "NVIDIA GeForce RTX 5060 Laptop GPU"
+      }
+    ],
+    "packages": {
+      "PyYAML": "6.0.3",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scipy": "1.18.1",
+      "torch": "2.14.0",
+      "traci": "1.27.1"
+    },
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "evidence": [
+    {
+      "bytes": 16553,
+      "path": "artifacts/evaluation/cross-backbone-transfer-synthesis-v3.json",
+      "sha256": "dbd768108ea727c7544adc5e16aa0fefebedad9884ce98cc02833f6194a57f4d"
+    },
+    {
+      "bytes": 12598,
+      "path": "artifacts/staeformer-evaluation-matrix.json",
+      "sha256": "ae44f801aa309d52608219495d74f211dc4706d8fba97f53f69fccf086174022"
+    },
+    {
+      "bytes": 11916,
+      "path": "artifacts/stid-evaluation-matrix.json",
+      "sha256": "2c6f1e68c4895d0230eaf332f84ad4c783b20d5d562d20e86d60da68ac16cdb7"
+    },
+    {
+      "bytes": 12024,
+      "path": "artifacts/dcrnn-evaluation-matrix.json",
+      "sha256": "b5c5632d098f617c80ac3b955336a407330af1ad0a29592f0a966bd309a1cada"
+    },
+    {
+      "bytes": 3291,
+      "path": "artifacts/corel-evaluation/matrix-summary.json",
+      "sha256": "24c9552f9358524c6a1c74c02890bd6cc20e980d9be2226016c7241d55fab30d"
+    },
+    {
+      "bytes": 10862,
+      "path": "artifacts/evaluation/sumo-asymmetric-validation.json",
+      "sha256": "05d7b08596a389db1e0dd6a2b6ce2d3d761b7859a7ca15bff87184f88941d360"
+    },
+    {
+      "bytes": 10724,
+      "path": "artifacts/evaluation/sumo-asymmetric-C4-transfer.json",
+      "sha256": "a925459b95dd2d81bc04c621ac7589b3b139c04b314ef3c64b9ec3103f6cf456"
+    },
+    {
+      "bytes": 3407,
+      "path": "artifacts/evaluation/sumo-recovery-summary.json",
+      "sha256": "ab2918f41cb097e73c57d9d759a944af79154659520b73e57abeeb3437a26a8d"
+    },
+    {
+      "bytes": 7402,
+      "path": "artifacts/evaluation/sumo-C3-farcal-ablation-subset12.json",
+      "sha256": "2c57e3ee115a3925d292b9fb5da4dfb38d23af60c36f1c90e4eefa5d58acb51e"
+    }
+  ],
+  "generated_at_utc": "2026-09-22T11:50:12.565325+00:00",
+  "limitations": [
+    {
+      "detail": "The result shows consistent METR-LA superiority across four tested backbones, but does not establish universal backbone-independent superiority because FAR-GW and STID fail the registered rule on PEMS-BAY C3 and C4.",
+      "id": "claim-universal",
+      "status": "unsupported"
+    },
+    {
+      "detail": "No explicit license was found for redistribution of the exact METR-LA and PEMS-BAY benchmark packages; raw files remain ignored.",
+      "id": "data-redistribution",
+      "status": "blocked"
+    },
+    {
+      "detail": "Real-data C1, C2, C5, and stress rows required by the specification remain unevaluated.",
+      "id": "real-scenarios",
+      "status": "incomplete"
+    },
+    {
+      "detail": "The prespecified SUMO subset ablation is complete; the full registered cross-dataset ablation matrix is not.",
+      "id": "ablations",
+      "status": "partial"
+    },
+    {
+      "detail": "The existing asymmetric-effects plot is supplemental; all six figure families required by the specification remain.",
+      "id": "figures",
+      "status": "incomplete"
+    },
+    {
+      "detail": "All registered SUMO recovery endpoints are censored because the 100-pair threshold exceeds the maximum available affected pairs.",
+      "id": "recovery",
+      "status": "censored"
+    },
+    {
+      "detail": "No finite-sample conformal validity theorem is claimed for dependent, weighted, selectively observed streams.",
+      "id": "theory",
+      "status": "not-claimed"
+    },
+    {
+      "detail": "A three-bin equivalence smoke check is complete; a full live gateway/forecaster study is not.",
+      "id": "live",
+      "status": "partial"
+    },
+    {
+      "detail": "The CoRel evidence is a PS-1 multihorizon adaptation, not a source-split reproduction.",
+      "id": "corel",
+      "status": "adaptation-only"
+    }
+  ],
+  "readiness": {
+    "executable_repository": "complete",
+    "experiment_registry": "substantial_but_required_rows_planned",
+    "manuscript": "draft_complete_claims_bounded",
+    "reproduction_manifest": "complete",
+    "required_figures": "incomplete_0_of_6",
+    "results_tables": "partial",
+    "submission_ready": false,
+    "sumo_package": "complete"
+  },
+  "registered_seeds": {
+    "fault": [
+      101,
+      202,
+      303
+    ],
+    "model": [
+      11,
+      22,
+      33
+    ]
+  },
+  "schema_version": 1,
+  "source": {
+    "git_commit": "aaf5da2faf6c45fe87e5ae8a789a5188b7688feb",
+    "git_describe": "aaf5da2",
+    "working_tree_clean_at_generation": true
+  },
+  "status": "partial_publication_bundle",
+  "verification": {
+    "command": ".\\.venv\\Scripts\\python.exe -m pytest -q",
+    "result": "78 passed"
+  },
+  "completed_real_data_extension": {
+    "core": "artifacts/real-core-c1-c2-c5-matrix.json",
+    "matched_control": "artifacts/stress/matched_control/matrix.json",
+    "one_factor": "artifacts/stress/one_factor/matrix.json",
+    "audit": "reports/real-stress-provenance-audit.json",
+    "claim_boundary": "METR-LA passes all locked FAR-GW extension cells; PEMS-BAY does not. No universal superiority or identifiable MNAR correction.",
+    "compute_quality": "artifacts/compute-quality/matrix.json"
+  },
+  "reporting_working_tree_commit": "a0cf5dbc07ddf6c8a1d4a81bb6bd05a5794159e4",
+  "reporting_changes_uncommitted": true,
+  "extension_source_hashes": [
+    {
+      "path": "artifacts/real-core-c1-c2-c5-matrix.json",
+      "sha256": "36522525bff872de1f0b9c96cd662594b8836923b0f3f0f76a0290236431307d"
+    },
+    {
+      "path": "artifacts/stress/matched_control/matrix.json",
+      "sha256": "83b5a4fa2bb0a6f747bd65a705b979eb8ca4c60926dd089728688e71e294dff1"
+    },
+    {
+      "path": "artifacts/stress/one_factor/matrix.json",
+      "sha256": "5e4a903d2051d74f499b240018c006b869ddb8bf25925d1173da0ce702bf475d"
+    },
+    {
+      "path": "reports/real-stress-provenance-audit.json",
+      "sha256": "2f0c0920228a449cf2f5c5e3ad20e9b43bf1a49121251d835caaf7e07128d8dc"
+    },
+    {
+      "path": "artifacts/compute-quality/matrix.json",
+      "sha256": "aa1749aef4ce62555a7e1074048f54efe27194213242fdfd5febf3d192003f5b"
+    }
+  ],
+  "reporting_config_hashes": [
+    {
+      "path": "configs\\experiment_registry.yaml",
+      "sha256": "2c3625750afcf1f17f70ac2230474d2bfc5211e0262270a1ffafee391def9495"
+    },
+    {
+      "path": "configs\\publication_figures.json",
+      "sha256": "9186d48cf3977600419ef74d010b9495374e75c48c4f572ed094c70de42c9cbf"
+    },
+    {
+      "path": "configs\\real_one_factor_stress.json",
+      "sha256": "27a77d8daa5894124424b990aaf0d9a42f2c47a849eb231e3808e1f687b8b104"
+    },
+    {
+      "path": "artifacts\\compute-quality\\protocol.json",
+      "sha256": "d87933b02de3150352504dcf2c698c3842c72d8a1d738b3421a6bc98e554a884"
+    }
+  ],
+  "reporting_validation": {
+    "stress_rule_recomputations": 48,
+    "core_control_rule_recomputations": 10,
+    "stress_manifests_verified": 1296,
+    "stress_chunk_hashes_verified": 26784,
+    "benchmark_replays": 18,
+    "archived_quality_reproductions": 6,
+    "generated_figures": 19,
+    "all_benchmark_figure_paired_comparisons": 36
+  },
+  "all_benchmark_figure_sources": [
+    {
+      "path": "artifacts\\evaluation\\cross-backbone-transfer-synthesis-v3.json",
+      "sha256": "dbd768108ea727c7544adc5e16aa0fefebedad9884ce98cc02833f6194a57f4d"
+    },
+    {
+      "path": "artifacts\\evaluation\\metr_la-corel-C3-transfer-audit.json",
+      "sha256": "7f4e3466ba2581ecd0678254a9975a80727b823f38712232520436b33a490bc6"
+    },
+    {
+      "path": "artifacts\\evaluation\\metr_la-corel-C4-transfer-audit.json",
+      "sha256": "6e08915a73bf7e878f5c6c1e4a887c741c2de37ddfae804b858e05f9d0811898"
+    },
+    {
+      "path": "artifacts\\evaluation\\pems_bay-corel-C3-transfer-audit.json",
+      "sha256": "2dc8583e3056bc8616bcca6ff8873a2614069499099f75edcf32d70662e93f55"
+    },
+    {
+      "path": "artifacts\\evaluation\\pems_bay-corel-C4-transfer-audit.json",
+      "sha256": "4b3048b739cafbcf4d1387a998d2dc1a9e93a5956e8f68915c8008d6c4ca5344"
+    }
+  ]
+}

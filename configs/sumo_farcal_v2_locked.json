@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "status": "locked_before_independent_replication_generation",
+  "selected_candidate": "v2s25",
+  "selection_partition": "tune",
+  "selection_model_seed": 11,
+  "selection_fault_seed": 101,
+  "selection_metric": "equal-horizon mean 90% interval score",
+  "coverage_preference": "aggregate 90% coverage at least 0.88",
+  "selected_score": 7.961029595963943,
+  "selected_coverage": 0.9065846994535519,
+  "candidate_results": {
+    "v2s25": {
+      "score": 7.961029595963943,
+      "coverage": 0.9065846994535519,
+      "manifest_sha256": "bab55b24705bbecff30a22d93ec6c587e10c9f16c3c442e5271f7f5bb4f7527d"
+    },
+    "v2s50": {
+      "score": 7.983549219975706,
+      "coverage": 0.9054371584699453,
+      "manifest_sha256": "4b784863bfa98bfe227a5f5d74a6c8402f7f3d2ff215bd1c0a2118920a1c5822"
+    },
+    "v2s75": {
+      "score": 8.019733108562198,
+      "coverage": 0.9037158469945356,
+      "manifest_sha256": "dc0c320c7b9317298ef28a1d24e650fc44782f8fdae77c896214959e19fbb5ac"
+    },
+    "v2s90": {
+      "score": 8.045146006808254,
+      "coverage": 0.9027868852459017,
+      "manifest_sha256": "d6baa751d4f975cb58e8d7a057d2e77801e5e8eb03f1eda5c8a851159bf720aa"
+    }
+  },
+  "candidate_registry_sha256": "c3b8639f71b0a8c7cbdb27e3f6be22f4ce947a61d1ea1c753e6c70435cb95416",
+  "parameters": {
+    "maximum_neighbors": 2,
+    "bandwidth": 2.0,
+    "beta_gap": 0.05,
+    "beta_missing": 0.05,
+    "rolling_shrinkage": 0.25
+  },
+  "validation_boundary": "No independent replication episode has been generated or inspected at lock time."
+}

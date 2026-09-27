@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "locked_before_fresh_asymmetric_validation",
+  "selected_candidate": "asym100",
+  "method": "far_cal_asymmetric",
+  "selection_metric": "equal-horizon mean 90% interval score",
+  "coverage_floor": 0.88,
+  "candidate_results": {
+    "asym100": {
+      "score": 7.2660046509706255,
+      "coverage": 0.8913387978142077,
+      "manifest_sha256": "712802b06038ba24af69107b81cf6746aafac790308638531b0f3d844eebcf32"
+    },
+    "asym25": {
+      "score": 7.720902066256831,
+      "coverage": 0.9056830601092897,
+      "manifest_sha256": "6ea35a099cfd48cc1becabec6ad74b67515eee6a4ea5dead03314f6af6019be5"
+    },
+    "asym50": {
+      "score": 7.494559649795782,
+      "coverage": 0.9050273224043716,
+      "manifest_sha256": "3f5d609b807981a6dde5b4093fd6f394089f5d6a721a7d042513a01d7aa05dbe"
+    },
+    "asym75": {
+      "score": 7.34323863045114,
+      "coverage": 0.9009016393442623,
+      "manifest_sha256": "54d83b76fce5029a68911c3f181b72391c979f04357ccaec0b97ddca1e75ae25"
+    }
+  },
+  "selected_result": {
+    "score": 7.2660046509706255,
+    "coverage": 0.8913387978142077,
+    "manifest_sha256": "712802b06038ba24af69107b81cf6746aafac790308638531b0f3d844eebcf32"
+  },
+  "parameters": {
+    "maximum_neighbors": 2,
+    "bandwidth": 2.0,
+    "beta_gap": 0.05,
+    "beta_missing": 0.05,
+    "asymmetric_blend": 1.0
+  },
+  "candidate_registry_sha256": "d48c238cf79379063f4f0b4fac4136930d420182c05b911c28bd58db6de3d788",
+  "development_replication_result": "artifacts/evaluation/sumo-asymmetric-development.json",
+  "fresh_validation_boundary": "No seed 70001-70040 episode existed at lock time."
+}

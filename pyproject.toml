@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ps1-feedback-traffic"
+version = "0.1.0"
+requires-python = ">=3.11"
+description = "Causal traffic observation and feedback replay research"
+dependencies = [
+  "matplotlib>=3.10,<4",
+  "numpy>=2.0",
+  "pandas>=2.3,<3",
+  "PyYAML>=6",
+  "scipy>=1.15",
+  "tables>=3.10",
+  "torch>=2.6",
+  "traci==1.27.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

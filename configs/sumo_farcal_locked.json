@@ -1,0 +1,95 @@
+{
+  "schema_version": 2,
+  "status": "split_safe_revalidation_after_test_same_candidate",
+  "selected_candidate": "n2b005w2",
+  "selection_partition": "tune",
+  "tuning_protocol": {
+    "temporary_residual_warmup_episode_indices": [
+      60,
+      61,
+      62,
+      63,
+      64
+    ],
+    "scored_episode_indices": [
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74
+    ],
+    "future_calibration_partition_used": false
+  },
+  "selection_model_seed": 11,
+  "selection_fault_seed": 101,
+  "selection_metric": "equal-horizon mean 90% interval score",
+  "coverage_preference": "aggregate 90% coverage at least 0.88",
+  "selected_score": 7.94911792880199,
+  "selected_coverage": 0.9073497267759563,
+  "parameters": {
+    "maximum_neighbors": 2,
+    "tau": 288.0,
+    "bandwidth": 2.0,
+    "support": 50.0,
+    "stale_decay": 288.0,
+    "beta_gap": 0.05,
+    "beta_missing": 0.05,
+    "inflation_cap": 3.0,
+    "buffer_bins": 2016
+  },
+  "candidate_scores": {
+    "bandwidth05": 8.055847516919746,
+    "bandwidth2": 8.055847516919746,
+    "base": 8.055847516919746,
+    "beta005": 8.023796855321999,
+    "beta010": 8.030571678245003,
+    "n1b005": 7.985018101051206,
+    "n1b010t576": 8.019415614644036,
+    "n2b005w2": 7.94911792880199,
+    "neighbors1": 8.017409951256925,
+    "neighbors2": 7.981066398829058,
+    "tau144": 8.060760297514703,
+    "tau576": 8.092783470570716
+  },
+  "candidate_coverages": {
+    "bandwidth05": 0.9107103825136612,
+    "bandwidth2": 0.9107103825136612,
+    "base": 0.9107103825136612,
+    "beta005": 0.9078415300546449,
+    "beta010": 0.9086338797814207,
+    "n1b005": 0.9081147540983606,
+    "n1b010t576": 0.9083060109289617,
+    "n2b005w2": 0.9073497267759563,
+    "neighbors1": 0.9109562841530053,
+    "neighbors2": 0.9101639344262296,
+    "tau144": 0.9045901639344263,
+    "tau576": 0.9106557377049181
+  },
+  "candidate_registry_sha256": "7be8f3533b0ceafa8149b13bb643276ca816495d4500a49ec4ab2b8a27001b5c",
+  "base_tuning_manifest_sha256": "e25af102619433396da3b1123fd858e2cb9b7d325a90bbe0eb6b9d3485eb1d6b",
+  "selected_tuning_manifest_sha256": "39db9fc4ce7176a461c78359836ae3b1fc20c9ccd1fbb26f444bf013e4fa7252",
+  "audit_note": "The original pre-test tuning implementation incorrectly used the later calibration archive. A post-test split-safe audit selected the identical candidate, so no test-driven parameter change was made; the protocol deviation remains disclosed.",
+  "original_pretest_record": {
+    "selected_candidate": "n2b005w2",
+    "selected_score": 7.86437670473193,
+    "candidate_scores": {
+      "base": 7.92307413472938,
+      "neighbors1": 7.9103551462309,
+      "neighbors2": 7.88793405779507,
+      "beta005": 7.8995033721368,
+      "beta010": 7.90411149447081,
+      "tau144": 7.94871892946448,
+      "tau576": 7.94576662032331,
+      "bandwidth05": 7.92312199048874,
+      "bandwidth2": 7.92309011865835,
+      "n1b005": 7.8865539435437,
+      "n1b010t576": 7.88863195506167,
+      "n2b005w2": 7.86437670473193
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "registered_before_real_c4_evaluation",
+  "purpose": "Real-data scenario transfer of asymmetric FAR-Cal under permanent feedback loss",
+  "datasets": ["pems_bay", "metr_la"],
+  "scenario": "C4",
+  "candidate": "asym100",
+  "model_seeds": [11, 22, 33],
+  "fault_seeds": [101, 202, 303],
+  "evaluation_stride_bins": 12,
+  "evaluation_cells": "Sensors named by the active C4 event from event start through 12 bins after event end.",
+  "scalable_variant": "Causal age/context-weighted signed residuals from the sensor and its two-neighbor group, capped at 256 records per sensor, with the locked stale-feedback rule.",
+  "comparators": ["rolling", "aci"],
+  "primary_endpoint": "equal-horizon mean 90% interval score",
+  "coverage_floor": 0.88,
+  "inference": "Three model seeds are averaged within each fault seed, followed by a 24-hour moving-block bootstrap stratified across three fault seeds.",
+  "superiority_rule": "Both comparator-minus-candidate 95% lower bounds must exceed zero and aggregate coverage must be at least 0.88."
+}

@@ -1,0 +1,220 @@
+{
+  "artifact_sha256": "c574a57ad0d71754013cb910c940c30840e318213d8f3b4e68d7370a3fab6def",
+  "episodes": 160,
+  "partition_codes": {
+    "calibration": 2,
+    "replication": 4,
+    "test": 3,
+    "train": 0,
+    "tune": 1
+  },
+  "reference_prepared_sha256": "94d2de177c3ae8f79a6f794f2933c43d484e280009774489b662ad176f64c654",
+  "replication_episode_indices": [
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159
+  ],
+  "replication_truth_inputs": [
+    {
+      "episode_id": "asym-validation-001",
+      "sha256": "82a56235c2562f66e45cb176ac0107beb758d4b68338a7345204ac9aaa595fe3"
+    },
+    {
+      "episode_id": "asym-validation-002",
+      "sha256": "8d25b4c5333618d14104872a9d3a74d32b38a873aabeffe7d6f7f1c154d2843e"
+    },
+    {
+      "episode_id": "asym-validation-003",
+      "sha256": "02185f28550a5f70dbe3ab62b7ff8bc37107c315b55342a184bc8535476459ee"
+    },
+    {
+      "episode_id": "asym-validation-004",
+      "sha256": "4d7d65e10fcc13993c2d8af7f1fbdeaae321545ff2560c023c354e86a8672f3d"
+    },
+    {
+      "episode_id": "asym-validation-005",
+      "sha256": "75a041e7d75a25e8625935fd2446c4b6c645d3f5fd79b14ae0f8c122a2dac204"
+    },
+    {
+      "episode_id": "asym-validation-006",
+      "sha256": "c6cb792738bb4af64ab0d1dac86fbc1563965f63b9643bbca19a27f54ab0d61e"
+    },
+    {
+      "episode_id": "asym-validation-007",
+      "sha256": "bc815be724582b6b69576e9119f4de1e803afab4273f058cfac8def6b06c2e92"
+    },
+    {
+      "episode_id": "asym-validation-008",
+      "sha256": "475afabf5868b1d429eaec494d2c1b614eaea34e4e9bcce8e4af82f5608b3335"
+    },
+    {
+      "episode_id": "asym-validation-009",
+      "sha256": "7f4108e0bfc68ad5359e76ea06c1d322133e6092201ef320ea47716d82bcdbc1"
+    },
+    {
+      "episode_id": "asym-validation-010",
+      "sha256": "1492cb95ebaa407101296fadd2b8944d0c25ddbb7c788a282f08b8ec5846fe0b"
+    },
+    {
+      "episode_id": "asym-validation-011",
+      "sha256": "da622d38617cec4cf3731a01a13791f9143aea8d9c01b1a2653ec47adcb8d717"
+    },
+    {
+      "episode_id": "asym-validation-012",
+      "sha256": "e0645491b44214c3b23b2efc1449f242858ec5c5478b563ba4b19ac9db7cee9f"
+    },
+    {
+      "episode_id": "asym-validation-013",
+      "sha256": "4ab4185872e5814599f53c41fa099f53b45947e8edc5ba8f833af0a3aaad48cd"
+    },
+    {
+      "episode_id": "asym-validation-014",
+      "sha256": "d0a5dec2860d8a0c1d836c361059f81fc1a1e03dffbafd7f8ce2f890065f1a0b"
+    },
+    {
+      "episode_id": "asym-validation-015",
+      "sha256": "b4681e2dbc1c7ee13efcfc1eb221fca11cd89eb2b42cf335aeaf8f1ca0871684"
+    },
+    {
+      "episode_id": "asym-validation-016",
+      "sha256": "4cec4deb95c9ea753b5f9dcc925a93fcf10f4155f5ee9dc7a3327a5d68cadfc5"
+    },
+    {
+      "episode_id": "asym-validation-017",
+      "sha256": "46bdd8f7201123243df78994530c845b129ffdafba5000f11cbf0f8f7b0da556"
+    },
+    {
+      "episode_id": "asym-validation-018",
+      "sha256": "b0b96b31fae1d9ba85c9fdfc4cb0fe740ad95760a3ff69595ca2760ad6c10aca"
+    },
+    {
+      "episode_id": "asym-validation-019",
+      "sha256": "8bcb9fd8e1257b5bd44f9207cdb422b8ff3dd21598244c94d3269dc1c32f112e"
+    },
+    {
+      "episode_id": "asym-validation-020",
+      "sha256": "03c5e20df7d1eb0d0b821a1fe1122d6618b50fb3882cb496ecfd00e9ed92a9e1"
+    },
+    {
+      "episode_id": "asym-validation-021",
+      "sha256": "0e46141dd64d3dd4ed890a215922e12d270e72203c0dc40b47060b260de31d1f"
+    },
+    {
+      "episode_id": "asym-validation-022",
+      "sha256": "271502a7c68b45c04fd391ace655b7e0d52c5efadca180d908ac010c4ed4093d"
+    },
+    {
+      "episode_id": "asym-validation-023",
+      "sha256": "21b84c0f0a2962c8a8314624ab1099f153ce4f4499ece8b08b00b3d74bedd5c9"
+    },
+    {
+      "episode_id": "asym-validation-024",
+      "sha256": "f0dbd779858e470bd159252663a66c7349fb304046c72eaf7264389b312230c2"
+    },
+    {
+      "episode_id": "asym-validation-025",
+      "sha256": "bdb6987bbae454d62f5a769043cbdb4ff4848c0fc51654ecba8c76abe6bf3c1d"
+    },
+    {
+      "episode_id": "asym-validation-026",
+      "sha256": "7c834a053545cb75abd072c3383e8c8d03b70ae83001f581940de7055e65ac9a"
+    },
+    {
+      "episode_id": "asym-validation-027",
+      "sha256": "9708fce0383e85a99a3a72bdc1c69317d396f53d6058bb2ded2f79988005db35"
+    },
+    {
+      "episode_id": "asym-validation-028",
+      "sha256": "d1bf55bafed312ee4924001d3303bda8502d1c51a496ae0e957c8a3cbf502f85"
+    },
+    {
+      "episode_id": "asym-validation-029",
+      "sha256": "59bfecf4441b63935ad5aa43ab0b042e98e681f59fe168e2129f054fb501577f"
+    },
+    {
+      "episode_id": "asym-validation-030",
+      "sha256": "2121c269b54f95566498366b0937052f40dbe2df0e56554a039eabac2ab10650"
+    },
+    {
+      "episode_id": "asym-validation-031",
+      "sha256": "6ca03431931cb9563b6bd77d443760d2dc086b6acd6f97f213e9c7ac37838b6d"
+    },
+    {
+      "episode_id": "asym-validation-032",
+      "sha256": "cf87e14c56a77bb9ca0c2a3850113860e215a91b34489df2610259ac060c36f0"
+    },
+    {
+      "episode_id": "asym-validation-033",
+      "sha256": "68848af42a6e097495a2c7d8e255b66be3139e62f752799329dc002bb3891282"
+    },
+    {
+      "episode_id": "asym-validation-034",
+      "sha256": "7715ec09a8ca6e188b6ed17973407b4778f002904960b9cc08cf2338c5696171"
+    },
+    {
+      "episode_id": "asym-validation-035",
+      "sha256": "b41a81bcb64141e8b12977e3adc09adf24458e5efd3660406da0c02ecf933975"
+    },
+    {
+      "episode_id": "asym-validation-036",
+      "sha256": "775edb4988826be52cd20a8bc8241a51fe3c59d542603ac49a5f47d85327d1f6"
+    },
+    {
+      "episode_id": "asym-validation-037",
+      "sha256": "f33d710de87d2b2f405635e0651a8919bf246ea4a426710f030051b43df1f093"
+    },
+    {
+      "episode_id": "asym-validation-038",
+      "sha256": "4ad502cf2befec799652beda26d5e15af9c7eb7b9d3e8f88f684286d8ea01cc0"
+    },
+    {
+      "episode_id": "asym-validation-039",
+      "sha256": "f747b7059af8ffcafe416ca608c05425e0f19ea54f79c8192fea1ac73265a622"
+    },
+    {
+      "episode_id": "asym-validation-040",
+      "sha256": "4db57799dcc34ddaca675d55e4424bb699d268d7d410aec82e72f1025301af26"
+    }
+  ],
+  "rows": 15360,
+  "schema_version": 1,
+  "source_generation_sha256": "3245f829aa0c938b0ee57cc1562b02a553f30ef150601d43aa57633edef51c24",
+  "status": "completed_independent_replication"
+}

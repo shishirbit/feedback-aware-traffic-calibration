@@ -1,0 +1,11 @@
+{
+  "status": "verified",
+  "manifest_count": 432,
+  "chunk_count": 5328,
+  "matrix_sha256": "1c76443ede5d26621fe44eff11d9ebeca7e063f21cd67d2eb61264ee93d20b72",
+  "exploratory_interval_classification": {
+    "removal_worsens": 13,
+    "removal_improves": 4,
+    "inconclusive": 25
+  }
+}

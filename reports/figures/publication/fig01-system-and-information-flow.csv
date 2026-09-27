@@ -1,0 +1,11 @@
+label,stage
+"Traffic sensors
++ availability mask",1
+"Immutable predictor
+quantile forecasts",2
+"Fault-aware replay
+C0–C5 channels",3
+"Intervals + point
+quality metrics",4
+"Delayed-label ledger
+received feedback only",5

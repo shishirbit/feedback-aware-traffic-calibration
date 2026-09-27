@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "registered_before_real_asymmetric_evaluation",
+  "purpose": "Cross-dataset transfer audit of the SUMO-locked asymmetric FAR-Cal design",
+  "datasets": ["pems_bay", "metr_la"],
+  "scenario": "C3",
+  "candidate": "asym100",
+  "model_seeds": [11, 22, 33],
+  "fault_seeds": [101, 202, 303],
+  "first_feasible_matrix": {"dataset": "pems_bay", "model_seeds": [11, 22, 33], "fault_seeds": [101]},
+  "evaluation_stride_bins": 12,
+  "issue_frequency": "one systematically selected origin per hour across the chronological test stream",
+  "evaluation_cells": "Sensors named by the active C3 event from event start through 12 bins after event end; non-event cells are excluded.",
+  "scalable_variant": "Use causal age/context-weighted signed residuals from the sensor and its two-neighbor group, capped at the latest 256 records per sensor; blend with the matching frozen local archive under the locked stale-feedback rule.",
+  "comparators": ["rolling", "aci"],
+  "primary_endpoint": "equal-horizon mean 90% interval score",
+  "coverage_floor": 0.88,
+  "inference": "Paired moving-block bootstrap over time with 24 selected hourly origins per block (one day).",
+  "interpretation_boundary": "This resource-bounded hourly transfer audit is supporting evidence and is not interchangeable with the full five-minute SUMO validation or a full registered real-data matrix."
+}

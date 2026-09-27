@@ -1,0 +1,516 @@
+{
+  "completed": 120,
+  "registry_sha256": "6bc9c5a2aaf9d01a4b521610ae648681cc11d9c00d1592a78a73953eb5278eef",
+  "runs": [
+    {
+      "run": "metr_la-C3-fault101-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-C3-fault202-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-C3-fault303-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-C4-fault101-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-C4-fault202-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-C4-fault303-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-C3-fault101-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-C3-fault202-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-C3-fault303-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-C4-fault101-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-C4-fault202-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "pems_bay-C4-fault303-schedule",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault101-cache",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault101-online",
+      "status": "existing"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C3-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed11-C4-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C3-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed22-C4-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C3-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "metr_la-seed33-C4-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C3-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed11-C4-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C3-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed22-C4-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C3-fault303-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault101-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault101-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault101-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault202-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault202-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault202-farcal",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault303-cache",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault303-online",
+      "status": "completed"
+    },
+    {
+      "run": "pems_bay-seed33-C4-fault303-farcal",
+      "status": "completed"
+    }
+  ],
+  "schema_version": 1,
+  "scope_boundary": "This stage tests independent versus graph-connected failures at matched per-bin failed-entry counts and delay/loss draws. It does not establish universal superiority. One-factor parameter sweeps, cold archive, and MNAR stress remain separate registered work.",
+  "status": "completed",
+  "summaries": [
+    {
+      "dataset": "metr_la",
+      "far_cal_coverage": 0.9024869645928312,
+      "scenario": "C3",
+      "superiority_rule_met": true
+    },
+    {
+      "dataset": "metr_la",
+      "far_cal_coverage": 0.9027963564558252,
+      "scenario": "C4",
+      "superiority_rule_met": true
+    },
+    {
+      "dataset": "pems_bay",
+      "far_cal_coverage": 0.9041364271355071,
+      "scenario": "C3",
+      "superiority_rule_met": false
+    },
+    {
+      "dataset": "pems_bay",
+      "far_cal_coverage": 0.9054891137687826,
+      "scenario": "C4",
+      "superiority_rule_met": false
+    }
+  ],
+  "total": 120
+}

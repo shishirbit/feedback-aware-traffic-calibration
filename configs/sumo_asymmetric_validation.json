@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "status": "locked_before_episode_generation",
+  "purpose": "Fresh confirmation of asymmetric FAR-Cal after redesign and development",
+  "episode_count": 40,
+  "episode_seed_base": 70000,
+  "episode_id_prefix": "asym-validation",
+  "family_counts": {"P0": 10, "P1": 10, "P2": 10, "P3": 10},
+  "model_seeds": [11, 22, 33],
+  "fault_seeds": [101, 202, 303],
+  "scenario": "C3",
+  "locked_candidate": "asym100",
+  "locked_method": "far_cal_asymmetric",
+  "comparators": ["rolling", "aci"],
+  "primary_endpoint": "equal-horizon mean 90% interval score",
+  "coverage_floor": 0.88,
+  "sample_size_basis": "Development episode SDs were 1.3065 and 1.1692 with effects 0.8122 and 0.7981; normal-approximation minimum sizes were 10 and 9. Forty fresh balanced episodes were fixed for conservative confirmation.",
+  "inference": "Average paired effects across model and fault seeds within each episode, then bootstrap the 40 complete episodes with 2000 resamples.",
+  "superiority_rule": "Both comparator-minus-candidate 95% episode-bootstrap lower bounds must exceed zero and candidate aggregate 90% coverage must be at least 0.88.",
+  "data_boundary": "No episode with seed 70001 through 70040 existed in the validation directory when this registry was committed."
+}

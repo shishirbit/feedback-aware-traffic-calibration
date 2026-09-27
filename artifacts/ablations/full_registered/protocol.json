@@ -1,0 +1,48 @@
+{
+  "evaluator_sha256": "9af0abb1e8ff8d3145c10e4d3acd34a9570842f60b8a217358d09b566f57392e",
+  "formatting_note": "Removed one trailing space after launch; no semantic change.",
+  "launch_evaluator_sha256": "5bf4c41f954cd58e243e7dffb6e328e5d661de7f2dbadab309226564e5cd79e3",
+  "protocol": {
+    "STAEformer_requirement": "main comparison already completed; this component matrix uses FAR-GW frozen predictions",
+    "ablations": [
+      "no_spatial",
+      "no_context",
+      "no_age",
+      "no_stale_blend",
+      "no_inflation",
+      "arrival_freshness",
+      "frozen_only"
+    ],
+    "arrival_freshness": "actual scheduled arrival replaces target time only in age weights and stale gap; target-based buffer eligibility and target-block ESS retained",
+    "claim_boundary": "no universal superiority; no identifiable MNAR correction",
+    "datasets": [
+      "metr_la",
+      "pems_bay",
+      "sumo"
+    ],
+    "fault_seeds": [
+      101,
+      202,
+      303
+    ],
+    "frozen_only": "same clean frozen archive and spatial fallback, uniform archive weights, no live adaptation or inflation",
+    "inference": "exploratory paired 95% bootstrap intervals; average model seeds within each episode or fault-time cell, real day blocks stratified by fault seed; no independent model-seed replication claim",
+    "model_seeds": [
+      11,
+      22,
+      33
+    ],
+    "real_data": "unchanged reference hourly origins, fault focus and 12-bin recovery; cap 256",
+    "reference": "locked far_cal_asymmetric asym100; verify and reuse completed references",
+    "scenarios": [
+      "C3",
+      "C4"
+    ],
+    "status": "locked_before_ablation_runs",
+    "sumo_C3": "all 40 fresh asymmetric-validation episodes",
+    "sumo_C4": "all 30 test episodes",
+    "total_stages": 432
+  },
+  "protocol_sha256": "2c1fdab3b0bc3b0810101d9e3e1cbb67653ba6be0c6faf0c408cd20af0fbab7f",
+  "runner_sha256": "95d0fe391cb01449dff8c0f9f7ff62c18a0d3c0ebfab36fbfb5ba87452b30c6a"
+}

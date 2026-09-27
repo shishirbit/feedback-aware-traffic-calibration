@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "registered_before_v2_tuning",
+  "method": "regularized FAR-Cal",
+  "selection_partition": "tune",
+  "tuning_protocol": "episodes 60-64 temporary residual warm-up; episodes 65-74 scored",
+  "selection_model_seed": 11,
+  "selection_fault_seed": 101,
+  "selection_metric": "equal-horizon mean 90% interval score",
+  "coverage_preference": "aggregate 90% coverage at least 0.88",
+  "design": "Shrink the context-, age-, and spatially-weighted FAR-Cal score distribution toward the causal rolling node distribution. Inflation is shrunk by the same coefficient. A coefficient of one is excluded so every candidate retains a nonzero FAR-Cal contribution.",
+  "fixed_parameters": {
+    "maximum_neighbors": 2,
+    "tau": 288.0,
+    "bandwidth": 2.0,
+    "support": 50.0,
+    "stale_decay": 288.0,
+    "beta_gap": 0.05,
+    "beta_missing": 0.05,
+    "inflation_cap": 3.0,
+    "buffer_bins": 2016
+  },
+  "candidates": [
+    {"id": "v2s25", "parameters": {"maximum_neighbors": 2, "bandwidth": 2.0, "beta_gap": 0.05, "beta_missing": 0.05, "rolling_shrinkage": 0.25}},
+    {"id": "v2s50", "parameters": {"maximum_neighbors": 2, "bandwidth": 2.0, "beta_gap": 0.05, "beta_missing": 0.05, "rolling_shrinkage": 0.50}},
+    {"id": "v2s75", "parameters": {"maximum_neighbors": 2, "bandwidth": 2.0, "beta_gap": 0.05, "beta_missing": 0.05, "rolling_shrinkage": 0.75}},
+    {"id": "v2s90", "parameters": {"maximum_neighbors": 2, "bandwidth": 2.0, "beta_gap": 0.05, "beta_missing": 0.05, "rolling_shrinkage": 0.90}}
+  ]
+}

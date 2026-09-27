@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "development_after_prior_confirmations",
+  "method": "asymmetric triggered FAR-Cal redesign",
+  "design": "Estimate signed residual tails using FAR-Cal's causal spatial, context, age, and stale-feedback weights, then shrink asymmetric endpoints toward causal rolling symmetric endpoints.",
+  "development_data": ["original tune", "30-episode replication", "160-episode powered confirmation"],
+  "fixed_parameters": {"maximum_neighbors": 2, "tau": 288.0, "bandwidth": 2.0, "support": 50.0, "stale_decay": 288.0, "beta_gap": 0.05, "beta_missing": 0.05, "inflation_cap": 3.0, "buffer_bins": 2016},
+  "candidates": [
+    {"id": "asym25", "parameters": {"maximum_neighbors": 2, "bandwidth": 2.0, "beta_gap": 0.05, "beta_missing": 0.05, "asymmetric_blend": 0.25}},
+    {"id": "asym50", "parameters": {"maximum_neighbors": 2, "bandwidth": 2.0, "beta_gap": 0.05, "beta_missing": 0.05, "asymmetric_blend": 0.50}},
+    {"id": "asym75", "parameters": {"maximum_neighbors": 2, "bandwidth": 2.0, "beta_gap": 0.05, "beta_missing": 0.05, "asymmetric_blend": 0.75}},
+    {"id": "asym100", "parameters": {"maximum_neighbors": 2, "bandwidth": 2.0, "beta_gap": 0.05, "beta_missing": 0.05, "asymmetric_blend": 1.00}}
+  ]
+}

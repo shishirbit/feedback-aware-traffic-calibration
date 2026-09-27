@@ -1,0 +1,170 @@
+{
+  "artifact_sha256": "3c114e598816e85b1b013623b1e291a7135e5482e0ddc26f761841173c5338ea",
+  "episodes": 150,
+  "partition_codes": {
+    "calibration": 2,
+    "replication": 4,
+    "test": 3,
+    "train": 0,
+    "tune": 1
+  },
+  "reference_prepared_sha256": "94d2de177c3ae8f79a6f794f2933c43d484e280009774489b662ad176f64c654",
+  "replication_episode_indices": [
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149
+  ],
+  "replication_truth_inputs": [
+    {
+      "episode_id": "replication-001",
+      "sha256": "42659a27760ddf34d4ab6dbff815de9a0f7f46f7043625fb9f47fbc1d57b9060"
+    },
+    {
+      "episode_id": "replication-002",
+      "sha256": "17dde0ce7821f4a9f1b113731ff6e4faab53fc875a9b9e6c8d1e5556f04046dc"
+    },
+    {
+      "episode_id": "replication-003",
+      "sha256": "6de289baf7d9f9348acb2d2f5e27151ad7154c55fa93863ddeae41d4777519c5"
+    },
+    {
+      "episode_id": "replication-004",
+      "sha256": "b02e1e4b154fbd893089f20f9491b2891287e00fabf8d5d3ef65271b1152569c"
+    },
+    {
+      "episode_id": "replication-005",
+      "sha256": "401cb009f8b5143fcf3c884b7e24b539ccfc0ddacb195c87206ffab70643aac5"
+    },
+    {
+      "episode_id": "replication-006",
+      "sha256": "b5aa7f2b7f71bf09ab9b73a2ab068b6364d2fd1131e195e27380c175158b474b"
+    },
+    {
+      "episode_id": "replication-007",
+      "sha256": "e48655a2d2a99194a916d51eebeab8fca1d06e51014b7a08a9ee648352331351"
+    },
+    {
+      "episode_id": "replication-008",
+      "sha256": "9a368bc27f02aaedb89f07c771c3bd33b2718444419d1dfe3e1e0fc1311979d3"
+    },
+    {
+      "episode_id": "replication-009",
+      "sha256": "a158a2c5a3ec33392ad5031ab5ca892bf540d86484e843ada9f74ac094fc1f1d"
+    },
+    {
+      "episode_id": "replication-010",
+      "sha256": "dd7e4c659ad9feda98933a25832610b48b6f737961036fa0b14310e986548c4f"
+    },
+    {
+      "episode_id": "replication-011",
+      "sha256": "a7df781d84b41a63c6a836418100a442fe5db6528109bf6701480ed5b2d50be2"
+    },
+    {
+      "episode_id": "replication-012",
+      "sha256": "bdbddf9fa84849818d33a5ab83f403aa1f1c8cdbbb066e2a557256dfa037eedc"
+    },
+    {
+      "episode_id": "replication-013",
+      "sha256": "d2df029fc44f25295e7d4aee1dd8ddc03f9ec21d45917c1fbbc2471e0ef02736"
+    },
+    {
+      "episode_id": "replication-014",
+      "sha256": "b7dcb662b0ee3ec95d65f5614a33364c44667bd5ac56b60285ee112f70c704a3"
+    },
+    {
+      "episode_id": "replication-015",
+      "sha256": "deb2c8e161d55fc8ffda4591278bf19e6fe87ed25cf8214a1d3ca8322e6d1f49"
+    },
+    {
+      "episode_id": "replication-016",
+      "sha256": "e8618590b48bde8ed3105c7b776afebc9d7f0937d3e906888131b671ab22dbe6"
+    },
+    {
+      "episode_id": "replication-017",
+      "sha256": "3d71ac3f7dc5cc4a5626888e329e1954cb139756ae981467e34cd7b4b02518c8"
+    },
+    {
+      "episode_id": "replication-018",
+      "sha256": "fd2353e45ad20e1539f46786f14a2e66faaeaaaca888fecb09122b82856eeca7"
+    },
+    {
+      "episode_id": "replication-019",
+      "sha256": "a719a5a206190aaa5e9d0c4c91aa063f7b03a685a5eed2488945aeb6c2afa760"
+    },
+    {
+      "episode_id": "replication-020",
+      "sha256": "e110653c9fbde5b21546d672ae7f6a5d2ab54516f3fd82c8257250409ec1a6fe"
+    },
+    {
+      "episode_id": "replication-021",
+      "sha256": "2e3040c869126ccbc17bede639faf5bd311a046d5c35bdbdc1b425f737751bac"
+    },
+    {
+      "episode_id": "replication-022",
+      "sha256": "344e027306ca8ac085de88bea109c587414935444c59c9db0a9241543702a655"
+    },
+    {
+      "episode_id": "replication-023",
+      "sha256": "363c622dab3cbeb8fcd159713eaafc112e76a0547ced34f2d89b2179603a108c"
+    },
+    {
+      "episode_id": "replication-024",
+      "sha256": "b6508c06e8a9a2fe148c082175492137b455b99dbb410c541a041bcbf03e0c6a"
+    },
+    {
+      "episode_id": "replication-025",
+      "sha256": "fbe387a6cccd0853a75376df68eb8e649b420387e154dcded1765100ab8525e9"
+    },
+    {
+      "episode_id": "replication-026",
+      "sha256": "9b6e2efb659f98bbb7850e4fd499a714f405993bd496379fc9101b77970c062d"
+    },
+    {
+      "episode_id": "replication-027",
+      "sha256": "6d6276d757155c32dc7a5c1fac4315c8bd9dd2304fd7035a452a6661e4c3a0ab"
+    },
+    {
+      "episode_id": "replication-028",
+      "sha256": "de0fb900b4019e2f4664483d7313f8512ab92023eeabcf2682865bcb5e6e2252"
+    },
+    {
+      "episode_id": "replication-029",
+      "sha256": "7cc0f1b9fcf57da1ffd37564fc668a53238b43175bb52131ba20c8022a6db635"
+    },
+    {
+      "episode_id": "replication-030",
+      "sha256": "21cc12d8da0fe33370a9d36fc7fc237de53029c34e2944a6a2452437c66dffa3"
+    }
+  ],
+  "rows": 14400,
+  "schema_version": 1,
+  "source_generation_sha256": "53bfb71af59ff250c153e09edfdb57d49bac5f205814753700fbe21d3602d8b6",
+  "status": "completed_independent_replication"
+}

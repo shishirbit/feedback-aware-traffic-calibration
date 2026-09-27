@@ -1,0 +1,442 @@
+{
+  "completed": 1488,
+  "registry_sha256": "27a77d8daa5894124424b990aaf0d9a42f2c47a849eb231e3808e1f687b8b104",
+  "schema_version": 1,
+  "scope_boundary": "These are one-factor C3/C4 stress tests and do not establish universal superiority or an identifiable MNAR correction. The low-speed truth is used only by the evaluator-side fault generator.",
+  "status": "completed",
+  "summaries": [
+    {
+      "dataset": "metr_la",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.9042277459103463,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 3,
+      "variant": "duration03"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.8983647635711662,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 12,
+      "variant": "duration12"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.8956239212102751,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 24,
+      "variant": "duration24"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "connected_fraction",
+      "far_cal_coverage": 0.8908137882018479,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 0.05,
+      "variant": "fraction05"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "connected_fraction",
+      "far_cal_coverage": 0.9024140038414528,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 0.2,
+      "variant": "fraction20"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "additional_backlog_delay_bins",
+      "far_cal_coverage": 0.898502637400034,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 3,
+      "variant": "extra03"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "additional_backlog_delay_bins",
+      "far_cal_coverage": 0.9037774374680959,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 12,
+      "variant": "extra12"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.8996511825761443,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 0.25,
+      "variant": "loss025"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.9009273438829335,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 0.5,
+      "variant": "loss050"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.903649821337417,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": 1.0,
+      "variant": "loss100"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "cold_calibration",
+      "far_cal_coverage": 0.898502637400034,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": null,
+      "variant": "cold_calibration"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "mnar_low_speed",
+      "far_cal_coverage": 0.8985451761102603,
+      "scenario": "C3",
+      "superiority_rule_met": true,
+      "value": null,
+      "variant": "mnar_low_speed"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.8997583004706781,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 3,
+      "variant": "duration03"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.8965509770787295,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 12,
+      "variant": "duration12"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.9016571701970336,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 24,
+      "variant": "duration24"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "connected_fraction",
+      "far_cal_coverage": 0.9067879760949068,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 0.05,
+      "variant": "fraction05"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "connected_fraction",
+      "far_cal_coverage": 0.9072144682524081,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 0.2,
+      "variant": "fraction20"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "additional_backlog_delay_bins",
+      "far_cal_coverage": 0.8958918091349835,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 3,
+      "variant": "extra03"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "additional_backlog_delay_bins",
+      "far_cal_coverage": 0.8978906183550225,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 12,
+      "variant": "extra12"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.8938504720591988,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 0.0,
+      "variant": "loss000"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.8947860848856001,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 0.25,
+      "variant": "loss025"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.8979756740665136,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": 1.0,
+      "variant": "loss100"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "cold_calibration",
+      "far_cal_coverage": 0.8959343369907289,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": null,
+      "variant": "cold_calibration"
+    },
+    {
+      "dataset": "metr_la",
+      "factor": "mnar_low_speed",
+      "far_cal_coverage": 0.8959343369907289,
+      "scenario": "C4",
+      "superiority_rule_met": true,
+      "value": null,
+      "variant": "mnar_low_speed"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.8984053497942387,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 3,
+      "variant": "duration03"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.8980918852880658,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 12,
+      "variant": "duration12"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.9015507115912208,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 24,
+      "variant": "duration24"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "connected_fraction",
+      "far_cal_coverage": 0.901781121399177,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 0.05,
+      "variant": "fraction05"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "connected_fraction",
+      "far_cal_coverage": 0.900332383665717,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 0.2,
+      "variant": "fraction20"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "additional_backlog_delay_bins",
+      "far_cal_coverage": 0.9093846450617284,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 3,
+      "variant": "extra03"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "additional_backlog_delay_bins",
+      "far_cal_coverage": 0.9100919495884774,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 12,
+      "variant": "extra12"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.9062178497942387,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 0.25,
+      "variant": "loss025"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.9086612654320988,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 0.5,
+      "variant": "loss050"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.9100758744855967,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": 1.0,
+      "variant": "loss100"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "cold_calibration",
+      "far_cal_coverage": 0.9005915637860082,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": null,
+      "variant": "cold_calibration"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "mnar_low_speed",
+      "far_cal_coverage": 0.9013149434156379,
+      "scenario": "C3",
+      "superiority_rule_met": false,
+      "value": null,
+      "variant": "mnar_low_speed"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.9066518775720165,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 3,
+      "variant": "duration03"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.9018454218106996,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 12,
+      "variant": "duration12"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "duration_bins",
+      "far_cal_coverage": 0.9017168209876543,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 24,
+      "variant": "duration24"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "connected_fraction",
+      "far_cal_coverage": 0.9062821502057613,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 0.05,
+      "variant": "fraction05"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "connected_fraction",
+      "far_cal_coverage": 0.9101772712883824,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 0.2,
+      "variant": "fraction20"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "additional_backlog_delay_bins",
+      "far_cal_coverage": 0.9087094907407407,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 3,
+      "variant": "extra03"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "additional_backlog_delay_bins",
+      "far_cal_coverage": 0.9098347479423868,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 12,
+      "variant": "extra12"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.8989679783950617,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 0.0,
+      "variant": "loss000"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.9029224537037037,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 0.25,
+      "variant": "loss025"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "loss_within",
+      "far_cal_coverage": 0.9098186728395061,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": 1.0,
+      "variant": "loss100"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "cold_calibration",
+      "far_cal_coverage": 0.9066197273662552,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": null,
+      "variant": "cold_calibration"
+    },
+    {
+      "dataset": "pems_bay",
+      "factor": "mnar_low_speed",
+      "far_cal_coverage": 0.9073109567901234,
+      "scenario": "C4",
+      "superiority_rule_met": false,
+      "value": null,
+      "variant": "mnar_low_speed"
+    }
+  ],
+  "total": 1488
+}

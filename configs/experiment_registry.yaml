@@ -1,0 +1,484 @@
+schema_version: 1
+experiments:
+  - id: smoke_cpu
+    status: completed
+    dataset: sumo_synthetic_motorway
+    profile: smoke
+    seed: 11
+    runtime_seconds: 0.1263125000987202
+    artifact_path: artifacts/smoke-66538f1f9de7
+    note: CPU execution check only; cannot support scientific claims
+  - id: metr_la_core
+    status: planned
+    dataset: metr_la
+    data_status: acquired_audited_prepared
+    prepared_manifest: data/prepared/metr_la.manifest.json
+    reason: C0, four-backbone C3/C4, FAR-GW C1/C2/C5, independent controls and one-factor stress are complete; full ablations remain
+  - id: pems_bay_core
+    status: planned
+    dataset: pems_bay
+    data_status: acquired_audited_prepared
+    prepared_manifest: data/prepared/pems_bay.manifest.json
+    reason: C0, four-backbone C3/C4, FAR-GW C1/C2/C5, independent controls and one-factor stress are complete; full ablations remain
+  - id: metr_la_cpu_feasibility
+    status: completed
+    dataset: metr_la
+    seed: 11
+    artifact_path: artifacts/feasibility/metr_la-seed11.json
+    note: One optimizer step only; timing and memory feasibility check, not a trained model or research result
+  - id: metr_la_far_gw_seed11_training
+    status: completed
+    dataset: metr_la
+    seed: 11
+    runtime_seconds: 25886.2797116
+    checkpoint_sha256: 3f86355f12da0e46dbd8de5807e6aaa5ac2a2752861c7d621c9f5be7f3ed318c
+    artifact_path: artifacts/training/metr_la-seed11-803c69399a64/training_summary.json
+    note: Registered early-stopped FAR-GW training; predictor evidence only
+  - id: metr_la_far_gw_seed22_training
+    status: completed
+    dataset: metr_la
+    seed: 22
+    runtime_seconds: 25664.2791136
+    checkpoint_sha256: de40b5dc51b256a5a1aaa85f1f3a9da8adfb5b6718d4ee01cd7089e9eea80ab5
+    artifact_path: artifacts/training/metr_la-seed22-803c69399a64/training_summary.json
+    note: Registered early-stopped FAR-GW training; predictor evidence only
+  - id: metr_la_far_gw_seed33_training
+    status: completed
+    dataset: metr_la
+    seed: 33
+    runtime_seconds: 21147.4510741
+    checkpoint_sha256: a99c1067fa85ec1b104d23cfd0623cda24b1df800eb80e0080a38ecfe1ac566f
+    artifact_path: artifacts/training/metr_la-seed33-803c69399a64/training_summary.json
+    note: Registered early-stopped FAR-GW training; predictor evidence only
+  - id: metr_la_seed11_clean_c0
+    status: completed
+    dataset: metr_la
+    seed: 11
+    artifact_path: artifacts/evaluation/metr_la-seed11-clean.json
+    note: Clean C0 point/raw/frozen calibration result only; H1-H4 remain unevaluated
+  - id: metr_la_seed22_clean_c0
+    status: completed
+    dataset: metr_la
+    seed: 22
+    artifact_path: artifacts/evaluation/metr_la-seed22-clean.json
+    note: Clean C0 point/raw/frozen calibration result only; H1-H4 remain unevaluated
+  - id: metr_la_seed11_c0_replay_validation
+    status: completed
+    dataset: metr_la
+    seed: 11
+    artifact_path: artifacts/validation/metr_la-seed11-C0-fault101.json
+    note: Independent release-schedule path has exact masks and model predictions versus clean cache; declared float tolerances apply only to legacy truth/context serialization
+  - id: metr_la_seed11_c3_fault101_static
+    status: completed
+    dataset: metr_la
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/metr_la-seed11-C3-fault101-static.json
+    note: Static raw/frozen comparison under C3 impaired inputs; does not evaluate online feedback adaptation
+  - id: metr_la_seed11_c3_inputs_c2_feedback_fault101_online
+    status: completed
+    dataset: metr_la
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/online/metr_la-seed11-C3-feedback-C2-fault101/manifest.json
+    note: Rolling and project-variant ACI with immediate feedback and C3-identical impaired inputs
+  - id: metr_la_seed11_c3_inputs_c3_feedback_fault101_online
+    status: completed
+    dataset: metr_la
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/online/metr_la-seed11-C3-feedback-C3-fault101/manifest.json
+    note: Rolling and project-variant ACI with delayed feedback and identical impaired inputs
+  - id: metr_la_seed11_feedback_timing_pair_fault101
+    status: completed
+    dataset: metr_la
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/metr_la-seed11-C3-feedback-C2-vs-C3-fault101.json
+    note: Preliminary one-model-seed/one-fault-seed paired H1 analysis with 24-hour moving-block bootstrap; not confirmatory
+  - id: metr_la_seed22_c3_fault101_static
+    status: completed
+    dataset: metr_la
+    seed: 22
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/metr_la-seed22-C3-fault101-static.json
+    note: Static raw/frozen comparison under C3 impaired inputs; does not evaluate online feedback adaptation
+  - id: metr_la_seed22_c3_inputs_c2_feedback_fault101_online
+    status: completed
+    dataset: metr_la
+    seed: 22
+    fault_seed: 101
+    artifact_path: artifacts/online/metr_la-seed22-C3-feedback-C2-fault101/manifest.json
+    note: Rolling and project-variant ACI with immediate feedback and C3-identical impaired inputs
+  - id: metr_la_seed22_c3_inputs_c3_feedback_fault101_online
+    status: completed
+    dataset: metr_la
+    seed: 22
+    fault_seed: 101
+    artifact_path: artifacts/online/metr_la-seed22-C3-feedback-C3-fault101/manifest.json
+    note: Rolling and project-variant ACI with delayed feedback and identical impaired inputs
+  - id: metr_la_seed22_feedback_timing_pair_fault101
+    status: completed
+    dataset: metr_la
+    seed: 22
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/metr_la-seed22-C3-feedback-C2-vs-C3-fault101.json
+    note: Preliminary second-model-seed, same-fault-seed paired H1 analysis with 24-hour moving-block bootstrap; fault-seed replication remains
+  - id: metr_la_seed11_feedback_timing_pair_fault202
+    status: completed
+    dataset: metr_la
+    seed: 11
+    fault_seed: 202
+    artifact_path: artifacts/evaluation/metr_la-seed11-C3-feedback-C2-vs-C3-fault202.json
+    note: Paired H1 replication for a second registered fault seed; rolling interval-score difference is positive with its 24-hour block-bootstrap interval above zero, while ACI is inconclusive
+  - id: metr_la_seed22_feedback_timing_pair_fault202
+    status: completed
+    dataset: metr_la
+    seed: 22
+    fault_seed: 202
+    artifact_path: artifacts/evaluation/metr_la-seed22-C3-feedback-C2-vs-C3-fault202.json
+    note: Paired H1 replication for a second registered fault seed; rolling and ACI intervals cross zero
+  - id: metr_la_simple_controls_clean_c0
+    status: completed
+    dataset: metr_la
+    artifact_path: artifacts/evaluation/metr_la-simple-controls-clean.json
+    note: Training-only last-available and historical time-of-week point controls under clean inputs
+  - id: pems_bay_cpu_feasibility
+    status: completed
+    dataset: pems_bay
+    seed: 11
+    artifact_path: artifacts/feasibility/pems_bay-seed11.json
+    note: One optimizer step only; timing and memory feasibility check, not a trained model or research result
+  - id: pems_bay_far_gw_seed11_training
+    status: completed
+    dataset: pems_bay
+    seed: 11
+    runtime_seconds: 103081.28766530001
+    checkpoint_sha256: df6caadfe7383ccd925f1b9ed1c95ed5f42c3bc9cb33bae12f5a3260bc9beb8b
+    artifact_path: artifacts/training/pems_bay-seed11-310e9ba8c418/training_summary.json
+    note: Registered early-stopped FAR-GW training; predictor evidence only
+  - id: pems_bay_far_gw_seed22_training
+    status: completed
+    dataset: pems_bay
+    seed: 22
+    final_session_runtime_seconds: 12114.627702799999
+    checkpoint_sha256: 8e39aefb9bbad45f059898429ef4af96613accf4a591ac56ac36a9dff998bd04
+    artifact_path: artifacts/training/pems_bay-seed22-310e9ba8c418/training_summary.json
+    note: Registered early-stopped FAR-GW training completed across resumable sessions; summary runtime covers the final session only
+  - id: pems_bay_far_gw_seed33_training
+    status: completed
+    dataset: pems_bay
+    seed: 33
+    runtime_seconds: 103692.5166804
+    checkpoint_sha256: b12274c57bde0a1cfb43c66ce6fd81b8dbfcc7fc22fe77402fda0e304986ae44
+    artifact_path: artifacts/training/pems_bay-seed33-310e9ba8c418/training_summary.json
+    note: Registered early-stopped FAR-GW training; predictor evidence only
+  - id: pems_bay_seed11_clean_c0
+    status: completed
+    dataset: pems_bay
+    seed: 11
+    artifact_path: artifacts/evaluation/pems_bay-seed11-clean.json
+    note: Clean C0 point/raw/frozen calibration result only; H1-H4 remain unevaluated
+  - id: pems_bay_seed22_clean_c0
+    status: completed
+    dataset: pems_bay
+    seed: 22
+    artifact_path: artifacts/evaluation/pems_bay-seed22-clean.json
+    note: Clean C0 point/raw/frozen calibration result only; H1-H4 remain unevaluated
+  - id: pems_bay_seed33_clean_c0
+    status: completed
+    dataset: pems_bay
+    seed: 33
+    artifact_path: artifacts/evaluation/pems_bay-seed33-clean.json
+    note: Clean C0 point/raw/frozen calibration result only; H1-H4 remain unevaluated
+  - id: pems_bay_seed11_c3_fault101_static
+    status: completed
+    dataset: pems_bay
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/pems_bay-seed11-C3-fault101-static.json
+    note: Static raw/frozen comparison under C3 impaired inputs; does not evaluate online feedback adaptation
+  - id: pems_bay_seed11_c3_inputs_c2_feedback_fault101_online
+    status: completed
+    dataset: pems_bay
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/online/pems_bay-seed11-C3-feedback-C2-fault101/manifest.json
+    note: Rolling and project-variant ACI with immediate feedback and C3-identical impaired inputs
+  - id: pems_bay_seed11_c3_inputs_c3_feedback_fault101_online
+    status: completed
+    dataset: pems_bay
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/online/pems_bay-seed11-C3-feedback-C3-fault101/manifest.json
+    note: Rolling and project-variant ACI with delayed feedback and identical impaired inputs
+  - id: pems_bay_seed11_feedback_timing_pair_fault101
+    status: completed
+    dataset: pems_bay
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/pems_bay-seed11-C3-feedback-C2-vs-C3-fault101.json
+    note: Preliminary one-model-seed/one-fault-seed paired H1 analysis; rolling interval-score difference is positive with its 24-hour block-bootstrap interval above zero, while ACI is inconclusive
+  - id: pems_bay_seed22_c3_fault101_static
+    status: completed
+    dataset: pems_bay
+    seed: 22
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/pems_bay-seed22-C3-fault101-static.json
+    note: Static raw/frozen comparison under C3 impaired inputs; does not evaluate online feedback adaptation
+  - id: pems_bay_seed22_c3_inputs_c2_feedback_fault101_online
+    status: completed
+    dataset: pems_bay
+    seed: 22
+    fault_seed: 101
+    artifact_path: artifacts/online/pems_bay-seed22-C3-feedback-C2-fault101/manifest.json
+    note: Rolling and project-variant ACI with immediate feedback and C3-identical impaired inputs
+  - id: pems_bay_seed22_c3_inputs_c3_feedback_fault101_online
+    status: completed
+    dataset: pems_bay
+    seed: 22
+    fault_seed: 101
+    artifact_path: artifacts/online/pems_bay-seed22-C3-feedback-C3-fault101/manifest.json
+    note: Rolling and project-variant ACI with delayed feedback and identical impaired inputs
+  - id: pems_bay_seed22_feedback_timing_pair_fault101
+    status: completed
+    dataset: pems_bay
+    seed: 22
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/pems_bay-seed22-C3-feedback-C2-vs-C3-fault101.json
+    note: Second-model-seed paired H1 replication; rolling and ACI interval-score differences are positive with their 24-hour block-bootstrap intervals above zero
+  - id: pems_bay_seed33_c3_fault101_static
+    status: completed
+    dataset: pems_bay
+    seed: 33
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/pems_bay-seed33-C3-fault101-static.json
+    note: Static raw/frozen comparison under C3 impaired inputs; does not evaluate online feedback adaptation
+  - id: pems_bay_seed33_c3_inputs_c2_feedback_fault101_online
+    status: completed
+    dataset: pems_bay
+    seed: 33
+    fault_seed: 101
+    artifact_path: artifacts/online/pems_bay-seed33-C3-feedback-C2-fault101/manifest.json
+    note: Rolling and project-variant ACI with immediate feedback and C3-identical impaired inputs
+  - id: pems_bay_seed33_c3_inputs_c3_feedback_fault101_online
+    status: completed
+    dataset: pems_bay
+    seed: 33
+    fault_seed: 101
+    artifact_path: artifacts/online/pems_bay-seed33-C3-feedback-C3-fault101/manifest.json
+    note: Rolling and project-variant ACI with delayed feedback and identical impaired inputs
+  - id: pems_bay_seed33_feedback_timing_pair_fault101
+    status: completed
+    dataset: pems_bay
+    seed: 33
+    fault_seed: 101
+    artifact_path: artifacts/evaluation/pems_bay-seed33-C3-feedback-C2-vs-C3-fault101.json
+    note: Third-model-seed paired H1 replication; rolling interval-score difference is positive with its 24-hour block-bootstrap interval above zero, while ACI is inconclusive
+  - id: pems_bay_simple_controls_clean_c0
+    status: completed
+    dataset: pems_bay
+    artifact_path: artifacts/evaluation/pems_bay-simple-controls-clean.json
+    note: Training-only last-available and historical time-of-week point controls under clean inputs
+  - id: sumo_core
+    status: planned
+    dataset: sumo
+    profile: paper
+    note: Paper episodes, training, C0/C3/C4 evaluation, mechanism isolation, and recovery analysis are complete; the balanced-subset FAR-Cal ablation is preliminary and full-scale comparator analyses remain
+  - id: sumo_paper_prepared
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: data/prepared/sumo.manifest.json
+    artifact_sha256: 94d2de177c3ae8f79a6f794f2933c43d484e280009774489b662ad176f64c654
+    note: 11,520 rows across 120 episodes; one-hour warm-up plus complete history enforced, with causal resets and windows constrained within episode boundaries
+  - id: sumo_cpu_feasibility
+    status: completed
+    dataset: sumo_synthetic_motorway
+    seed: 11
+    artifact_path: artifacts/feasibility/sumo-seed11.json
+    note: On corrected post-warm-up data, one CPU optimizer step took 0.1488 seconds for the 318,132-parameter 20-node model; feasibility evidence only
+  - id: sumo_far_gw_seed11_training
+    status: completed
+    dataset: sumo_synthetic_motorway
+    seed: 11
+    artifact_path: artifacts/training/sumo-seed11-a61d9128e7a6/training_summary.json
+    runtime_seconds: 415.989
+    epochs_completed: 41
+    checkpoint_sha256: 1ab432ba221fc78f900697a0ef85abb109152f47d4171a90fd442940be0d59a0
+    note: Corrected registered post-warm-up early-stopped SUMO FAR-GW training
+  - id: sumo_far_gw_seed22_training
+    status: completed
+    dataset: sumo_synthetic_motorway
+    seed: 22
+    artifact_path: artifacts/training/sumo-seed22-a61d9128e7a6/training_summary.json
+    runtime_seconds: 516.050
+    epochs_completed: 51
+    checkpoint_sha256: 9ccb50e3c2b82af250ee3ec39b97a0e2d78ed9ff18d51ee0495808c4ff8f749c
+    note: Corrected registered post-warm-up early-stopped SUMO FAR-GW training
+  - id: sumo_far_gw_seed33_training
+    status: completed
+    dataset: sumo_synthetic_motorway
+    seed: 33
+    artifact_path: artifacts/training/sumo-seed33-a61d9128e7a6/training_summary.json
+    runtime_seconds: 353.016
+    epochs_completed: 35
+    checkpoint_sha256: 94265589c6fe5def81280a0af8daa5b5fec83c069a67deb7b7d2a17ce5a94721
+    note: Corrected registered post-warm-up early-stopped SUMO FAR-GW training
+  - id: sumo_seed11_clean_c0
+    status: completed
+    dataset: sumo_synthetic_motorway
+    seed: 11
+    artifact_path: artifacts/evaluation/sumo-seed11-clean.json
+    note: Corrected clean C0 evaluation across 30 held-out episodes after one-hour warm-up and complete history
+  - id: sumo_seed22_clean_c0
+    status: completed
+    dataset: sumo_synthetic_motorway
+    seed: 22
+    artifact_path: artifacts/evaluation/sumo-seed22-clean.json
+    note: Corrected clean C0 evaluation across 30 held-out episodes after one-hour warm-up and complete history
+  - id: sumo_seed33_clean_c0
+    status: completed
+    dataset: sumo_synthetic_motorway
+    seed: 33
+    artifact_path: artifacts/evaluation/sumo-seed33-clean.json
+    note: Corrected clean C0 evaluation across 30 held-out episodes after one-hour warm-up and complete history
+  - id: sumo_core_fault_schedules
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: artifacts/faults/sumo/C3-seed101/fault_manifest.json
+    note: Deterministic C0/C2/C3/C4 schedules for fault seeds 101/202/303; 20 events per C3/C4 schedule across 30 reset test episodes, equivalent to two events per 24 hours
+  - id: sumo_seed11_c0_replay_validation
+    status: completed
+    dataset: sumo_synthetic_motorway
+    seed: 11
+    fault_seed: 101
+    artifact_path: artifacts/validation/sumo-seed11-C0-fault101.json
+    note: Episode indices, masks, truths, contexts, and model quantiles match the corrected clean cache exactly
+  - id: sumo_c3_c4_static_matrix
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: artifacts/evaluation/sumo-seed11-C3-fault101-static.json
+    note: Validated all 18 static point/raw/frozen runs for three model seeds by C3/C4 and three fault seeds across all 30 test episodes; feedback adaptation evaluated separately
+  - id: sumo_c3_feedback_timing_matrix
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: artifacts/evaluation/sumo-seed11-C3-feedback-C2-vs-C3-fault101.json
+    note: Completed 18 episode-reset online runs and nine paired immediate-versus-delayed comparisons across three model seeds and three fault seeds; uncertainty bootstraps all 30 test episodes
+  - id: sumo_c4_coupled_online_matrix
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: artifacts/online/sumo-seed11-C4-feedback-C4-fault101/manifest.json
+    note: Completed nine episode-reset coupled lossy-feedback runs across three model seeds and three fault seeds
+  - id: sumo_c4_feedback_loss_pair_matrix
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: artifacts/evaluation/sumo-seed11-C4-feedback-C4I-vs-C4-fault101.json
+    note: Completed nine episode-bootstrap paired comparisons across three model seeds and three fault seeds, holding C4 point inputs fixed while comparing complete immediate outcome feedback against coupled permanently lossy feedback
+  - id: sumo_c1_c2_mechanism_subset
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: artifacts/evaluation/sumo-seed11-C0-feedback-C0-vs-C1-fault101-subset12.json
+    note: Prespecified test-001 through test-012 before C1/C2 outcome inspection, exactly three episodes per P0-P3 family; completed nine episode-reset C0/C1/C2 runs, three paired C1 feedback-only comparisons, and three paired C2 input-effect comparisons across model seeds 11/22/33 with episode bootstrap
+  - id: sumo_c3_c4_recovery
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: artifacts/evaluation/sumo-recovery-summary.json
+    note: Evaluated all C3/C4 events across three model seeds and three fault seeds; every recovery endpoint is censored because the registered 100-pair minimum exceeds the maximum 24 affected-sensor pairs in a 12-origin per-horizon SUMO window
+  - id: sumo_farcal_ablation_subset12
+    status: completed
+    dataset: sumo_synthetic_motorway
+    artifact_path: artifacts/evaluation/sumo-C3-farcal-ablation-subset12.json
+    note: Exact FAR-Cal and five registered ablations evaluated under C3 fault seed 101 on the prespecified balanced 12-episode subset across model seeds 11/22/33; rolling and ACI had descriptively lower scores, but each per-seed episode-bootstrap interval crossed zero
+  - id: sumo_p1_pilot_seed11
+    status: completed
+    dataset: sumo_synthetic_motorway
+    profile: pilot
+    seed: 11
+    artifact_path: data/sumo/pilot-p1-seed11/run_summary.json
+    note: Eight-hour peak-demand pilot; execution validation only, not paper evidence
+  - id: sumo_p2_pilot_seed22
+    status: completed
+    dataset: sumo_synthetic_motorway
+    profile: pilot
+    seed: 22
+    artifact_path: data/sumo/pilot-p2-seed22/run_summary.json
+    note: Eight-hour speed-restriction pilot with TraCI restriction and restoration recorded; execution validation only
+  - id: sumo_p3_pilot_seed33
+    status: completed
+    dataset: sumo_synthetic_motorway
+    profile: pilot
+    seed: 33
+    artifact_path: data/sumo/pilot-p3-seed33/run_summary.json
+    note: Eight-hour overlapping demand-surge and speed-restriction pilot with TraCI actions recorded; execution validation only
+  - id: sumo_paper_episode_generation
+    status: completed
+    dataset: sumo_synthetic_motorway
+    profile: paper
+    artifact_path: data/sumo/paper/generation_manifest.json
+    note: Generated and hash-validated 120 independent eight-hour episodes with deterministic 60/15/15/30 splits, exactly 30 episodes per P0-P3 family, and 60 paired restriction/restoration logs
+  - id: sumo_live_smoke
+    status: completed
+    dataset: sumo_synthetic_motorway
+    profile: smoke
+    seed: 44
+    artifact_path: data/sumo/live-smoke/live_equivalence.json
+    note: Three-bin integration check; counts and masks exact, speed within XML serialization tolerance.
+  - id: four_backbone_c3_c4_synthesis
+    status: completed
+    dataset: metr_la_and_pems_bay
+    artifact_path: artifacts/evaluation/cross-backbone-transfer-synthesis-v3.json
+    note: Complete FAR-GW, STAEformer, STID, and DCRNN C3/C4 synthesis; 12 of 16 cells meet the registered rule and universal backbone-independent superiority is false
+  - id: corel_c3_c4_matrix
+    status: completed
+    dataset: metr_la_and_pems_bay
+    artifact_path: artifacts/corel-evaluation/matrix-summary.json
+    note: Complete 114-stage PS-1 multihorizon CoRel-adaptation comparison matrix; not a source-split reproduction of the published CoRel protocol
+  - id: staeformer_c3_c4_matrix
+    status: completed
+    dataset: metr_la_and_pems_bay
+    artifact_path: artifacts/staeformer-evaluation-matrix.json
+    note: Complete 114-stage STAEformer matrix across both datasets and C3/C4
+  - id: stid_c3_c4_matrix
+    status: completed
+    dataset: metr_la_and_pems_bay
+    artifact_path: artifacts/stid-evaluation-matrix.json
+    note: Complete 114-stage STID matrix across both datasets and C3/C4
+  - id: dcrnn_c3_c4_matrix
+    status: completed
+    dataset: metr_la_and_pems_bay
+    artifact_path: artifacts/dcrnn-evaluation-matrix.json
+    note: Complete 114-stage DCRNN matrix across both datasets and C3/C4
+  - id: real_data_c1_c2_c5_stress_matrix
+    status: completed
+    dataset: metr_la_and_pems_bay
+    artifact_path: artifacts/real-core-c1-c2-c5-matrix.json
+    note: Complete 168-stage locked C1/C2/C5 real-data core matrix
+  - id: real_data_c3_c4_matched_independent_control
+    status: completed
+    dataset: metr_la_and_pems_bay
+    artifact_path: artifacts/stress/matched_control/matrix.json
+    note: Complete 120-stage matched-rate independent control; superiority holds for METR-LA C3/C4 but not PEMS-BAY C3/C4
+  - id: real_data_c3_c4_one_factor_stress
+    status: completed
+    dataset: metr_la_and_pems_bay
+    artifact_path: artifacts/stress/one_factor/matrix.json
+    progress_path: artifacts/stress/one_factor/progress.json
+    note: Locked duration, affected-fraction, additional-backlog, loss, cold-calibration, and MNAR sweeps
+  - id: full_registered_ablation_matrix
+    status: completed
+    dataset: sumo_and_real
+    reason: completed and verified all 432 stages; seven asymmetric FAR-GW component ablations across full SUMO and both real datasets; exploratory paired report and figure 15 generated
+  - id: farcal_archive_cap_compute_quality
+    status: completed
+    dataset: metr_la_and_pems_bay
+    protocol_path: artifacts/compute-quality/protocol.json
+    artifact_path: artifacts/compute-quality/matrix.json
+    note: Descriptive matched C3 duration03 replay at caps 64/128/256; model11 fault101; three timed repetitions on one host; no cross-method runtime ranking
+  - id: publication_figure_set
+    status: completed
+    dataset: all
+    note: All six required figure families are generated; compute-quality is a descriptive archive-cap study rather than a cross-method timing ranking
+  - id: raw_dataset_redistribution
+    status: blocked
+    dataset: metr_la_and_pems_bay
+    reason: the benchmark files are downloadable, but an explicit license for redistributing the exact packaged files has not been established

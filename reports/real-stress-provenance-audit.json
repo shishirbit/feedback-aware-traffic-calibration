@@ -1,0 +1,206 @@
+{
+  "status": "passed",
+  "matrix_cells": 48,
+  "referenced_manifests": 1296,
+  "verified_chunk_hashes": 26784,
+  "registry_sha256": "27a77d8daa5894124424b990aaf0d9a42f2c47a849eb231e3808e1f687b8b104",
+  "sources": [
+    {
+      "path": "artifacts\\stress\\one_factor\\matrix.json",
+      "sha256": "5e4a903d2051d74f499b240018c006b869ddb8bf25925d1173da0ce702bf475d"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration03\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "10f3f0cf02b4efef5c0621325f2e24e6162228fffa05cb896440b06bc4f0d018"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration12\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "bc5a54f27d1ed4fed65cc01d93430b80d68f53d535226ea5b8f324fe4da8cdf0"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration24\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "51ccaa58a6f4a632f0da19894d579f3ac3ff9c9932e7bed8fa337b1877f388b3"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\fraction05\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "47691f0feb31d8bd5e3275f2ff5ca33a4e4001218e935d6d3985bb0ed343d324"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\fraction20\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "eb50cd27b7263c038d6e9aa1226a743a57f8aa56b077024b19a48d16beb7b3fc"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\extra03\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "608821abf911ff3c5f2cfb75479115a6ff9ae1c6004c458ddb67132fb60425d1"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\extra12\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "289a66ec77bfd1d90312a4a9868216886889dd097189676fe3bfe3bfa37baa79"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss025\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "e89fe06c3e8dce47bdf55146d4e49eabbecd006b56cd40e5c209c1ca7d007a86"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss050\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "98b3be9b51e5d7baeebfe78be9e012bad52591b57840b9c67ebae38ed63af3d1"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss100\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "c83c518b3aeea280e6ac2d10358e6f4f8d4fba0670e96f8688c8259c99e76fe5"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\cold_calibration\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "5fbf735738f9419bed55d9b7e401f5e26313878cb1b979f1d5f57432845df12d"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\mnar_low_speed\\evaluation\\metr_la-C3-transfer-audit.json",
+      "sha256": "03d109d2a37e7dd9a40c432ec395108559e2281330742a6b1ee7e60fc1dddf32"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration03\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "6a9b4a7c84f383964ae1993bf2ecead7f3a23e76addd24b9983f6b0ff4067581"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration12\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "b7786d5b34aae26a7bd5a9b31c14449aea3d684c4c9b5abe1f44bbf64d8834c3"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration24\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "797fbda8824ff526f35086682308ef017cc7f3405fed2d8f9a43b33ac48401a3"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\fraction05\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "2b4d2f1a6a046d299a8e8ddf8115970a9c5ec4f3bfcc64ed8e1c1870c1a88dc1"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\fraction20\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "d82dcd72257bba9ba9140eb27ed84c2ec01273514d89ce31af17d5761a92731b"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\extra03\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "93988f992c89bc1377037488cfcd1083f2b1c068787c616bedc4b72e49b6e315"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\extra12\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "6ebbf2a780d57b575072c19ba1d233772db21edabc06a1a27f44110de54803a2"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss000\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "7c8ca5f2e17b34668134f321d01106f9f2258b0e775d3dbc7f2cffd10e53692c"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss025\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "3c9c1671ad189478e6b83b420e76e71f9690936f2fad83a6bac22cb2e64f0020"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss100\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "61e71dade92bb9c59616befd47d8b816ffd577a1f88af786e9ed3d93cc82cec6"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\cold_calibration\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "5336473a54ee99738431acabd3b27fcf6d46bd08bd0a8e8fd46adc1088831a62"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\mnar_low_speed\\evaluation\\metr_la-C4-transfer-audit.json",
+      "sha256": "6826455032ffd6b96fa72b1e8aff36df4d3193a1d713b6ff92d036fbe1f04350"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration03\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "5dd0883bea4b460b7bf878a11c46d16f6e0f9a6ff5aa7c16f53c86ae531780cd"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration12\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "a95cfba4b77c163b45385d039d4201ffa517a33ea1153c67d94cd831ce9fe22e"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration24\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "69f617100906946b483c82b814c46b3f0948cdf5779f4b5aa4454e785a465ce7"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\fraction05\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "83a3cbc1dd79e6c495309504e1dd183c2038e0cf904d2c53ba0b80c3eafc362f"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\fraction20\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "37ac08866a611d147985b43aad0a732486520ce7fc063ce0a391877125166e52"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\extra03\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "24e8c5b4d0caf1226cd3ffaa0de3c9a665135e17ba99f320f71d7e723f7b8782"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\extra12\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "14ad55d6ffaf0aaff9d8accd0d84ec19eaa3813af809660ca639a6eea401a274"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss025\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "f346c426b0f65090bbff0453c821ffecbb605d67c6728212cbf32f68b7bca1cf"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss050\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "de4a117bf8043a11717a4c1657b5a7aef4a07e68ecee36fa67b7a7558653fecf"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss100\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "1e4b6cf4caa73b3609a7491b02cf9b036f6315a04d77ef9237fcd6486780d93c"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\cold_calibration\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "4f0ae620dbb6bd1b02f5ad921ec096a7cbcd7824fc3a6ec2a2f52cd377aafaa9"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\mnar_low_speed\\evaluation\\pems_bay-C3-transfer-audit.json",
+      "sha256": "5287915f1fd22a62c091c4bf1d7b0c5425dd466c19181fa194ff243c8d57f101"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration03\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "e0baf176fa151189c19608521c7aec1199e0d3521774d52974a1f6467ea74c88"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration12\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "ec2e42671a4af3649b06a7e71001659cc4a92ce5cd5b17767145bf5c7e65dade"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\duration24\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "9832468dd411835bb0cba7742e82729dc5409fba9ffae834b77a59cbb0d42cfa"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\fraction05\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "2d0355f38e6ee36b516fdd9019c23a2c862cd6b4ce847e6239f291e88a06089c"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\fraction20\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "e2c7a18f56842d292e88b07adba4609eaa4d75fb4ddc8845cc21879dd7260ae1"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\extra03\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "12b671b0ec281fed69d922ea8a5b0728fabcae8643179971fe752c24b19754d4"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\extra12\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "96c2cd71d4d1090062064ef66145d40d666764ffff91da5397b51de2f9b7ebb8"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss000\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "339eafebc9b04af3b851c808565dd0905407d913b455d2a071e673ecbbd691f8"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss025\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "5a839439641d6f6c3cf2c0f8b73e684c02a5893b77794b472bb10024d020cfeb"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\loss100\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "08e0a8a3d5018ce18d0f1ea5b1b00e10695c6044e829d4c85e76b2b99b6617e7"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\cold_calibration\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "909a1364c85dce45ea07e26a07abf83879f30fa4d99cc3e881048299922d23d9"
+    },
+    {
+      "path": "artifacts\\stress\\one_factor\\mnar_low_speed\\evaluation\\pems_bay-C4-transfer-audit.json",
+      "sha256": "74c00a5b37678a2d60b20dbcbd6082480f6c6f87647325341e22e5b6eddc0590"
+    }
+  ],
+  "scope": "One-factor audit; checks rule recomputation, seeds, registry, referenced manifests and every referenced prediction/interval chunk. Does not audit unreferenced artifacts or establish theoretical validity."
+}

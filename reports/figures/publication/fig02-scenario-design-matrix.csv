@@ -1,0 +1,7 @@
+Feedback channel,Predictor input,Recovery backlog,Spatial correlation,scenario
+0,0,0,0,C0 clean
+1,0,0,0,C1 feedback delay
+0,1,0,0,C2 input faults
+1,1,0,1,C3 correlated outage
+1,1,1,1,C4 buffered recovery
+1,1,1,0,C5 mixed stress

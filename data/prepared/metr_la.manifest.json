@@ -1,0 +1,26 @@
+{
+  "arrays": {
+    "adjacency": "float32 [sensor,sensor]",
+    "original_valid": "bool [time,sensor]",
+    "sensor_ids": "unicode [sensor]",
+    "timestamp_ns": "int64 naive nanoseconds",
+    "values_mph": "float32 [time,sensor]"
+  },
+  "artifact_sha256": "c8c3270690c39ab47ec1c39b326a51d8f9d13b31d43f6af35d047ff925ba009e",
+  "boundary_timestamps": [
+    "2012-03-01T00:00:00",
+    "2012-05-11T09:35:00",
+    "2012-05-23T07:10:00",
+    "2012-06-04T04:45:00",
+    "2012-06-28T00:00:00"
+  ],
+  "graph_sha256": "a35687c6e15aa228dc45027b0ed2a0ea0f4ec78f573deb992c595092d12f61b3",
+  "inserted_missing_rows": 0,
+  "raw_rows": 34272,
+  "rows": 34272,
+  "schema_version": 1,
+  "sensors": 207,
+  "source_sha256": "64784b76d6fb8ec9bff4b6decafb354da2bb37840468fdccee5044e511277c05",
+  "units": "mph",
+  "zero_is_missing": true
+}

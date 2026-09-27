@@ -1,0 +1,148 @@
+\begin{table}[p]
+\caption{Data and evaluation design.}\label{tab:data}
+\centering\small
+\begin{tabular}{llll}\toprule
+Data & Sensors & Partitions & Test sampling \\\midrule
+METR-LA & 207 & 60/10/10/20\% & Hourly origins \\
+PEMS-BAY & 325 & 60/10/10/20\% & Hourly origins \\
+SUMO & 20 & 60/15/15/30 episodes & Full episode origins \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Real partitions are chronological. SUMO C3 additionally uses 40 fresh validation episodes. All histories span 60 min; reported horizons are 15, 30 and 60 min.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Shared protocol and locked asymmetric settings.}\label{tab:settings}
+\centering\small
+\begin{tabular}{ll}\toprule
+Quantity & Setting \\\midrule
+Nominal coverage / decision floor & 0.90 / 0.88 \\
+History / forecast window & 12 / 12 five-minute bins \\
+Training / fault seeds & 11, 22, 33 / 101, 202, 303 \\
+Scale floor & 0.44704 $\ms$ \\
+Buffer / age decay / stale decay & 2016 / 288 / 288 bins \\
+Context bandwidth / support reference & 2 / 50 \\
+Inflation coefficients / cap & 0.05, 0.05 / 3 \\
+Real local archive cap & 256 records per group node \\
+Maximum local neighbours & 2 \\
+Bootstrap resamples & 2000 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Per-backbone training configurations are supplied in the release. These locked calibration settings supersede exploratory defaults.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Reporting conditions.}\label{tab:conditions}
+\centering\small
+\begin{tabular}{lll}\toprule
+Condition & Predictor input & Calibration feedback \\\midrule
+C0 & Available & Available \\
+C1 & Available & Correlated delay \\
+C2 & Correlated outage & Available \\
+C3 & Correlated outage & Delay and backlog \\
+C4 & Correlated outage & Permanent within-outage loss \\
+C5 & Independent packet loss & Independent packet loss \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize C3/C4 baseline: 10\% connected sensors, 30-min outage, two daily events, 15-min backlog; C4 permanently loses half of affected feedback. Schedules are separate from physical validity.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Final FAR-GW paired score effects and joint decisions.}\label{tab:primary}
+\centering\small
+\begin{tabular}{llllll}\toprule
+Data & Cell & Rolling minus FAR & ACI minus FAR & Coverage & Pass \\\midrule
+SUMO & C3 & 0.266 [0.105, 0.450] & 0.259 [0.104, 0.427] & 0.8890 & Yes \\
+SUMO & C4 & 0.460 [0.272, 0.682] & 0.422 [0.256, 0.614] & 0.8793 & No \\
+METR-LA & C3 & 0.355 [0.192, 0.551] & 0.345 [0.185, 0.538] & 0.8985 & Yes \\
+METR-LA & C4 & 0.425 [0.238, 0.638] & 0.425 [0.253, 0.617] & 0.8958 & Yes \\
+PEMS-BAY & C3 & -0.035 [-0.101, 0.047] & -0.042 [-0.111, 0.043] & 0.9006 & No \\
+PEMS-BAY & C4 & -0.119 [-0.194, -0.043] & -0.130 [-0.216, -0.047] & 0.9068 & No \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Effects and 95\% paired intervals are in $\ms$. Positive differences favour FAR-Cal. SUMO values are rounded from saved validation summaries.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Backbone transfer decisions.}\label{tab:backbones}
+\centering\small
+\begin{tabular}{lllll}\toprule
+Backbone & Data & Cell & Coverage & Joint rule \\\midrule
+FAR-GW & METR-LA & C3 & 0.8985 & Yes \\
+STAEformer & METR-LA & C3 & 0.8965 & Yes \\
+STID & METR-LA & C3 & 0.8891 & Yes \\
+DCRNN & METR-LA & C3 & 0.8891 & Yes \\
+FAR-GW & METR-LA & C4 & 0.8958 & Yes \\
+STAEformer & METR-LA & C4 & 0.8916 & Yes \\
+STID & METR-LA & C4 & 0.8880 & Yes \\
+DCRNN & METR-LA & C4 & 0.8943 & Yes \\
+FAR-GW & PEMS-BAY & C3 & 0.9006 & No \\
+STAEformer & PEMS-BAY & C3 & 0.8945 & Yes \\
+STID & PEMS-BAY & C3 & 0.9002 & No \\
+DCRNN & PEMS-BAY & C3 & 0.9007 & Yes \\
+FAR-GW & PEMS-BAY & C4 & 0.9068 & No \\
+STAEformer & PEMS-BAY & C4 & 0.9101 & Yes \\
+STID & PEMS-BAY & C4 & 0.9062 & No \\
+DCRNN & PEMS-BAY & C4 & 0.9144 & Yes \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Joint rule compares rolling and ACI on identical frozen forecasts. CoRel was evaluated only with FAR-GW.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Core and independent matched-rate controls.}\label{tab:controls}
+\centering\small
+\begin{tabular}{llllll}\toprule
+Data & Cell & Schedule & Rolling effect & ACI effect & Pass \\\midrule
+METR-LA & C1 & Core & 0.356 [0.194, 0.553] & 0.347 [0.187, 0.540] & Yes \\
+METR-LA & C2 & Core & 0.354 [0.192, 0.551] & 0.345 [0.185, 0.538] & Yes \\
+METR-LA & C5 & Core & 0.102 [0.063, 0.129] & 0.092 [0.055, 0.120] & Yes \\
+METR-LA & C3 & Independent & 0.304 [0.225, 0.386] & 0.310 [0.232, 0.390] & Yes \\
+METR-LA & C4 & Independent & 0.307 [0.227, 0.389] & 0.312 [0.234, 0.392] & Yes \\
+PEMS-BAY & C1 & Core & -0.035 [-0.101, 0.046] & -0.042 [-0.111, 0.042] & No \\
+PEMS-BAY & C2 & Core & -0.035 [-0.101, 0.047] & -0.042 [-0.111, 0.043] & No \\
+PEMS-BAY & C5 & Core & -0.014 [-0.021, -0.005] & -0.016 [-0.023, -0.007] & No \\
+PEMS-BAY & C3 & Independent & 0.018 [-0.010, 0.062] & 0.018 [-0.010, 0.063] & No \\
+PEMS-BAY & C4 & Independent & 0.017 [-0.009, 0.055] & 0.017 [-0.008, 0.055] & No \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Effects and paired 95\% intervals are in $\ms$; the independent controls randomise sensor identities at matched severity.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{One-factor stress summary by network and factor.}\label{tab:stress}
+\centering\small
+\begin{tabular}{lllll}\toprule
+Data & Factor & Cells & Passes & Min coverage \\\midrule
+METR-LA & duration\_bins & 6 & 6 & 0.8956 \\
+METR-LA & connected\_fraction & 4 & 4 & 0.8908 \\
+METR-LA & additional\_backlog\_delay\_bins & 4 & 4 & 0.8959 \\
+METR-LA & loss\_within & 6 & 6 & 0.8939 \\
+METR-LA & cold\_calibration & 2 & 2 & 0.8959 \\
+METR-LA & mnar\_low\_speed & 2 & 2 & 0.8959 \\
+PEMS-BAY & duration\_bins & 6 & 0 & 0.8981 \\
+PEMS-BAY & connected\_fraction & 4 & 0 & 0.9003 \\
+PEMS-BAY & additional\_backlog\_delay\_bins & 4 & 0 & 0.9087 \\
+PEMS-BAY & loss\_within & 6 & 0 & 0.8990 \\
+PEMS-BAY & cold\_calibration & 2 & 0 & 0.9006 \\
+PEMS-BAY & mnar\_low\_speed & 2 & 0 & 0.9013 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Cells comprise separately evaluated values and C3/C4 conditions; the release retains every effect estimate and interval. MNAR is a sensitivity experiment, not an identification result.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Exploratory paired ablation classifications across six cells.}\label{tab:ablations}
+\centering\small
+\begin{tabular}{llll}\toprule
+Removal/diagnostic & Worsens & Improves & Inconclusive \\\midrule
+no spatial & 3 & 0 & 3 \\
+no context & 1 & 1 & 4 \\
+no age & 0 & 3 & 3 \\
+no stale blend & 5 & 0 & 1 \\
+no inflation & 1 & 0 & 5 \\
+arrival freshness & 2 & 0 & 4 \\
+frozen only & 1 & 0 & 5 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Worsens: lower 95\% bound above zero; improves: upper bound below zero. The intervals are exploratory and unadjusted for multiple comparisons. Counts refer to removals, not full-method superiority.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Descriptive CPU archive-cap replays.}\label{tab:runtime}
+\centering\small
+\begin{tabular}{lllll}\toprule
+Data & Cap & Median seconds [range] & Score ($\ms$) & Coverage \\\midrule
+METR-LA & 64 & 19.28 [19.25, 19.89] & 9.4872 & 0.9114 \\
+METR-LA & 128 & 19.69 [18.71, 20.04] & 9.3233 & 0.9133 \\
+METR-LA & 256 & 19.08 [18.80, 19.99] & 9.3148 & 0.9122 \\
+PEMS-BAY & 64 & 97.95 [96.88, 99.69] & 5.4284 & 0.8980 \\
+PEMS-BAY & 128 & 93.76 [91.85, 102.98] & 5.4079 & 0.8971 \\
+PEMS-BAY & 256 & 96.25 [91.57, 105.95] & 5.3960 & 0.8971 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Three repetitions per cap and network; identical C3 duration03 inputs, seeds 11/101. Ranges are observed timing ranges, not confidence intervals. The pooled quality estimand differs from origin-level paired inference.
+\end{table}\clearpage

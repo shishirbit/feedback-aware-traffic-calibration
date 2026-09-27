@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "sumo_mechanism_subset12",
+  "artifact_suffix": "subset12",
+  "episode_indices": [90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101],
+  "episode_ids": [
+    "test-001", "test-002", "test-003", "test-004",
+    "test-005", "test-006", "test-007", "test-008",
+    "test-009", "test-010", "test-011", "test-012"
+  ],
+  "family_counts": {"P0": 3, "P1": 3, "P2": 3, "P3": 3},
+  "selection_rule": "Before inspecting C1/C2 outcomes, select the first three test episodes from each physical family in immutable test order; these are exactly test-001 through test-012.",
+  "fault_seed": 101,
+  "model_seeds": [11, 22, 33],
+  "scenarios": ["C0", "C1", "C2"]
+}

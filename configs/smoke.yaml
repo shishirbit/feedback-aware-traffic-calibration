@@ -1,0 +1,16 @@
+profile: smoke
+training:
+  seeds: [11]
+  epochs: 2
+  patience: 2
+  batch_size: 4
+sumo:
+  episode_seconds: 10800
+  warmup_seconds: 1800
+  train_episodes: 1
+  tune_episodes: 0
+  calibration_episodes: 1
+  test_episodes: 1
+  physical_families: [P0]
+evaluation:
+  bootstrap_resamples: 20

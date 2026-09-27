@@ -1,0 +1,8 @@
+dataset: pems_bay
+data:
+  expected_sensors: 325
+  filename: data/raw/pems-bay.h5
+  adjacency_filename: data/raw/adj_mx_bay.pkl
+  source_url: https://github.com/liyaguang/DCRNN
+  retrieval_url: https://drive.google.com/file/d/1wD-mHlqAb2mtHOe_68fZvDh1LpDegMMq/view
+  license_access_terms: Publicly downloadable benchmark; DCRNN code is MIT, but no explicit dataset redistribution license was found. Verify rights before redistribution.

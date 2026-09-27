@@ -1,0 +1,7 @@
+dataset,far_cal_coverage,scenario,superiority_rule_met
+metr_la,0.898502637400034,C1,True
+metr_la,0.898502637400034,C2,True
+metr_la,0.8892831889049385,C5,True
+pems_bay,0.9006397890946503,C1,False
+pems_bay,0.9006397890946503,C2,False
+pems_bay,0.8977146270694658,C5,False

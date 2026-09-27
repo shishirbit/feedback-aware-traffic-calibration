@@ -1,0 +1,18 @@
+{
+  "status": "locked_before_ablation_runs",
+  "datasets": ["metr_la", "pems_bay", "sumo"],
+  "scenarios": ["C3", "C4"],
+  "model_seeds": [11, 22, 33],
+  "fault_seeds": [101, 202, 303],
+  "ablations": ["no_spatial", "no_context", "no_age", "no_stale_blend", "no_inflation", "arrival_freshness", "frozen_only"],
+  "reference": "locked far_cal_asymmetric asym100; verify and reuse completed references",
+  "total_stages": 432,
+  "sumo_C3": "all 40 fresh asymmetric-validation episodes",
+  "sumo_C4": "all 30 test episodes",
+  "real_data": "unchanged reference hourly origins, fault focus and 12-bin recovery; cap 256",
+  "arrival_freshness": "actual scheduled arrival replaces target time only in age weights and stale gap; target-based buffer eligibility and target-block ESS retained",
+  "frozen_only": "same clean frozen archive and spatial fallback, uniform archive weights, no live adaptation or inflation",
+  "inference": "exploratory paired 95% bootstrap intervals; average model seeds within each episode or fault-time cell, real day blocks stratified by fault seed; no independent model-seed replication claim",
+  "STAEformer_requirement": "main comparison already completed; this component matrix uses FAR-GW frozen predictions",
+  "claim_boundary": "no universal superiority; no identifiable MNAR correction"
+}

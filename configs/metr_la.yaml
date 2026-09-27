@@ -1,0 +1,8 @@
+dataset: metr_la
+data:
+  expected_sensors: 207
+  filename: data/raw/metr-la.h5
+  adjacency_filename: data/raw/adj_mx.pkl
+  source_url: https://github.com/liyaguang/DCRNN
+  retrieval_url: https://raw.githubusercontent.com/leilin-research/GCGRNN/master/data/METR-LA_traffic_speed/metr-la.h5
+  license_access_terms: Publicly downloadable benchmark; DCRNN code is MIT, but no explicit dataset redistribution license was found. Verify rights before redistribution.

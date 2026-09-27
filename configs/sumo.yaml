@@ -1,0 +1,5 @@
+dataset: sumo
+data:
+  expected_sensors: 20
+  filename: data/sumo
+  adjacency_filename: data/sumo/network/adjacency.npz

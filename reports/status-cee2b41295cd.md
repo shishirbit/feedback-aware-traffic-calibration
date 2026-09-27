@@ -1,0 +1,60 @@
+# PS-1 evidence status
+
+Registry SHA-256: `cee2b41295cd20e9ae80ea1567f765085bdf1d395f4c932d94b53ad19a1e545f`
+
+This report distinguishes executed software checks from pending research evidence.
+
+| Experiment | Dataset | Status | Evidence |
+|---|---|---|---|
+| smoke_cpu | sumo_synthetic_motorway | completed | artifacts/smoke-66538f1f9de7 |
+| metr_la_core | metr_la | planned | all three registered predictor seeds are trained; full scenario replay and calibration comparison remain |
+| pems_bay_core | pems_bay | planned | all three registered predictor seeds are trained; prediction caching, scenario replay, and calibration comparisons remain |
+| metr_la_cpu_feasibility | metr_la | completed | artifacts/feasibility/metr_la-seed11.json |
+| metr_la_far_gw_seed11_training | metr_la | completed | artifacts/training/metr_la-seed11-803c69399a64/training_summary.json |
+| metr_la_far_gw_seed22_training | metr_la | completed | artifacts/training/metr_la-seed22-803c69399a64/training_summary.json |
+| metr_la_far_gw_seed33_training | metr_la | completed | artifacts/training/metr_la-seed33-803c69399a64/training_summary.json |
+| metr_la_seed11_clean_c0 | metr_la | completed | artifacts/evaluation/metr_la-seed11-clean.json |
+| metr_la_seed22_clean_c0 | metr_la | completed | artifacts/evaluation/metr_la-seed22-clean.json |
+| metr_la_seed11_c0_replay_validation | metr_la | completed | artifacts/validation/metr_la-seed11-C0-fault101.json |
+| metr_la_seed11_c3_fault101_static | metr_la | completed | artifacts/evaluation/metr_la-seed11-C3-fault101-static.json |
+| metr_la_seed11_c3_inputs_c2_feedback_fault101_online | metr_la | completed | artifacts/online/metr_la-seed11-C3-feedback-C2-fault101/manifest.json |
+| metr_la_seed11_c3_inputs_c3_feedback_fault101_online | metr_la | completed | artifacts/online/metr_la-seed11-C3-feedback-C3-fault101/manifest.json |
+| metr_la_seed11_feedback_timing_pair_fault101 | metr_la | completed | artifacts/evaluation/metr_la-seed11-C3-feedback-C2-vs-C3-fault101.json |
+| metr_la_seed22_c3_fault101_static | metr_la | completed | artifacts/evaluation/metr_la-seed22-C3-fault101-static.json |
+| metr_la_seed22_c3_inputs_c2_feedback_fault101_online | metr_la | completed | artifacts/online/metr_la-seed22-C3-feedback-C2-fault101/manifest.json |
+| metr_la_seed22_c3_inputs_c3_feedback_fault101_online | metr_la | completed | artifacts/online/metr_la-seed22-C3-feedback-C3-fault101/manifest.json |
+| metr_la_seed22_feedback_timing_pair_fault101 | metr_la | completed | artifacts/evaluation/metr_la-seed22-C3-feedback-C2-vs-C3-fault101.json |
+| metr_la_seed11_feedback_timing_pair_fault202 | metr_la | completed | artifacts/evaluation/metr_la-seed11-C3-feedback-C2-vs-C3-fault202.json |
+| metr_la_seed22_feedback_timing_pair_fault202 | metr_la | completed | artifacts/evaluation/metr_la-seed22-C3-feedback-C2-vs-C3-fault202.json |
+| metr_la_simple_controls_clean_c0 | metr_la | completed | artifacts/evaluation/metr_la-simple-controls-clean.json |
+| pems_bay_cpu_feasibility | pems_bay | completed | artifacts/feasibility/pems_bay-seed11.json |
+| pems_bay_far_gw_seed11_training | pems_bay | completed | artifacts/training/pems_bay-seed11-310e9ba8c418/training_summary.json |
+| pems_bay_far_gw_seed22_training | pems_bay | completed | artifacts/training/pems_bay-seed22-310e9ba8c418/training_summary.json |
+| pems_bay_far_gw_seed33_training | pems_bay | completed | artifacts/training/pems_bay-seed33-310e9ba8c418/training_summary.json |
+| pems_bay_seed11_clean_c0 | pems_bay | completed | artifacts/evaluation/pems_bay-seed11-clean.json |
+| pems_bay_seed22_clean_c0 | pems_bay | completed | artifacts/evaluation/pems_bay-seed22-clean.json |
+| pems_bay_seed33_clean_c0 | pems_bay | completed | artifacts/evaluation/pems_bay-seed33-clean.json |
+| pems_bay_seed11_c3_fault101_static | pems_bay | completed | artifacts/evaluation/pems_bay-seed11-C3-fault101-static.json |
+| pems_bay_seed11_c3_inputs_c2_feedback_fault101_online | pems_bay | completed | artifacts/online/pems_bay-seed11-C3-feedback-C2-fault101/manifest.json |
+| pems_bay_seed11_c3_inputs_c3_feedback_fault101_online | pems_bay | completed | artifacts/online/pems_bay-seed11-C3-feedback-C3-fault101/manifest.json |
+| pems_bay_seed11_feedback_timing_pair_fault101 | pems_bay | completed | artifacts/evaluation/pems_bay-seed11-C3-feedback-C2-vs-C3-fault101.json |
+| pems_bay_seed22_c3_fault101_static | pems_bay | completed | artifacts/evaluation/pems_bay-seed22-C3-fault101-static.json |
+| pems_bay_seed22_c3_inputs_c2_feedback_fault101_online | pems_bay | completed | artifacts/online/pems_bay-seed22-C3-feedback-C2-fault101/manifest.json |
+| pems_bay_seed22_c3_inputs_c3_feedback_fault101_online | pems_bay | completed | artifacts/online/pems_bay-seed22-C3-feedback-C3-fault101/manifest.json |
+| pems_bay_seed22_feedback_timing_pair_fault101 | pems_bay | completed | artifacts/evaluation/pems_bay-seed22-C3-feedback-C2-vs-C3-fault101.json |
+| pems_bay_seed33_c3_fault101_static | pems_bay | completed | artifacts/evaluation/pems_bay-seed33-C3-fault101-static.json |
+| pems_bay_seed33_c3_inputs_c2_feedback_fault101_online | pems_bay | completed | artifacts/online/pems_bay-seed33-C3-feedback-C2-fault101/manifest.json |
+| pems_bay_seed33_c3_inputs_c3_feedback_fault101_online | pems_bay | completed | artifacts/online/pems_bay-seed33-C3-feedback-C3-fault101/manifest.json |
+| pems_bay_seed33_feedback_timing_pair_fault101 | pems_bay | completed | artifacts/evaluation/pems_bay-seed33-C3-feedback-C2-vs-C3-fault101.json |
+| pems_bay_simple_controls_clean_c0 | pems_bay | completed | artifacts/evaluation/pems_bay-simple-controls-clean.json |
+| sumo_core | sumo | planned | SUMO 1.27.1 launch and all three integration tests pass after Windows Smart App Control was disabled; P1-P3 paper generation remains |
+| sumo_p1_pilot_seed11 | sumo_synthetic_motorway | completed | data/sumo/pilot-p1-seed11/run_summary.json |
+| sumo_p2_pilot_seed22 | sumo_synthetic_motorway | completed | data/sumo/pilot-p2-seed22/run_summary.json |
+| sumo_p3_pilot_seed33 | sumo_synthetic_motorway | completed | data/sumo/pilot-p3-seed33/run_summary.json |
+| sumo_live_smoke | sumo_synthetic_motorway | completed | data/sumo/live-smoke/live_equivalence.json |
+
+## Scientific claim status
+
+H1 has preliminary artifact-backed evidence where listed; it is not confirmed until all registered model/fault-seed replication and methods are complete. H2-H4 are not evaluated.
+
+No missing result has been replaced by a generated number or zero.
