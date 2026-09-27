@@ -1,0 +1,12 @@
+{
+  "pages": 25,
+  "abstract_words": 150,
+  "tables": 9,
+  "figures": 4,
+  "unresolved_references": 0,
+  "overfull_boxes": 0,
+  "public_repository": "https://github.com/shishirbit/feedback-aware-traffic-calibration",
+  "raw_real_datasets_redistributed": false,
+  "author_declarations": "No funding, competing interests or additional contributors; user confirmed",
+  "pdf_sha256": "25d19561911aa5d9dde76ec7756502a6a89f2d7a7863647e73824e93d5e2c911"
+}

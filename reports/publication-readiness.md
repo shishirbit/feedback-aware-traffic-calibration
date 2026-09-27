@@ -38,3 +38,8 @@ The complete figure inventory, selection rules, and editorial placement are reco
 All 432 stages completed. Among 42 exploratory paired intervals, 13 indicate worse interval score after removal, four indicate improved score, and 25 include zero. Removing target-age weighting improves score in METR-LA C4 and PEMS-BAY C3/C4; removing context matching improves PEMS-BAY C4. The largest degradation is removal of stale blending in PEMS-BAY C4: +9.441 mph interval score, 95% CI [8.410, 10.511], coverage 0.549. These findings do not establish that every component is universally beneficial. The runtime warning from averaging fully masked cells is expected for non-focus times; all reported estimates and CI bounds are finite.
 
 The manuscript must use the author-supplied Interact/Chicago author-date template and the requirements in `docs/manuscript-submission-requirements.md`. Current journal-specific compliance, author declarations and a verified public repository URL remain pending.
+
+
+## Manuscript and reproducibility release — 2026-09-27
+
+The supplied Interact template manuscript now includes author metadata, confirmed none declarations, mathematical formulation, causal algorithm, detailed external architecture, nine tables and four SI figures. Journal instructions were verified directly. Public evidence/code/generated-SUMO repository: https://github.com/shishirbit/feedback-aware-traffic-calibration. Raw real benchmarks remain acquisition-and-hash owing to unresolved redistribution rights. Final author scientific review is required before submission; journal acceptance or Q1 suitability is not guaranteed.

@@ -5,8 +5,10 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 R=Path(__file__).resolve().parents[1]; M=R/'manuscript'; F=M/'figures'; F.mkdir(exist_ok=True)
 k=.44704
-for n in ['interact.cls','tfcad.bst','natbib.sty']: shutil.copy2(M/'template/interactcadlatex'/n,M/n)
-s=(M/'main.tex').read_text(encoding='utf8').replace('log observation age','capped, scaled observation age').replace('\\begin{figure}[ht]\n\\fbox','\\begin{center}\n\\refstepcounter{algorithm}\n\\fbox').replace('\\end{minipage}}\n\\end{figure}','\\end{minipage}}\n\\end{center}').replace('\\newcommand{\\ms}', '\\newcounter{algorithm}\n\\newcommand{\\ms}')
+for n in ['interact.cls','tfcad.bst','natbib.sty']:
+ if (M/'template/interactcadlatex'/n).exists(): shutil.copy2(M/'template/interactcadlatex'/n,M/n)
+s=(M/'main.tex').read_text(encoding='utf8').replace('log observation age','capped, scaled observation age').replace('\\begin{figure}[ht]\n\\fbox','\\begin{center}\n\\refstepcounter{algorithm}\n\\fbox').replace('\\end{minipage}}\n\\end{figure}','\\end{minipage}}\n\\end{center}')
+if '\\newcounter{algorithm}' not in s: s=s.replace('\\newcommand{\\ms}', '\\newcounter{algorithm}\n\\newcommand{\\ms}')
 (M/'main.tex').write_text(s,encoding='utf8')
 abstract=s.split('\\begin{abstract}')[1].split('\\end{abstract}')[0]; print('Abstract words',len(abstract.split()))
 words=len(re.findall(r"\b[\w]+(?:[-'][\w]+)*\b",re.sub(r'\\[a-zA-Z]+(?:\[[^]]*\])?', ' ',s)))
@@ -52,7 +54,7 @@ def box(x,y,w,h,text,col='#e6eef6'):
 def arrow(a,b):ax.annotate('',xy=b,xytext=a,arrowprops={'arrowstyle':'->','color':'#34495e','lw':1.4})
 box(.2,6.7,2.5,.9,'Traffic source\nSpeed, validity, graph');box(3.4,6.7,3,.9,'Evaluator fault schedules\nSeparate input / feedback release');arrow((2.7,7.15),(3.4,7.15))
 box(.2,4.7,2.6,1.1,'Service: causal input store\nPast fill; 7 input channels');box(3.4,4.7,3,1.1,'Frozen predictor\nNoncrossing quantile head');box(7,4.7,2.6,1.1,'Immutable issue ledger\nCentre, scale, context\nTarget and horizon');arrow((2.8,5.2),(3.4,5.2));arrow((6.4,5.2),(7,5.2));arrow((4.9,6.7),(1.5,5.8))
-box(.2,2.5,2.6,1.1,'Released feedback only\nMatch once to ledger\nSigned residual');box(3.4,2.5,3,1.1,'Calibration pools\nTarget age; context; support\nFrozen + live archive');box(7,2.5,2.6,1.1,'Signed-tail intervals\nStale blend and inflation\nSaved at issuance');arrow((4.9,6.7),(1.5,3.6));arrow((1.5,4.7),(1.5,3.6));arrow((2.8,3.05),(3.4,3.05));arrow((6.4,3.05),(7,3.05));arrow((8.3,4.7),(8.3,3.6))
+box(.2,2.5,2.6,1.1,'Released feedback only\nMatch once to ledger\nSigned residual');box(3.4,2.5,3,1.1,'Calibration pools\nTarget age; context; support\nFrozen + live archive');box(7,2.5,2.6,1.1,'Signed-tail intervals\nStale blend and inflation\nSaved at issuance');arrow((4.9,6.7),(1.5,3.6));arrow((2.8,3.05),(3.4,3.05));arrow((6.4,3.05),(7,3.05));arrow((8.3,4.7),(8.3,3.6))
 box(3.4,.3,6.2,1.1,'Evaluator-only hidden truth + originally valid targets\nScore saved intervals; never update from unavailable outcomes','#fcebdc');arrow((8.3,2.5),(8.3,1.4));ax.text(.3,.8,'No future arrivals or\nloss flags visible\nto the service',fontsize=9)
 save(fig,'architecture')
 fig,axs=plt.subplots(1,2,figsize=(10,8),sharex=False)
@@ -65,13 +67,16 @@ fig,axs=plt.subplots(2,3,figsize=(11,6.5))
 for ax,((d,c),g) in zip(axs.flat,A.groupby(['dataset','scenario'],sort=False)):
  v=g.difference.to_numpy()*k;lo=g.lower.to_numpy()*k;hi=g.upper.to_numpy()*k
  ax.errorbar(v,np.arange(7),xerr=[v-lo,hi-v],fmt='o',color='#176087',capsize=2,ms=4);ax.set_yticks(range(7),[a.replace('_',' ') for a in g.ablation],fontsize=7);ax.invert_yaxis();ax.axvline(0,color='.5');ax.set_title(name[d]+' '+c);ax.set_xlabel('Removal minus full score (m/s)',fontsize=8);ax.grid(axis='x',alpha=.2)
+ax=axs.flat[3]
+# PEMS-BAY C4 has one much larger effect; label it explicitly outside the zoomed axis.
+ax.set_xlim(-.22,.25);ax.text(-.18,3,'4.220 [3.760, 4.699] →',fontsize=7,color='#176087',va='center')
 fig.tight_layout();save(fig,'ablations')
 D=pd.read_csv(R/'reports/figures/publication/fig12-interval-score-vs-outage-duration.csv');fig,axs=plt.subplots(1,2,figsize=(8,3.3))
 for ax,(d,g) in zip(axs,D.groupby('dataset',sort=False)):
  for c,z in g.groupby('scenario'):z=z.sort_values('value');ax.plot(z.value*5,z.far_cal_interval_score*k,'o-',label=c)
  ax.set_title(name[d]);ax.set_xlabel('Outage duration (min)');ax.set_ylabel('FAR-Cal interval score (m/s)');ax.legend(frameon=False);ax.grid(alpha=.2)
 fig.tight_layout();save(fig,'duration')
-caps={'architecture':'Causal system architecture. The service observes only released packets. Evaluator truth is reserved for scoring immutable issued intervals.','benchmarks':'Paired comparator-minus-FAR-Cal interval-score effects and 95% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW.','duration':'Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions.','ablations':'Exploratory removal-minus-full interval-score effects and 95% paired intervals. Positive values indicate deterioration after removal. Panel scales differ to retain the large PEMS-BAY C4 stale-blend failure.'}
+caps={'architecture':'Causal system architecture. The service observes only released packets. Evaluator truth is reserved for scoring immutable issued intervals.','benchmarks':'Paired comparator-minus-FAR-Cal interval-score effects and 95% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW.','duration':'Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions.','ablations':'Exploratory removal-minus-full interval-score effects and 95% paired intervals. Positive values indicate deterioration after removal. Panel scales differ; the off-scale PEMS-BAY C4 stale-blend failure is explicitly labelled with its estimate and bounds.'}
 (M/'figures.tex').write_text('\n'.join('\\begin{figure}[p]\\centering\\includegraphics[width=\\linewidth]{figures/'+n+'.pdf}\\caption{'+c.replace('%','\\%')+'}\\label{fig:'+n+'}\\end{figure}\\clearpage' for n,c in caps.items()),encoding='utf8')
 (M/'captions.tex').write_text('\n\n'.join('Figure '+str(i+1)+'. '+c.replace('%','\\%') for i,(n,c) in enumerate(caps.items())),encoding='utf8')
 print('Generated tables and four SI figures')

@@ -305,5 +305,18 @@
       "path": "artifacts\\evaluation\\pems_bay-corel-C4-transfer-audit.json",
       "sha256": "4b3048b739cafbcf4d1387a998d2dc1a9e93a5956e8f68915c8008d6c4ca5344"
     }
-  ]
+  ],
+  "publication_release": {
+    "repository": "https://github.com/shishirbit/feedback-aware-traffic-calibration",
+    "public_verified": true,
+    "manuscript": "manuscript/main.pdf",
+    "pdf_sha256": "25d19561911aa5d9dde76ec7756502a6a89f2d7a7863647e73824e93d5e2c911",
+    "verification": "manuscript/verification.json",
+    "release_tests": {
+      "passed": 77,
+      "seconds": 5.952
+    },
+    "raw_real_data_included": false,
+    "generated_sumo_prepared_sets": 4
+  }
 }

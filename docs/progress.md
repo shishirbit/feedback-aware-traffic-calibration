@@ -63,3 +63,8 @@ Locked configs/full_registered_ablations.json and launched scripts/run_full_regi
 ## Full ablations completed — 2026-09-27
 
 Verified 432 completed manifests and 5,328 chunk hashes. Paired summaries and figure 15 generated and visually checked. Exploratory classification: 13 removals worsen score, four improve it and 25 are inconclusive. Both favorable and adverse findings must appear in the manuscript; no universal component-benefit claim. Remaining submission preparation includes author-supplied template compliance, verified journal instructions, public reproducibility release and author declarations.
+
+
+## Manuscript and reproducibility release — 2026-09-27
+
+The supplied Interact template manuscript now includes author metadata, confirmed none declarations, mathematical formulation, causal algorithm, detailed external architecture, nine tables and four SI figures. Journal instructions were verified directly. Public evidence/code/generated-SUMO repository: https://github.com/shishirbit/feedback-aware-traffic-calibration. Raw real benchmarks remain acquisition-and-hash owing to unresolved redistribution rights. Final author scientific review is required before submission; journal acceptance or Q1 suitability is not guaranteed.
