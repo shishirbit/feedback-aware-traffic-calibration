@@ -4,7 +4,7 @@ R=Path.cwd(); P=R/'artifacts/public-release/feedback-aware-traffic-calibration';
 def copy(src,dst):dst.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(src,dst)
 for folder in ['src','scripts','configs','tests','docs']:
  for f in (R/folder).rglob('*'):
-  if f.is_file() and not any(x in f.parts for x in ['__pycache__','.git']) and f.suffix in ['.py','.ps1','.yaml','.json','.md','.csv']:copy(f,P/f.relative_to(R))
+  if f.is_file() and f.name != 'redraft_manuscript.py' and not any(x in f.parts for x in ['__pycache__','.git']) and f.suffix in ['.py','.ps1','.yaml','.json','.md','.csv']:copy(f,P/f.relative_to(R))
 for f in R.glob('requirements*.lock'):copy(f,P/f.name)
 for n in ['README.md','pyproject.toml','pytest.ini']:copy(R/n,P/n)
 for f in (R/'reports').glob('*'):
@@ -43,7 +43,7 @@ Install the relevant locked environment (Python 3.11 backbone/CoRel locks or the
 
 Generated SUMO prepared arrays cover original, replication, confirmation and fresh asymmetric-validation sets; original episode XML can be regenerated from registered plans. Prepared manifest provenance paths describe the original host and are not portable runtime paths. This is an evidence/source release rather than a precomputed-cache image. Study scripts use repository-relative paths unless explicitly documented as original-host launch helpers.
 
-Build manuscript tables/figures with `python scripts/build_manuscript_assets.py`. Compile `manuscript/main.tex` with Tectonic or a LaTeX/BibTeX toolchain. All manuscript effects are converted from native mph artifacts to SI using 0.44704 exactly.
+Build manuscript tables/figures with `python scripts/build_revised_manuscript_assets.py`. Compile `manuscript/main.tex` with Tectonic or a LaTeX/BibTeX toolchain. All manuscript effects are converted from native mph artifacts to SI using 0.44704 exactly.
 
 ## Original workflow and command inventory
 

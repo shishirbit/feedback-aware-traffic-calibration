@@ -1,203 +1,43 @@
 \documentclass[]{interact}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{graphicx}
-\usepackage{booktabs}
+\usepackage{booktabs,array}
 \usepackage{amsmath,amssymb}
 \usepackage{natbib}
 \usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Causal residual calibration for traffic forecasting with delayed and lost sensor feedback},pdfauthor={Shishir Singh Chauhan}}
 \bibpunct[, ]{(}{)}{;}{a}{}{,}
 \renewcommand\bibfont{\fontsize{10}{12}\selectfont}
 \newcounter{algorithm}
 \newcommand{\ms}{\mathrm{m\,s^{-1}}}
 \newcommand{\FAR}{\textsc{FAR-Cal}}
 \begin{document}
-\title{Feedback-aware uncertainty calibration for traffic forecasting under correlated sensor outages}
+\title{Causal residual calibration for traffic forecasting with delayed and lost sensor feedback}
 \author{\name{Shishir Singh Chauhan\thanks{CONTACT Shishir Singh Chauhan. Email: shishir.chauhan@jaipur.manipal.edu}}
 \affil{Manipal University Jaipur, off Ajmer--Jaipur Expressway, Dahmi Kalan, Rajasthan 303007, India}}
 \maketitle
 \input{word-count.tex}
 \begin{abstract}
-Traffic sensor outages interrupt both forecasting inputs and the outcome feedback used to update prediction intervals. We develop a causal replay benchmark with separate input and feedback arrival times, and evaluate feedback-aware residual calibration on two traffic networks and controlled simulations. The proposed asymmetric method combines spatial residual pooling, context matching, target-age weighting and a frozen-archive fallback. With forecasting models held fixed, it satisfies a registered interval-score and coverage rule in twelve of sixteen backbone, network and outage cells. All four backbones pass on METR-LA, whereas PEMS-BAY results depend on the backbone. A fresh forty-episode simulation validation passes under delayed feedback; permanent-loss transfer narrowly misses the coverage floor. Full component ablations reveal selective benefits and adverse effects of some components. These findings support conditional improvements under tested reporting faults, while rejecting universal superiority and providing no identifiable correction for missing-not-at-random outcomes. Code, simulation data and reproducibility materials accompany the study.
+Traffic forecasting intervals depend on both observed inputs and feedback about realised outcomes. Sensor reporting failures can interrupt these channels differently, leaving online calibration without current residual evidence. We develop a causal replay benchmark and an asymmetric residual calibration method that combines spatial pooling, context matching, target-age weighting and historical fallback. Evaluation uses METR-LA, PEMS-BAY and controlled SUMO datasets with frozen forecasting backbones, independent controls and registered reporting stress. The method satisfies a joint interval-score and coverage rule in twelve of sixteen real-data backbone cells. Fresh simulation validation succeeds with delayed feedback, whereas permanent-loss transfer misses the coverage floor. Seven full component ablations identify thirteen adverse removals, four beneficial removals and twenty-five inconclusive effects. Results support conditional gains rather than universal superiority. Explicit independently configured release schedules, immutable forecasts and publicly accessible evidence make the comparisons independently reproducible, without asserting identifiable correction of selectively missing outcomes or operational traffic-control benefits.
 \end{abstract}
 \begin{keywords}
 Traffic forecasting; prediction intervals; sensor outages; delayed feedback; uncertainty calibration; reproducibility
 \end{keywords}
 
-\section{Introduction}
-Traffic forecasting services depend on a continuing stream of observations. When a detector or a reporting gateway fails, the consequences extend beyond the input window of the forecasting model. The service also loses the realised speeds needed to assess its previous forecasts and recalibrate uncertainty. The distinction matters operationally: an interval may look reassuringly narrow while the residual archive has stopped receiving evidence from the affected part of the network.
+\input{sections/introduction.tex}
+\input{sections/related-work.tex}
+\input{sections/datasets.tex}
+\input{sections/architecture.tex}
+\input{sections/mathematical-modelling.tex}
+\input{sections/algorithms.tex}
+\input{sections/protocol.tex}
+\input{sections/results.tex}
+\input{sections/ablations.tex}
+\input{sections/discussion.tex}
+\section{Conclusion}\label{sec:conclusion}
 
-Consider a forecast issued before an outage. Its target speed may later be measured but delivered only after the gateway recovers. The prediction cannot be revised retrospectively, and its residual cannot enter calibration before the report arrives. If the report is permanently lost, no residual update is possible. A burst of delayed reports presents a different problem: recently delivered errors can describe old traffic conditions. An update based only on delivery time can therefore overstate their freshness.
-
-The motivation for this study is to evaluate these mechanisms without changing the underlying point forecasts between calibration methods. This isolates how received feedback is used, rather than conflating calibration improvements with a better predictor. Traffic dynamics and reporting dynamics are represented separately: congestion changes the physical speed process, whereas the reporting channel determines which observations the service can access at each issue time.
-
-Graph-based and recurrent predictors capture network dependence in different ways. Graph WaveNet learns spatial relations alongside temporal convolutions \citep{wu2019}; DCRNN uses diffusion operations within a recurrent architecture \citep{li2018}. STID and STAEformer offer alternative spatial and temporal representations \citep{shao2022,liu2023}. These models motivate testing calibration transfer across several frozen backbones rather than assuming that a result with one forecasting architecture generalises to all others.
-
-Adaptive conformal inference adjusts uncertainty using sequential errors \citep{gibbs2021}. A multi-step formulation accounts for the ordinary delay between forecast issuance and its target \citep{hallberg2024}. Reporting failures impose additional delay or suppress the outcome entirely. CoRel explicitly uses relationships between correlated series for uncertainty estimation \citep{cini2025}; relational calibration itself is therefore not a new contribution here. Our narrower contribution is an executable evaluation protocol for separately impaired feedback, coupled with an empirical residual-weighting method whose behaviour is tested under that protocol.
-
-The study makes three contributions. First, it provides timestamp-correct replay with independent input and outcome release channels, immutable issued forecasts and auditable fault schedules. Second, it evaluates asymmetric feedback-aware residual calibration, abbreviated \FAR{}, with a stale-feedback fallback and bounded inflation. Third, it reports confirmatory validation, negative transfer findings, controls, stress tests and full component ablations. The research questions concern interval quality under delayed or lost feedback, transfer across networks and predictors, and the contribution of individual components. No finite-sample coverage theorem is claimed for the proposed method.
-
-\section{Materials and methods}
-\subsection{Data, partitions and physical simulation}
-METR-LA and PEMS-BAY contain five-minute speed observations from 207 and 325 sensors. The chronological partitions allocate 60\% to training, 10\% to tuning, 10\% to initial calibration and 20\% to testing. Boundaries are applied before forecast windows are constructed. Every target in a window must remain within its designated partition. Missing benchmark values, including zeros under the audited benchmark convention, are masked; genuine zero speeds in simulation remain valid. Table~\ref{tab:data} records the data design and sampling distinction.
-
-The controlled SUMO network contains 20 detector stations along a 10-km mainline with two through lanes. Simulation steps are one second and observations are aggregated into five-minute bins. Eight-hour episodes include a one-hour warm-up. The original design comprises 60 training, 15 tuning, 15 calibration and 30 test episodes, drawn from four registered demand/event families. Separate replication, confirmation and asymmetric-validation sets are generated without reusing episodes. The final asymmetric C3 validation uses all 40 fresh episodes; C4 uses all 30 test episodes. SUMO enables controlled physical and reporting processes, but does not reproduce the full diversity of real road networks \citep{lopez2018}.
-
-Only training data determine scaling, sensor fallback statistics, graph processing and context normalisation. Tuning selects predictor settings and calibration candidates. Once selected, the final candidate is locked before fresh asymmetric validation. Point-model parameters remain fixed during initial calibration and test replay. This ordering prevents test outcomes from selecting the final method.
-
-\subsection{System architecture and information boundary}
-Figure~\ref{fig:architecture} details the architecture. The source layer consists of traffic observations, their validity mask and the graph. An evaluator-side fault generator creates separate input and feedback schedules. The service sees packets only after their release; it cannot inspect future arrivals, the permanent-loss flag or the evaluator's hidden truth stream. Its causal input store forms the history available at the issue time and supplies the frozen predictor.
-
-Seven input channels comprise standardised causally filled speed, observation validity, capped, scaled observation age and four cyclic calendar features. Missing speeds use the available past and training-derived fallbacks. A noncrossing 0.05/0.50/0.95 head supplies a median forecast and a scale. The issue ledger retains target, horizon, point, scale, issue context and the interval originally issued. Later feedback is matched to this immutable record. The same observed target may score forecasts from several horizons, but each forecast--horizon residual is ingested once.
-
-The calibration layer maintains a received rolling buffer and a frozen historical archive. The local pooling service queries graph neighbours, weights received residuals and assesses fresh support. A blending service shifts mass towards the archive when live support is stale or insufficient. Signed-tail quantiles and inflation produce the interval. The evaluator alone uses the original validity mask and hidden target truth to calculate scores, so a missing feedback packet does not make an otherwise valid target disappear from evaluation.
-
-This separation is a central design constraint. The system cannot infer a missing value merely because the evaluator knows it. Nor can it use a newly released outcome to change an old interval. The benchmark is a replay of causal information availability; its results do not establish service-level latency or operational deployment readiness.
-
-\subsection{Mathematical formulation}
-Let $G=(V,E)$ represent the sensor graph, $y_{i,u}$ the speed at sensor $i$ and target bin $u$, and $t$ an issue bin. The reporting channel assigns input arrival $a^x_{i,u}$ and feedback arrival $a^f_{i,u}$. Permanent loss is represented by an infinite arrival time. A value may enter the predictor only when $a^x_{i,u}\le t$ and may update calibration only when $a^f_{i,u}\le t$. The service information set is
-\begin{equation}
-\mathcal I_t=\{x_{i,u}:a^x_{i,u}\le t\}\cup\{y_{i,u}:a^f_{i,u}\le t\}\cup\{\text{previously issued records}\}.
-\end{equation}
-The predictor $f_\theta$ is frozen and depends only on $\mathcal I_t$. For horizon $h$, define its centre $m_{i,t,h}$ and scale
-\begin{equation}
-m_{i,t,h}=\widehat q_{0.50,i,t,h},\qquad
-s_{i,t,h}=\max\{(\widehat q_{0.95,i,t,h}-\widehat q_{0.05,i,t,h})/2,s_0\},
-\label{eq:scale}
-\end{equation}
-where $s_0=0.44704\,\ms$, equivalent to the implementation's one-mile-per-hour floor. All reported dimensional scores are converted to SI units using the exact factor $1\,\mathrm{mph}=0.44704\,\ms$; this rescaling does not change coverage or comparison signs.
-
-A signed residual becomes eligible only after its target report arrives:
-\begin{equation}
-r_{i,t,h}=(y_{i,t+h}-m_{i,t,h})/s_{i,t,h},\qquad a^f_{i,t+h}\le t',
-\end{equation}
-where $t'$ is the current calibration time. The original issue-time centre and scale are used. For each horizon, the live archive $R_h(t')$ retains received residuals whose targets are at least $t'-B$, with $B=2016$ five-minute bins. Target age, rather than delivery age, governs this eligibility.
-
-Write $c_{i,t}$ for a two-dimensional issue context: neighbourhood mean availability and the logarithm of one plus neighbourhood mean observation age, each standardised using training histories. For a pool $P$, a record $k$ with target $u_k$ receives unnormalised weight
-\begin{equation}
-w_k(t',c)=\exp\left[-\frac{t'-u_k}{\tau}-\frac{\|c_k-c\|_2^2}{2b^2}\right],\qquad
-\widetilde w_k=w_k/\sum_{j\in P}w_j.
-\label{eq:weights}
-\end{equation}
-The locked settings are $\tau=288$ bins and $b=2$. Grouping weights by target timestamp avoids counting correlated spatial reports at the same time as independent evidence. With $W_u=\sum_{k:u_k=u}w_k$, the support measure is
-\begin{equation}
-n_{\mathrm{eff}}(P)=\frac{(\sum_u W_u)^2}{\sum_u W_u^2}.
-\label{eq:ess}
-\end{equation}
-This is a heuristic effective-support statistic, not a claim that dependent samples become independent.
-
-The local pool contains sensor $i$ and up to two graph neighbours. Let $g$ be the nonnegative gap between the current bin and the latest local target, using archive targets as fallback when no live record is available. With reference support $n_0=50$ and decay $d=288$ bins, the real-data local implementation uses
-\begin{equation}
-\eta=\begin{cases}\min(1,n_{\mathrm{eff}}(P)/n_0)\exp(-g/d),&P\ne\varnothing,\\0,&P=\varnothing.\end{cases}
-\qquad F=\eta F_P+(1-\eta)F_A,
-\label{eq:blend}
-\end{equation}
-where $F_A$ is the uniformly weighted frozen archive distribution for the local group, with archive fallback. At most $256$ recent records per sensor are retained in the capped local query.
-
-The uncapped SUMO implementation also includes a global live pool $Q$. Its live distribution is $\lambda F_P+(1-\lambda)F_Q$, where $\lambda=n_{\mathrm{eff}}(P)/(n_{\mathrm{eff}}(P)+n_0)$. Equation~\eqref{eq:blend} then uses global support for $\eta$ and a sensor-specific archive, falling back to the full archive if fewer than 50 sensor records are available. Both paths implement the same feedback-aware principle, but their pooling estimands and sampling rates differ and are reported separately.
-
-Let $z$ denote issue-time missingness, recovered from the stored availability context. Bounded inflation is
-\begin{equation}
-\kappa=\min\{3,1+0.05\min(g/d,2)+0.05z\}.
-\end{equation}
-For empirical weighted quantile $Q_p(F)=\inf\{q:F(q)\ge p\}$ and nominal miscoverage $\alpha$, the locked fully asymmetric interval is
-\begin{align}
-L_{i,t,h}&=\max\{0,m_{i,t,h}+s_{i,t,h}\kappa Q_{\alpha/2}(F)\},\\
-U_{i,t,h}&=\max\{L_{i,t,h},m_{i,t,h}+s_{i,t,h}\kappa Q_{1-\alpha/2}(F)\}.
-\label{eq:interval}
-\end{align}
-The candidate uses asymmetric blend one, so no symmetric rolling-radius component remains. Multiplication of signed tails by $\kappa$ need not strictly enlarge both sides when both tail quantiles have the same sign; the equations specify the implemented transformation rather than asserting monotone widening in every case.
-
-\subsection{Proposed algorithm}
-Algorithm~\ref{alg:replay} states the operational ordering. Its matching and release logic is shared across calibrators; only the residual-to-interval update changes.
-\begin{center}
-\refstepcounter{algorithm}
-\fbox{\begin{minipage}{0.94\linewidth}
-\textbf{Algorithm 1: causal feedback-aware calibration}\label{alg:replay}
-\begin{enumerate}
-\item Initialise the frozen archive from the calibration partition; copy causally eligible records to the live buffers. Freeze $\theta$ and all selected calibration parameters.
-\item At each issue bin $t$, release input and feedback packets scheduled at or before $t$. Update only the causal input store.
-\item For each released valid target, retrieve all matching issued forecast--horizon records. Compute the signed residual using the stored centre and scale, append it once, and retain its target and original issue context.
-\item Expire live records by target time $u<t-B$. Form the available input window and issue the frozen multihorizon point and scale forecasts.
-\item For each sensor and horizon, query local (and, for SUMO, global) pools; compute weights, timestamp-block support, freshness gap and archive blend using Equations~\eqref{eq:weights}--\eqref{eq:blend}.
-\item Compute signed-tail quantiles, inflation and interval bounds using Equation~\eqref{eq:interval}. Save the issued record without later modification.
-\item Independently score originally valid targets against the saved intervals using evaluator-only truth. Never pass that truth into an unavailable-feedback update.
-\end{enumerate}
-\end{minipage}}
-\end{center}
-
-\subsection{Comparators and adaptation scope}
-Rolling calibration uses causally received absolute normalised residuals by sensor and horizon. The ACI adaptation maintains a horizon-specific significance controller. At a feedback arrival bin it updates once using the spatial batch's mean interval miss; there is no update before release and none for a permanently lost outcome. This batching and selective outcome suppression differ from the source protocol, so the source coverage guarantee is not inherited \citep{hallberg2024}.
-
-CoRel is evaluated as a documented project adaptation on the FAR-GW prediction caches. Its architecture and relational calibration follow the official implementation, but the partitioning, multihorizon targets and reporting replay follow this study. These results compare calibration on identical frozen forecasts, not the scores reported on the source paper's splits \citep{cini2025}. CoRel is not extrapolated to the other backbones.
-
-FAR-GW adapts Graph WaveNet with the seven causal channels and noncrossing quantile head. STAEformer is an independent paper-based implementation because the audited official repository did not provide a licence file. STID and DCRNN are documented adaptations of their licensed references. Each backbone is trained with seeds 11, 22 and 33; fault seeds are 101, 202 and 303. Table~\ref{tab:settings} records shared settings and calibrated-method parameters. Per-backbone configurations and source audits accompany the release.
-
-\subsection{Reporting conditions, controls and stress tests}
-Table~\ref{tab:conditions} defines the six reporting conditions. C3 combines correlated input outages with delayed feedback and backlog release. C4 imposes permanent feedback loss within the affected region. The baseline connected outage affects 10\% of sensors for six bins, with two events per day and a three-bin backlog release. C4 loses half of the within-outage feedback. Physical target validity remains unchanged.
-
-The matched-rate independent control randomises affected sensor identities while retaining severity. It asks whether a method succeeds under the independent process; it does not by itself estimate a causal correlated-minus-independent treatment effect. The one-factor stress grid changes duration, connected fraction, additional backlog delay or within-outage loss while holding other settings fixed. Two further tests impair initial calibration and introduce additional low-speed feedback loss. The latter uses a training-derived 20th-percentile speed threshold and suppresses qualifying outcomes with additional probability 0.5. Truth enters only the evaluator-side fault generator. This is missing-not-at-random (MNAR) sensitivity, not an identifiable correction procedure.
-
-\subsection{Endpoints and paired inference}
-For interval $[L,U]$, outcome $y$ and miscoverage $\alpha$, the interval score is
-\begin{equation}
-\mathrm{IS}_{\alpha}(L,U;y)=U-L+\frac{2}{\alpha}(L-y)\mathbf1(y<L)+\frac{2}{\alpha}(y-U)\mathbf1(y>U).
-\end{equation}
-Lower scores reward narrow intervals while penalising missed targets. Coverage is the fraction of originally valid targets inside the interval; width is $U-L$. The primary endpoint averages the 90\% score equally over 15-, 30- and 60-minute horizons. Paired differences are comparator minus \FAR{}, so positive effects favour \FAR{}. The registered rule requires lower 95\% bounds above zero against both rolling and ACI, together with aggregate coverage at least 0.88. Nominal coverage remains 0.90; the 0.88 floor is an evaluation tolerance, not a revised nominal target.
-
-SUMO inference averages model and fault seeds within each episode, then resamples complete episodes 2,000 times. Real-data inference averages model seeds within each fault seed and uses one-day moving blocks, stratified by fault seed. Model-seed repetitions are not independent temporal replications. Real-data audits use systematically selected hourly origins and affected sensors through 12 post-event bins; the buffer cap controls cost. Thus the real-data results do not represent every five-minute network-wide forecast. Stress summaries average origin-level scores, whereas descriptive runtime quality uses pooled valid targets; these estimands are not substituted for one another.
-
-Seven component ablations retain the same point and scale caches: no spatial pooling, no context matching, no target-age weighting, no stale blend, no inflation, arrival-time freshness and frozen calibration only. The arrival-time diagnostic changes age weighting and freshness gap but retains target-based buffer eligibility and timestamp-block support. Frozen-only uses the same archive and fallback without live adaptation or inflation. Full-reference runs are verified and reused. Ablation intervals are exploratory and unadjusted for 42 comparisons; their signs are descriptive evidence rather than family-wise confirmatory tests.
-
-\section{Results}
-\subsection{Development history and fresh validation}
-The initially locked symmetric formulation failed held-out SUMO C3 testing. A regularised revision had favourable estimates in a 30-episode replication, but both paired intervals included zero. A separately registered 160-episode confirmation again did not establish superiority; comparator advantages were approximately $0.012\,\ms$ after unit conversion. These unsuccessful stages are retained rather than reclassified as successful evidence for the final method.
-
-The subsequent signed-tail candidate was selected using split-safe tuning and locked before its fresh validation. Table~\ref{tab:primary} reports the six final FAR-GW dataset/scenario cells. The 40-episode SUMO C3 validation passes the complete rule. SUMO C4 has positive paired score effects but coverage 0.8793, narrowly below the registered floor. Neither favourable score estimates alone nor rounding coverage to two decimals changes that decision.
-
-METR-LA passes in both C3 and C4. PEMS-BAY C3 has small effects whose intervals include zero; PEMS-BAY C4 favours both comparators. These negative transfer results are principal findings. The method is left locked rather than retuned using the evaluated test outcomes.
-
-\subsection{Cross-backbone and relational comparisons}
-Figure~\ref{fig:benchmarks} presents every evaluated real-data comparator with the proposed method as the zero reference. Within each backbone, all calibrators use the same forecasts and masks. The plot therefore compares calibration conditional on a backbone; it is not a ranking of the predictors themselves. CoRel points appear only for FAR-GW because that is the evaluated scope.
-
-The four-backbone matrix passes in 12 of 16 registered cells: all eight METR-LA cells, and the four PEMS-BAY cells using STAEformer or DCRNN. FAR-GW and STID each fail both PEMS-BAY conditions. Table~\ref{tab:backbones} makes these joint decisions explicit. Consistency across METR-LA predictors supports transfer on that network, while PEMS-BAY demonstrates predictor-dependent behaviour.
-
-CoRel-minus-\FAR{} differences are positive in all four FAR-GW real-data cells. After SI conversion, the estimates are 0.758, 0.973, 1.008 and 1.004\,$\ms$ for METR-LA C3/C4 and PEMS-BAY C3/C4. Their respective intervals are [0.518, 1.030], [0.616, 1.403], [0.814, 1.215] and [0.787, 1.227]\,$\ms$. CoRel coverage is 0.8743, 0.8725, 0.8837 and 0.8743. This direct comparison supports an advantage over this adaptation; it does not imply that \FAR{} beats rolling or ACI in the PEMS-BAY cells.
-
-\subsection{Core faults, independent controls and one-factor stress}
-The core and matched-control matrices complete 168 and 120 stages. Table~\ref{tab:controls} reports their paired effects and joint decisions. METR-LA passes C1, C2 and C5 and both independent C3/C4 controls; PEMS-BAY passes none. The independent-control results preserve the network-specific pattern without proving that spatial correlation itself causes the method's advantage.
-
-All 1,488 one-factor stress stages finish, yielding 48 dataset/scenario/variant summaries. METR-LA passes all 24 tested cells and PEMS-BAY none of its 24; every aggregate coverage is at least 0.88. Table~\ref{tab:stress} groups the findings by factor, and Figure~\ref{fig:duration} shows score sensitivity to outage duration. Duration, connected fraction, backlog delay, permanent loss and initial archive impairment test different limits of the reporting system; they are not pooled into a single generalisation guarantee. The MNAR grid retains the same distinction: favourable performance in one network and failure in the other remain compatible with selective outcome observation.
-
-\subsection{Full component ablations}
-All 432 stages are complete: 54 verified full references and 378 new component evaluations. Figure~\ref{fig:ablations} displays ablation-minus-full effects. A positive interval indicates degradation after removal; a negative interval indicates an improvement. Thirteen exploratory intervals are wholly positive, four wholly negative and 25 include zero. Table~\ref{tab:ablations} identifies which components fall into these categories.
-
-Stale blending has the clearest repeated benefit. Removing it worsens score in METR-LA C3, both PEMS-BAY conditions and both SUMO conditions. The largest effect occurs in PEMS-BAY C4: removal increases score by $4.220\,\ms$, with 95\% interval [3.760, 4.699]\,$\ms$, while coverage falls to 0.549. Spatial pooling is beneficial in METR-LA C3 and PEMS-BAY C3/C4, but its remaining intervals include zero.
-
-The adverse findings matter equally. Removing age weighting improves score in METR-LA C4 and PEMS-BAY C3/C4; removing context matching improves PEMS-BAY C4. Consequently, the ablations do not support a claim that every component is necessary or uniformly beneficial. Arrival-time freshness is worse in METR-LA C4 and PEMS-BAY C3, but the remaining effects are small or uncertain. The simulated diagnostic does not establish a large general backlog penalty. Exploratory intervals are not used to modify the tested method.
-
-\subsection{Descriptive computation study}
-Eighteen timed replays compare archive caps 64, 128 and 256 with identical C3 inputs and fixed model/fault seeds 11/101. Table~\ref{tab:runtime} reports wall-clock medians, observed ranges and pooled quality. Timing includes CPU calibration, loading and output serialisation, excluding training and prediction. The cap-256 setting exactly reproduces the archived same-run quality. Smaller caps have slightly higher score in both fixed runs, but timing ranges overlap. Host workload and filesystem cache are not isolated, so these measurements do not establish a reliable speed advantage, a cross-method runtime ranking or a deployment throughput guarantee.
-
-\section{Discussion}
-\subsection{Interpretation and methodological limits}
-The strongest methodological lesson is that observing an outcome and receiving its report are different events. Calibration needs the latter, while valid evaluation uses the former. Keeping these channels separate exposes a failure mode that input-only missingness experiments cannot fully characterise: the forecasting system can lose both explanatory observations and the evidence needed to correct its uncertainty.
-
-The results favour a conditional interpretation. The asymmetric redesign succeeds on fresh SUMO C3 and transfers consistently across METR-LA backbones, while PEMS-BAY remains heterogeneous. Residual shape, graph neighbourhoods, scale quality and network dynamics may contribute, but the experiments do not isolate a dominant explanation. The failed symmetric confirmations also caution against attributing all final gains to a single component change: successive formulations were evaluated on different held-out stages.
-
-Full ablations sharpen this conclusion. Stale blending is repeatedly useful, and its removal under permanent loss can collapse coverage. Conversely, target-age and context weighting sometimes hurt score. These findings suggest a future programme of training/tuning-only component selection followed by validation on new networks or untouched episode sets. Choosing a revised rule from the current test ablations would be further method development, not confirmation of the locked rule.
-
-Neither weighted pooling nor the support statistic supplies a missing-outcome identification argument. Selective feedback can change the residual population, especially if low speeds are preferentially suppressed. The MNAR experiment quantifies sensitivity to a specified fault generator; it cannot recover the distribution of unseen outcomes without assumptions or additional information. There is no claim of identifiable MNAR correction or finite-sample coverage under arbitrary reporting failures.
-
-\subsection{Motivation, societal implications and deployment boundary}
-The practical aim is to make uncertainty services more accountable when sensing infrastructure degrades. Wider or better-positioned intervals may help operators recognise that a point forecast is less informative during an outage. That possibility is a motivation, not a demonstrated improvement in routing, travel time, safety, emissions or public welfare. No traffic-control policy is evaluated in this study.
-
-Uneven detector availability also raises distributional concerns. Regions with persistently poor instrumentation may receive intervals built from neighbouring or historical residuals that do not represent local conditions. Aggregate network coverage can hide such disparities. A deployment should therefore audit coverage and interval quality by location, reporting quality and relevant operational regime, communicate outages explicitly and retain human oversight for consequential actions. The present datasets and simulation are insufficient to claim equitable performance across communities or road types.
-
-The architecture records forecast issuance and subsequent feedback, which can support auditing. A production implementation would additionally require access controls, retention policies, operational monitoring and validation on live infrastructure. The existing gateway tests establish replay-equivalence properties at smoke scale; they do not replace a full service study. This manuscript accordingly claims a causal replay benchmark and tested calibration behaviour, not operational readiness.
-
-\subsection{Limitations}
-The real-data audit is hourly, fault focused and locally capped. Its conclusions cannot be substituted for complete five-minute network-wide evaluation. Simulation provides controlled replication but represents a small freeway network. CoRel, STID and DCRNN are documented adaptations, and STAEformer is an independent implementation; the comparisons do not reproduce every source-paper setting. The archive-cap study uses one fixed run per network and descriptive timing. Ablation intervals are exploratory and not adjusted for multiple comparisons. Dataset redistribution rights for the exact real benchmark packages remain unverified, so the release provides acquisition instructions rather than redistributing them. Finally, the literature positioning is bounded: no universal absence of related feedback-aware work is asserted.
-
-\subsection{Conclusion}
 Separating predictor-input and calibration-feedback availability enables causal assessment of traffic prediction intervals under delayed and permanently lost reports. The locked asymmetric method improves interval quality under several tested conditions, but superiority depends on network and backbone, and the full ablations reveal both useful and adverse components. The study contributes an auditable benchmark and conditional empirical evidence. It does not establish universal superiority, arbitrary-missingness coverage or identifiable MNAR correction.
 
 \section*{Acknowledgements and funding}

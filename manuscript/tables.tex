@@ -1,13 +1,87 @@
+\begin{table}[p]\caption{Forecasting and input-reconstruction literature: role in this study.}\label{tab:related-models}\centering\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{5.0cm}}\toprule
+Reference & Representation or objective & Numerical study role \\\midrule
+Graph WaveNet \citep{wu2019} & Graph supports and temporal convolutions & FAR-GW causal quantile adapter \\
+DCRNN \citep{li2018} & Diffusion recurrent forecasting & Causal quantile adapter; data provenance \\
+STID \citep{shao2022} & Spatial and temporal identity & Causal quantile adapter \\
+STAEformer \citep{liu2023} & Adaptive embeddings and Transformer & Independent paper-based adapter \\
+GRIN \citep{cini2022} & Graph-based missing-value reconstruction & Literature context; not evaluated \\
+\bottomrule\end{tabular}\par\smallskip\footnotesize Representation choices do not determine how missing outcome feedback should be handled. Source-paper performance values are not used as study results.\end{table}\clearpage
+\begin{table}[p]\caption{Calibration literature and feedback scope.}\label{tab:related-calibration}\centering\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{4.7cm}}\toprule
+Reference & Relevant objective & Scope here \\\midrule
+CQR \citep{romano2019} & Calibrated quantile regression & Literature; predictor quantiles distinguished from calibrated bounds \\
+Beyond exchangeability \citep{barber2023} & Weighted inference under drift & Literature; no theorem imported \\
+ACI \citep{gibbs2021} & Sequential coverage adaptation & Horizon-specific spatial-batch adapter \\
+SPCI \citep{xu2023} & Sequential residual-based intervals & Literature; not evaluated \\
+Multistep ACI \citep{hallberg2024} & Ordinary forecast-target delay & Starting point for ACI adaptation \\
+CoRel \citep{cini2025} & Relational series calibration & Official architecture; FAR-GW only \\
+Incomplete series \citep{chen2026} & Post-training missing-input adaptation & Published 2026; literature comparison \\
+Delayed ACI \citep{elhalabi2026} & Delay-dependent recursion and guarantees & 2026 preprint; not evaluated \\
+Corrupted feedback \citep{wang2026} & Binary-flip feedback robustness & 2026 preprint; different corruption model \\
+\bottomrule\end{tabular}\par\smallskip\footnotesize Entries summarise reviewed objectives, not universal capability claims or a numerical ranking. General CP background is supplied by \citet{angelopoulos2021}.\end{table}\clearpage
 \begin{table}[p]
-\caption{Data and evaluation design.}\label{tab:data}
+\caption{Dataset dimensions, periods and evaluation sampling.}\label{tab:data}
 \centering\small
-\begin{tabular}{llll}\toprule
-Data & Sensors & Partitions & Test sampling \\\midrule
-METR-LA & 207 & 60/10/10/20\% & Hourly origins \\
-PEMS-BAY & 325 & 60/10/10/20\% & Hourly origins \\
-SUMO & 20 & 60/15/15/30 episodes & Full episode origins \\
+\begin{tabular}{lllll}\toprule
+Data & Sensors & Rows & Acquired/prepared period & Test sampling \\\midrule
+METR-LA & 207 & 34,272 & 1 Mar--27 Jun 2012 & Hourly fault audit \\
+PEMS-BAY & 325 & 52,128 & 1 Jan--30 Jun 2017 & Hourly fault audit \\
+SUMO original & 20 & 11,520 & 120 eight-hour episodes & Full episode audit \\
+SUMO fresh C3 & 20 & 3,840 & 40 fresh episodes & Full episode audit \\
 \bottomrule\end{tabular}
-\par\smallskip\footnotesize Real partitions are chronological. SUMO C3 additionally uses 40 fresh validation episodes. All histories span 60 min; reported horizons are 15, 30 and 60 min.
+\par\smallskip\footnotesize All rows use five-minute bins. PEMS-BAY has 52,116 raw rows plus twelve inserted wholly invalid rows. Real zero speeds follow the benchmark missingness convention; physical SUMO zeros remain valid.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Descriptive prepared-data validity and observed speeds.}\label{tab:data-statistics}
+\centering\small
+\begin{tabular}{lllll}\toprule
+Data & Valid (\%) & Median & 5th percentile & 95th percentile \\\midrule
+METR-LA & 91.89 & 28.26 & 11.46 & 30.80 \\
+PEMS-BAY & 99.97 & 29.19 & 17.88 & 31.16 \\
+SUMO & 99.73 & 22.31 & 16.65 & 23.66 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Speed summaries are in $\ms$ across originally valid prepared measurements before reporting interventions. They are not distributional estimates for the selectively received feedback stream.
+\end{table}\clearpage
+\begin{table}[p]\caption{Chronological boundaries and episode separation.}\label{tab:partitions}\centering\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{3.4cm}}\toprule
+Data & Train/tune boundary & Tune/calibration boundary & Calibration/test boundary \\\midrule
+METR-LA & 11 May 2012 09:35 & 23 May 2012 07:10 & 4 Jun 2012 04:45 \\
+PEMS-BAY & 19 Apr 2017 14:45 & 7 May 2017 17:05 & 25 May 2017 19:20 \\
+SUMO original & 60 training episodes & 15 tuning episodes & 15 calibration; 30 test episodes \\
+SUMO fresh C3 & No predictor retraining & Candidate locked before generation & 40 new validation episodes \\
+\bottomrule\end{tabular}\par\smallskip\footnotesize Real proportions are 60/10/10/20 percent. Targets must remain inside their assigned partition. Timestamp boundaries precede PEMS-BAY gap reindexing.\end{table}\clearpage
+\begin{table}[p]\caption{Architecture interfaces and information boundary.}\label{tab:architecture-contract}\centering\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{5.5cm}}\toprule
+Module & Consumes & Produces / restriction \\\midrule
+Input store & Released speed, validity and measurement time & Past-only seven-channel history; no future packets \\
+Frozen predictor & Available history and fitted parameters & Median and floored scale; no test-time training \\
+Issue ledger & Point, scale, context and interval & Immutable sensor/target/horizon records \\
+Feedback matcher & Released valid outcomes and stored records & Residual once per forecast--horizon key \\
+Calibration kernel & Received live and valid frozen archives & Weighted signed-tail bounds; no hidden truth \\
+Evaluator & Original validity, truth and issued bounds & Scores; no return edge to service \\
+\bottomrule\end{tabular}\par\smallskip\footnotesize The diagram separates service data flow from evaluator knowledge. Recorded software/artifact checks establish replay properties, not operational latency.\end{table}\clearpage
+\begin{table}[p]
+\caption{Principal mathematical notation.}\label{tab:notation}
+\centering\small
+\begin{tabular}{lll}\toprule
+Symbol & Meaning & Units \\\midrule
+$G=(V,E)$ & Sensor graph & -- \\
+$t,u,h$ & Issue bin, target bin, forecast horizon & Five-minute bins \\
+$a^x,a^f$ & Input and feedback release times & Bins or infinity \\
+$y,m,s$ & Target speed, point centre, scale & $\ms$ \\
+$r$ & Signed normalised forecast residual & Dimensionless \\
+$c,z$ & Issue context and missing fraction & Dimensionless \\
+$R_h,A_h$ & Live and frozen residual archives & Records \\
+$B,\tau,d$ & Retention, age and stale-decay lengths & Bins \\
+$G_i,C$ & Local group and group-cap multiplier & Sensors / records \\
+$b,n_0$ & Context bandwidth and support reference & Dimensionless \\
+$n_{\rm eff},g$ & Timestamp-block support and freshness gap & Blocks / bins \\
+$\eta,\lambda,\kappa$ & Archive mixture, local mixture, inflation & Dimensionless \\
+$L,U,\mathrm{IS}$ & Interval bounds and interval score & $\ms$ \\
+$\alpha$ & Nominal miscoverage & Probability \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize SI conversion uses exactly 0.44704 metres per second per mph. Dimensionless mixture weights and coverage remain unchanged.
 \end{table}\clearpage
 \begin{table}[p]
 \caption{Shared protocol and locked asymmetric settings.}\label{tab:settings}
@@ -21,7 +95,7 @@ Scale floor & 0.44704 $\ms$ \\
 Buffer / age decay / stale decay & 2016 / 288 / 288 bins \\
 Context bandwidth / support reference & 2 / 50 \\
 Inflation coefficients / cap & 0.05, 0.05 / 3 \\
-Real local archive cap & 256 records per group node \\
+Real local archive cap & 256 times group size \\
 Maximum local neighbours & 2 \\
 Bootstrap resamples & 2000 \\
 \bottomrule\end{tabular}
@@ -56,28 +130,42 @@ PEMS-BAY & C4 & -0.119 [-0.194, -0.043] & -0.130 [-0.216, -0.047] & 0.9068 & No 
 \par\smallskip\footnotesize Effects and 95\% paired intervals are in $\ms$. Positive differences favour FAR-Cal. SUMO values are rounded from saved validation summaries.
 \end{table}\clearpage
 \begin{table}[p]
-\caption{Backbone transfer decisions.}\label{tab:backbones}
-\centering\small
-\begin{tabular}{lllll}\toprule
-Backbone & Data & Cell & Coverage & Joint rule \\\midrule
-FAR-GW & METR-LA & C3 & 0.8985 & Yes \\
-STAEformer & METR-LA & C3 & 0.8965 & Yes \\
-STID & METR-LA & C3 & 0.8891 & Yes \\
-DCRNN & METR-LA & C3 & 0.8891 & Yes \\
-FAR-GW & METR-LA & C4 & 0.8958 & Yes \\
-STAEformer & METR-LA & C4 & 0.8916 & Yes \\
-STID & METR-LA & C4 & 0.8880 & Yes \\
-DCRNN & METR-LA & C4 & 0.8943 & Yes \\
-FAR-GW & PEMS-BAY & C3 & 0.9006 & No \\
-STAEformer & PEMS-BAY & C3 & 0.8945 & Yes \\
-STID & PEMS-BAY & C3 & 0.9002 & No \\
-DCRNN & PEMS-BAY & C3 & 0.9007 & Yes \\
-FAR-GW & PEMS-BAY & C4 & 0.9068 & No \\
-STAEformer & PEMS-BAY & C4 & 0.9101 & Yes \\
-STID & PEMS-BAY & C4 & 0.9062 & No \\
-DCRNN & PEMS-BAY & C4 & 0.9144 & Yes \\
+\caption{All sixteen paired backbone comparisons.}\label{tab:backbones}
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lllllll}\toprule
+Backbone & Data & Cell & Rolling minus FAR & ACI minus FAR & Coverage & Pass \\\midrule
+FAR-GW & METR-LA & C3 & 0.355 [0.192, 0.551] & 0.345 [0.185, 0.538] & 0.8985 & Yes \\
+STAEformer & METR-LA & C3 & 0.669 [0.332, 1.056] & 0.672 [0.340, 1.047] & 0.8965 & Yes \\
+STID & METR-LA & C3 & 0.693 [0.356, 1.096] & 0.684 [0.348, 1.081] & 0.8891 & Yes \\
+DCRNN & METR-LA & C3 & 0.439 [0.214, 0.705] & 0.444 [0.219, 0.706] & 0.8891 & Yes \\
+FAR-GW & METR-LA & C4 & 0.425 [0.238, 0.638] & 0.425 [0.253, 0.617] & 0.8958 & Yes \\
+STAEformer & METR-LA & C4 & 0.801 [0.440, 1.234] & 0.827 [0.464, 1.245] & 0.8916 & Yes \\
+STID & METR-LA & C4 & 0.835 [0.453, 1.307] & 0.857 [0.483, 1.314] & 0.8880 & Yes \\
+DCRNN & METR-LA & C4 & 0.644 [0.381, 0.951] & 0.657 [0.388, 0.968] & 0.8943 & Yes \\
+FAR-GW & PEMS-BAY & C3 & -0.035 [-0.101, 0.047] & -0.042 [-0.111, 0.043] & 0.9006 & No \\
+STAEformer & PEMS-BAY & C3 & 0.113 [0.038, 0.200] & 0.117 [0.044, 0.202] & 0.8945 & Yes \\
+STID & PEMS-BAY & C3 & -0.010 [-0.075, 0.074] & -0.005 [-0.070, 0.080] & 0.9002 & No \\
+DCRNN & PEMS-BAY & C3 & 0.255 [0.157, 0.401] & 0.239 [0.147, 0.379] & 0.9007 & Yes \\
+FAR-GW & PEMS-BAY & C4 & -0.119 [-0.194, -0.043] & -0.130 [-0.216, -0.047] & 0.9068 & No \\
+STAEformer & PEMS-BAY & C4 & 0.116 [0.044, 0.196] & 0.123 [0.045, 0.209] & 0.9101 & Yes \\
+STID & PEMS-BAY & C4 & 0.030 [-0.053, 0.123] & 0.034 [-0.054, 0.133] & 0.9062 & No \\
+DCRNN & PEMS-BAY & C4 & 0.323 [0.212, 0.442] & 0.314 [0.207, 0.429] & 0.9144 & Yes \\
 \bottomrule\end{tabular}
-\par\smallskip\footnotesize Joint rule compares rolling and ACI on identical frozen forecasts. CoRel was evaluated only with FAR-GW.
+\par\smallskip\footnotesize Effects and 95\% paired intervals are in $\ms$. Every comparison conditions on one frozen backbone. Joint rule requires both lower bounds above zero and FAR-Cal coverage at least 0.88.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Direct CoRel adaptation comparison on FAR-GW caches.}\label{tab:corel}
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lllllll}\toprule
+Data & Cell & FAR score & CoRel score & CoRel minus FAR & FAR cov. & CoRel cov. \\\midrule
+METR-LA & C3 & 9.091 & 9.850 & 0.758 [0.518, 1.030] & 0.8985 & 0.8743 \\
+METR-LA & C4 & 10.476 & 11.449 & 0.973 [0.616, 1.403] & 0.8958 & 0.8725 \\
+PEMS-BAY & C3 & 4.617 & 5.625 & 1.008 [0.814, 1.215] & 0.9006 & 0.8837 \\
+PEMS-BAY & C4 & 4.723 & 5.726 & 1.004 [0.787, 1.227] & 0.9068 & 0.8743 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Dimensional scores and paired intervals are in $\ms$. Absolute scores and CoRel coverage retain the report's rounding; paired effects use full saved precision. This is not a comparison on other backbones.
 \end{table}\clearpage
 \begin{table}[p]
 \caption{Core and independent matched-rate controls.}\label{tab:controls}
@@ -131,6 +219,72 @@ arrival freshness & 2 & 0 & 4 \\
 frozen only & 1 & 0 & 5 \\
 \bottomrule\end{tabular}
 \par\smallskip\footnotesize Worsens: lower 95\% bound above zero; improves: upper bound below zero. The intervals are exploratory and unadjusted for multiple comparisons. Counts refer to removals, not full-method superiority.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Full METR-LA component ablations.}\label{tab:ablation-metr}
+\centering\small
+\begin{tabular}{lllll}\toprule
+Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
+C3 & no spatial & 0.156 [0.066, 0.273] & 0.8904 & 4.945 \\
+C3 & no context & 0.001 [-0.039, 0.040] & 0.8996 & 4.919 \\
+C3 & no age & -0.018 [-0.113, 0.075] & 0.9025 & 4.875 \\
+C3 & no stale blend & 0.133 [0.065, 0.224] & 0.8991 & 5.003 \\
+C3 & no inflation & 0.005 [-0.002, 0.014] & 0.8980 & 4.867 \\
+C3 & arrival freshness & 0.002 [-0.002, 0.004] & 0.8985 & 4.886 \\
+C3 & frozen only & 0.136 [-0.039, 0.328] & 0.8835 & 4.480 \\
+C4 & no spatial & 0.100 [-0.062, 0.268] & 0.8889 & 5.241 \\
+C4 & no context & -0.028 [-0.067, 0.011] & 0.8964 & 5.186 \\
+C4 & no age & -0.113 [-0.206, -0.032] & 0.9000 & 5.142 \\
+C4 & no stale blend & 0.047 [-0.036, 0.126] & 0.8962 & 5.313 \\
+C4 & no inflation & 0.018 [0.005, 0.030] & 0.8935 & 5.105 \\
+C4 & arrival freshness & 0.004 [0.002, 0.006] & 0.8960 & 5.166 \\
+C4 & frozen only & 0.066 [-0.157, 0.300] & 0.8797 & 4.683 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Effects and widths are in $\ms$. Positive differences mean removal worsens score. Intervals are exploratory and unadjusted. The frozen-only and arrival-freshness rows are diagnostic alternatives.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Full PEMS-BAY component ablations.}\label{tab:ablation-pems}
+\centering\small
+\begin{tabular}{lllll}\toprule
+Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
+C3 & no spatial & 0.069 [0.029, 0.120] & 0.8941 & 2.825 \\
+C3 & no context & 0.000 [-0.001, 0.001] & 0.9008 & 2.799 \\
+C3 & no age & -0.054 [-0.085, -0.011] & 0.9054 & 2.795 \\
+C3 & no stale blend & 0.008 [0.002, 0.012] & 0.8990 & 2.796 \\
+C3 & no inflation & 0.000 [-0.000, 0.000] & 0.9003 & 2.797 \\
+C3 & arrival freshness & 0.001 [0.001, 0.003] & 0.9002 & 2.796 \\
+C3 & frozen only & 0.093 [0.042, 0.161] & 0.9076 & 2.871 \\
+C4 & no spatial & 0.123 [0.070, 0.174] & 0.8999 & 3.129 \\
+C4 & no context & -0.101 [-0.177, -0.038] & 0.9015 & 2.978 \\
+C4 & no age & -0.012 [-0.028, -0.000] & 0.9075 & 3.031 \\
+C4 & no stale blend & 4.221 [3.760, 4.699] & 0.5486 & 1.677 \\
+C4 & no inflation & -0.000 [-0.003, 0.003] & 0.9044 & 2.999 \\
+C4 & arrival freshness & 0.000 [-0.000, 0.000] & 0.9066 & 3.029 \\
+C4 & frozen only & 0.018 [-0.004, 0.034] & 0.9053 & 3.027 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Effects and widths are in $\ms$. Positive differences mean removal worsens score. Intervals are exploratory and unadjusted. The frozen-only and arrival-freshness rows are diagnostic alternatives.
+\end{table}\clearpage
+\begin{table}[p]
+\caption{Full SUMO component ablations.}\label{tab:ablation-sumo}
+\centering\small
+\begin{tabular}{lllll}\toprule
+Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
+C3 & no spatial & 0.007 [-0.011, 0.024] & 0.8875 & 2.082 \\
+C3 & no context & 0.001 [-0.001, 0.005] & 0.8889 & 2.080 \\
+C3 & no age & 0.044 [-0.031, 0.111] & 0.8994 & 2.290 \\
+C3 & no stale blend & 0.034 [0.022, 0.046] & 0.8817 & 2.043 \\
+C3 & no inflation & 0.000 [-0.002, 0.003] & 0.8878 & 2.071 \\
+C3 & arrival freshness & 0.000 [-0.000, 0.000] & 0.8890 & 2.081 \\
+C3 & frozen only & 0.049 [-0.052, 0.140] & 0.9041 & 2.362 \\
+C4 & no spatial & 0.005 [-0.013, 0.023] & 0.8780 & 2.407 \\
+C4 & no context & 0.019 [0.003, 0.039] & 0.8790 & 2.422 \\
+C4 & no age & -0.110 [-0.285, 0.033] & 0.8915 & 2.559 \\
+C4 & no stale blend & 0.223 [0.110, 0.386] & 0.8579 & 2.332 \\
+C4 & no inflation & 0.000 [-0.003, 0.004] & 0.8781 & 2.405 \\
+C4 & arrival freshness & 0.000 [-0.000, 0.000] & 0.8793 & 2.416 \\
+C4 & frozen only & -0.104 [-0.284, 0.044] & 0.8961 & 2.617 \\
+\bottomrule\end{tabular}
+\par\smallskip\footnotesize Effects and widths are in $\ms$. Positive differences mean removal worsens score. Intervals are exploratory and unadjusted. The frozen-only and arrival-freshness rows are diagnostic alternatives.
 \end{table}\clearpage
 \begin{table}[p]
 \caption{Descriptive CPU archive-cap replays.}\label{tab:runtime}

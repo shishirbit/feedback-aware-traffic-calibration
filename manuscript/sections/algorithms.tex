@@ -1,0 +1,46 @@
+\section{Proposed algorithms}\label{sec:algorithm}
+\subsection{Causal replay and residual ingestion}
+Algorithm~\ref{alg:replay} specifies the state transitions needed to reproduce the study. Its inputs are frozen model parameters, partition-safe calibration records, graph groups and two evaluator-owned release schedules. Its outputs are immutable interval records and evaluator metrics. The schedules determine packet availability, but their unreleased entries are never exposed to the model. Steps involving truth are confined to the evaluator, while residual ingestion requires an actually released, valid outcome. The procedure applies separately at each episode boundary in simulation.
+
+\begin{center}\refstepcounter{algorithm}
+\fbox{\begin{minipage}{0.94\linewidth}\small
+\textbf{Algorithm \thealgorithm: causal replay with immutable forecasts}\label{alg:replay}
+\begin{enumerate}
+\item \textbf{Initialise:} freeze model and calibration parameters; load graph groups, training statistics and calibration archive $A_h$ for each reported horizon $h$.
+\item Initialise causal input store, live buffers $R_h$, issue ledger $\mathcal L$ and an ingestion-key set. Reset causal episode state when required.
+\item \textbf{For each issue bin $t$:} obtain only input packets released by $t$; retain measurement timestamps and validity, and update the causal store.
+\item Obtain only feedback packets released by $t$. For each valid packet $(i,u,y)$, retrieve ledger entries whose sensor is $i$ and target is $u$.
+\item For each matching entry $(i,v,h)$, check $u=v+h$ and its unique ingestion key. Skip entries already ingested; otherwise compute $(y-m_{i,v,h})/s_{i,v,h}$.
+\item Append the signed residual, target $u$, arrival $t$, sensor and stored issue context to $R_h$. Mark the key ingested. Never revise the saved interval.
+\item Expire live records with target $u<t-B$. Retain $A_h$ unchanged; delivery time does not reset target age.
+\item Build the available twelve-bin history with past-only filling and training fallbacks. Compute issue context and missing fraction without hidden outcomes.
+\item Query frozen $f_\theta$ to obtain median $m_{i,t,h}$ and floored scale $s_{i,t,h}$ for every sensor and reported horizon.
+\item Call Algorithm~\ref{alg:kernel} using $R_h$, $A_h$, current context and graph group. Store $(i,t,t+h,h,m,s,c,L,U)$ in $\mathcal L$ and publish $[L,U]$.
+\item \textbf{Evaluator only:} score the saved interval against originally valid truth; missing feedback does not remove the target from evaluation.
+\item At completion, aggregate the prespecified horizons and paired blocks; save metrics, source hashes and inference units. Validate artifacts before reuse.
+\end{enumerate}
+\end{minipage}}\end{center}
+
+The ingestion key is defined per issued forecast and horizon, not merely per measured target. This allows one outcome to assess multiple previously issued horizons without counting the same residual twice. The immutable ledger also prevents a restoration-time forecast from replacing an outage-time forecast during scoring. If no outcome arrives, the loop performs no residual update for that target. These cases explain why release ordering and matching are substantive parts of the method rather than administrative details.
+
+\subsection{Weighted asymmetric calibration kernel}
+Algorithm~\ref{alg:kernel} expands the residual-to-interval calculation. It follows Equations~\eqref{eq:weights}--\eqref{eq:interval} and makes local versus local/global processing explicit. Weighted quantiles are empirical left-continuous inverse-distribution queries; they do not add an unimplemented conformal correction. The frozen fallback ensures that loss of live support does not force an empty query, provided the valid initial archive exists. Inflation is the implemented signed-tail scaling and need not widen both sides when the two selected quantiles have the same sign.
+
+\begin{center}\refstepcounter{algorithm}
+\fbox{\begin{minipage}{0.94\linewidth}\small
+\textbf{Algorithm \thealgorithm: asymmetric interval kernel}\label{alg:kernel}
+\begin{enumerate}
+\item \textbf{Inputs:} $i,t,h,m,s,c,z,R_h,A_h$; group $G_i$; locked parameters $B,\tau,b,n_0,d$, inflation coefficients and archive cap $C$.
+\item Select received live records in $G_i$. In real-data local mode, retain at most $C|G_i|$ last group records in archive order and apply the same group limit to frozen records.
+\item Compute log weights $-(t-u_k)/\tau-\|c_k-c\|^2/(2b^2)$. Subtract their maximum before exponentiation, normalise, and group weights by target timestamp for $n_{\rm eff}$.
+\item Determine freshness gap from the latest local target; use local archive targets if the live group is empty. Apply the documented full-archive fallback when necessary.
+\item \textbf{Real mode:} set $\eta$ from local support and gap. Mix local weighted signed residuals with a uniformly weighted frozen group archive.
+\item \textbf{SUMO mode:} also query and weight the global live pool. Set $\lambda$ from local support and $\eta$ from global support; mix local, global and frozen sensor evidence. If fewer than fifty frozen sensor records exist, use the full archive.
+\item If no eligible live records exist, set live mass to zero. Compute $\kappa$ from freshness and issue missingness, bounded by the registered cap.
+\item Remove zero-mass entries; sort remaining signed residuals stably. Form cumulative weights and take the first residual whose cumulative mass reaches $\alpha/2$ and $1-\alpha/2$ of total mass.
+\item Form $L=\max(0,m+s\kappa q_{\alpha/2})$ and $U=\max(L,m+s\kappa q_{1-\alpha/2})$; return the bounds and query diagnostics.
+\item \textbf{Ablation mode:} change only the registered component: neighbourhood, context, age weights, stale mixture, inflation, freshness timestamp or frozen-only path. Preserve forecasts, masks and all other settings.
+\end{enumerate}
+\end{minipage}}\end{center}
+
+With $K$ retained records, weight formation is linear in $K$ and the direct stable quantile sort costs $O(K\log K)$ per query. These are algorithmic operation counts, not measured throughput. Capped real queries bound the number of local records by $C|G_i|$; they do not guarantee equal allocation of records to each group sensor. Table~\ref{tab:runtime} and Figure~\ref{fig:compute} provide the separate descriptive timing experiment. No asymptotic argument is used to claim a speed advantage over the other calibrators.

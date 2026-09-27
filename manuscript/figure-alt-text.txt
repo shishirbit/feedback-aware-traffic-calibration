@@ -1,4 +1,15 @@
-Figure 1: A causal pipeline separates released input and feedback packets, a frozen forecasting model, immutable forecast ledger and residual calibration pools. Hidden truth is used only for scoring.
-Figure 2: Two network panels show paired comparator-minus-FAR-Cal effects for every evaluated backbone and comparator. METR-LA effects are positive; PEMS-BAY effects depend on backbone.
-Figure 3: Separate C3 and C4 curves show FAR-Cal interval-score sensitivity over registered outage durations in METR-LA and PEMS-BAY.
-Figure 4: Six dataset/scenario panels show seven removal-minus-full ablation effects and exploratory paired intervals, including adverse and inconclusive removals. The PEMS-BAY C4 no-stale-blend effect is labelled outside the zoomed axis.
+Figure 1: Training-partition observed-speed distributions before forecast-window construction. Only originally valid prepared measurements are plotted; labels report original valid fractions. SUMO includes its prepared training-partition measurements. The distributions are descriptive, not an explanation of calibration transfer.
+
+Figure 2: Causal architecture with separate input, feedback and evaluator lanes. Stored issue records feed both residual matching and the calibration query; the junction is intentional. Hidden truth feeds scoring only. All module routes avoid text and preserve the service information boundary.
+
+Figure 3: Paired comparator-minus-FAR-Cal interval-score effects and 95% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW.
+
+Figure 4: Final FAR-GW interval score and coverage for the six primary cells. Dashed and dotted lines mark the 0.88 decision floor and 0.90 nominal coverage. Absolute network scores are not a paired between-network effect.
+
+Figure 5: Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions.
+
+Figure 6: Additional one-factor stress: ACI-minus-FAR-Cal effects and paired 95% intervals for affected fraction, backlog delay, permanent loss, cold calibration and MNAR. Positive values favour FAR-Cal. Categorical panels contain only their registered conditions; continuous lines connect tested values without extrapolation.
+
+Figure 7: Exploratory removal-minus-full interval-score effects and 95% paired intervals. Positive values indicate deterioration after removal. Panel scales differ; the off-scale PEMS-BAY C4 stale-blend failure is explicitly labelled with its estimate and bounds.
+
+Figure 8: Descriptive archive-cap quality and wall-time sensitivity, with three observed runtime repetitions per cap and network. Horizontal bars are observed ranges, not confidence intervals. These fixed-run pooled scores differ from the origin-level paired inference estimand.
