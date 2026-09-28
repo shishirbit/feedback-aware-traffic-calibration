@@ -9,3 +9,7 @@ The introduction, literature review, calibration comparison table and discussion
 ## Abstract revision - 28 September 2026
 
 The unstructured abstract was rewritten to state the problem, practical evaluation gap, objective, causal method, datasets, key registered outcomes and conditional conclusion in exactly 150 words. The 35-page PDF recompiles without unresolved references or overfull text. The first page was visually checked. No numerical results or broader claims were added.
+
+## Abstract numerical-results correction - 28 September 2026
+
+In response to the author, the 150-word abstract now reports the FAR-GW METR-LA C3 improvement versus rolling calibration (0.355 m/s, 95% paired interval 0.192-0.551, coverage 0.8985), the 12/16 backbone decisions, SUMO C4 coverage 0.8793 against its 0.88 floor, and the adverse FAR-GW PEMS-BAY C4 effect (rolling better by 0.119 m/s). TeX percent escaping and page fit were checked; the complete abstract appears in the compiled PDF. No experimental outcomes changed.
