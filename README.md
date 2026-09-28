@@ -1,6 +1,8 @@
-# Feedback-aware traffic calibration: reproducibility release
+# Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports
 
-This release accompanies the Transportmetrica B manuscript by Shishir Singh Chauhan, Manipal University Jaipur. It contains code, configurations, tests, generated SUMO prepared arrays, evidence summaries and the supplied-template manuscript.
+Reproducibility release
+
+This release accompanies the research manuscript by Shishir Singh Chauhan, Manipal University Jaipur. It contains code, configurations, tests, generated SUMO prepared arrays, evidence summaries and the supplied-template manuscript.
 
 The registered evaluations and all 432 ablation stages are complete. Findings are conditional: no universal superiority, no identifiable MNAR correction and no production-service claim. Negative and inconclusive results are retained.
 

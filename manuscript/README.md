@@ -1,4 +1,6 @@
-# Single-file manuscript source
+# Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports
+
+Single-file manuscript source
 
 `main.tex` is the authoritative source and contains every section, both algorithms, all 19 tables, eight figure environments and the complete bibliography. It has no input/include dependencies. External vector PDF figures are in `figures/`; no TikZ is used. Compile with Tectonic or LaTeX; no BibTeX step is required. The supplied Interact class is retained.
 
