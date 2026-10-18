@@ -1,0 +1,6 @@
+Highlights
+
+- Causal replay separates unavailable inputs from delayed outcome feedback.
+- The joint score and coverage rule passed in 12 of 16 real-data cells.
+- Network and fault condition limit the benefit of residual calibration.
+- Complete component ablations show beneficial and adverse removals.

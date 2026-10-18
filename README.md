@@ -12,7 +12,7 @@ Install the relevant locked environment (Python 3.11 backbone/CoRel locks or the
 
 Generated SUMO prepared arrays cover original, replication, confirmation and fresh asymmetric-validation sets; original episode XML can be regenerated from registered plans. Prepared manifest provenance paths describe the original host and are not portable runtime paths. This is an evidence/source release rather than a precomputed-cache image. Study scripts use repository-relative paths unless explicitly documented as original-host launch helpers.
 
-The authoritative manuscript is a single `manuscript/main.tex`, containing text, bibliography, tables and captions, with external figure PDFs. Compile it directly with Tectonic or LaTeX; no BibTeX step is required. Older migration/asset scripts are not a manuscript reconstruction command. All manuscript effects are converted from native mph artifacts to SI using 0.44704 exactly.
+The authoritative manuscript is a single `manuscript/main.tex`, containing text, bibliography, tables and captions, with external figure PDFs. The manuscript now uses the supplied Elsevier CAS single-column class; `manuscript/results-in-engineering-overleaf.zip` is the self-contained Overleaf package. Compile with XeLaTeX; no BibTeX step is required. Older migration/asset scripts are not a manuscript reconstruction command. All manuscript effects are converted from native mph artifacts to SI using 0.44704 exactly.
 
 ## Original workflow and command inventory
 

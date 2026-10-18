@@ -1,33 +1,36 @@
-\documentclass[]{interact}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\documentclass[a4paper,fleqn]{cas-sc}
 \usepackage{graphicx}
 \usepackage{booktabs,array}
 \usepackage{float}
 \usepackage{amsmath,amssymb}
-\usepackage{natbib}
+\usepackage[authoryear,longnamesfirst]{natbib}
 \usepackage{url}
-\usepackage[hidelinks]{hyperref}
-\hypersetup{pdftitle={Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports},pdfauthor={Shishir Singh Chauhan}}
-\bibpunct[, ]{(}{)}{;}{a}{}{,}
-\renewcommand\bibfont{\fontsize{10}{12}\selectfont}
+\hypersetup{pdftitle={Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports},pdfauthor={Shishir Singh Chauhan and Satyabrata Roy}}
 \newcounter{algorithm}
 \newcommand{\ms}{\mathrm{m\,s^{-1}}}
 \newcommand{\FAR}{\textsc{FAR-Cal}}
 \begin{document}
-\title{Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports}
-\author{\name{Shishir Singh Chauhan\thanks{CONTACT Shishir Singh Chauhan. Email: shishir.chauhan@jaipur.manipal.edu}}
-\affil{Manipal University Jaipur, off Ajmer--Jaipur Expressway, Dahmi Kalan, Rajasthan 303007, India}}
-\maketitle
-\enlargethispage{2pt}
-\noindent Approximate manuscript prose word count: 8920 (excluding references, tables, captions and displayed equations).\par
-
+\let\WriteBookmarks\relax
+\shorttitle{Feedback-aware calibration of traffic prediction intervals}
+\shortauthors{Chauhan and Roy}
+\title[mode=title]{Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports}
+\author[1]{Shishir Singh Chauhan}
+\ead{shishir.chauhan@jaipur.manipal.edu}
+\credit{Investigation, Software, Writing - original draft}
+\affiliation[1]{organization={Manipal University Jaipur},addressline={Off Ajmer--Jaipur Expressway, Dahmi Kalan},city={Jaipur},postcode={303007},state={Rajasthan},country={India}}
+\author[2]{Satyabrata Roy}
+\cormark[1]
+\ead{satyabrata.roy@jaipur.manipal.edu}
+\credit{Writing - review and editing}
+\affiliation[2]{organization={Department of Computer Science and Engineering, Manipal University Jaipur},city={Jaipur},postcode={303007},state={Rajasthan},country={India}}
+\cortext[1]{Corresponding author: Satyabrata Roy}
 \begin{abstract}
 Traffic forecasting intervals depend on realised outcomes that may arrive late or disappear during sensor outages. We evaluate whether uncertainty can be calibrated causally when both predictor inputs and outcome feedback are impaired. Our signed-residual method combines spatial pooling, context matching, target-age weighting and historical fallback. A locked replay separates input availability from feedback release and compares calibrators on frozen backbones using METR-LA, PEMS-BAY and controlled SUMO data. The registered joint interval-score and coverage rule was met in 12 of 16 real-data backbone cells. On METR-LA C3 with FAR-GW, interval score improved by 0.355 m/s versus rolling calibration (95\% paired interval 0.192--0.551), with 0.8985 coverage. Fresh SUMO C3 validation passed; SUMO C4 missed the 0.88 coverage floor at 0.8793. FAR-GW PEMS-BAY C4 instead favoured rolling calibration by 0.119 m/s. Component ablations showed mixed effects. Benefits depend on network and reporting condition; universal superiority and correction of unobserved outcomes are unsupported.
 \end{abstract}
 \begin{keywords}
-Traffic forecasting; prediction intervals; sensor outages; delayed feedback; uncertainty calibration; reproducibility
+Traffic forecasting \sep Prediction intervals \sep Sensor outages \sep Delayed feedback \sep Uncertainty calibration \sep Reproducibility
 \end{keywords}
+\maketitle
 
 \section{Introduction}\label{sec:introduction}
 Traffic forecasting is increasingly framed as a prediction problem on a network, but an uncertainty service also depends on a reporting process. A speed measurement has a physical timestamp, a delivery timestamp and a role in subsequent decisions. If a detector gateway stops reporting, the forecasting model loses recent inputs. The calibration module also loses the realised outcomes needed to assess forecasts already issued. Treating these two losses as interchangeable hides an important distinction: a predictor may continue producing plausible values while the residual evidence supporting its intervals becomes stale. The uncertainty problem therefore concerns information availability as well as traffic dynamics.
@@ -58,7 +61,7 @@ Journal research places these algorithms within a longer forecasting history. \c
 
 Graph WaveNet combines temporal modelling with learned spatial dependence \citep{wu2019}. Its relevance here is the separation between a forecasting backbone and the uncertainty layer attached to its outputs. A graph predictor can exploit relationships between sensors, yet this does not determine how prediction errors should be used when their reports arrive late. The FAR-GW adapter adds causal validity and age channels and a noncrossing quantile head. These are documented study modifications rather than claims about the original implementation. Table~\ref{tab:related-models} distinguishes the forecasting references from the uncertainty mechanisms evaluated on their frozen outputs.
 
-\begin{table}[H]\caption{Forecasting and input-reconstruction literature: role in this study.}\label{tab:related-models}\centering\small
+\begin{table}[!htbp]\caption{Forecasting and input-reconstruction literature: role in this study.}\label{tab:related-models}\centering\small
 \begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{5.0cm}}\toprule
 Reference & Representation or objective & Numerical study role \\\midrule
 Graph WaveNet \citep{wu2019} & Graph supports and temporal convolutions & FAR-GW causal quantile adapter \\
@@ -88,7 +91,7 @@ Sequential predictive conformal inference develops adaptive prediction intervals
 
 Multistep adaptive conformal inference accounts for the fact that the outcome of a forecast is unavailable until its target time \citep{hallberg2024}. This ordinary horizon delay should not be confused with an additional communication backlog. A fifteen-minute forecast can have its outcome physically realised after fifteen minutes yet delivered much later. Our replay records both target and release timestamps and permits permanent loss. The ACI implementation uses the multistep reference as its starting point but changes spatial batching and reporting availability. Table~\ref{tab:related-calibration} records this distinction without implying that the source method ignores ordinary forecasting delay.
 
-\begin{table}[H]\caption{Calibration literature and feedback scope.}\label{tab:related-calibration}\centering\small
+\begin{table}[!htbp]\caption{Calibration literature and feedback scope.}\label{tab:related-calibration}\centering\small
 \begin{tabular}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{4.7cm}}\toprule
 Reference & Relevant objective & Scope here \\\midrule
 CQR \citep{romano2019} & Calibrated quantile regression & Literature; predictor quantiles distinguished from calibrated bounds \\
@@ -120,7 +123,7 @@ Literature relevance does not imply experimental reproduction. Numerical claims 
 \subsection{METR-LA and PEMS-BAY}
 METR-LA comprises 207 sensors and 34,272 five-minute timestamp rows from 1 March to 27 June 2012. PEMS-BAY comprises 325 sensors and 52,116 original rows from 1 January to 30 June 2017. These statements describe the acquired benchmark files, whose provenance is recorded against DCRNN \citep{li2018}; the graph and speed-file hashes are retained separately. PEMS-BAY has a 65-minute timestamp gap. Reindexing inserts twelve wholly invalid five-minute rows, giving 52,128 prepared rows. METR-LA requires no inserted rows. Table~\ref{tab:data} compares the dimensions, periods, missingness convention and sampling policy. Figure~\ref{fig:data-profile} shows training-partition speed distributions and original validity, making the empirical input populations visible without treating distributional differences as a causal explanation for transfer results.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Dataset dimensions, periods and evaluation sampling.}\label{tab:data}
 \centering\small
 \begin{tabular}{lllll}\toprule
@@ -133,11 +136,11 @@ SUMO fresh C3 & 20 & 3,840 & 40 fresh episodes & Full episode audit \\
 \par\smallskip\footnotesize All rows use five-minute bins. PEMS-BAY has 52,116 raw rows plus twelve inserted wholly invalid rows. Real zero speeds follow the benchmark missingness convention; physical SUMO zeros remain valid.
 \end{table}
 
-\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/data-profile.pdf}\caption{Training-partition observed-speed distributions before forecast-window construction. Only originally valid prepared measurements are plotted; labels report original valid fractions. SUMO includes its prepared training-partition measurements. The distributions are descriptive, not an explanation of calibration transfer.}\label{fig:data-profile}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/data-profile.pdf}\caption{Training-partition observed-speed distributions before forecast-window construction. Only originally valid prepared measurements are plotted; labels report original valid fractions. SUMO includes its prepared training-partition measurements. The distributions are descriptive, not an explanation of calibration transfer.}\label{fig:data-profile}\end{figure}
 
 The benchmark convention treats zero-valued real speeds as missing, following the audited source mask. It should not be interpreted as a physical assertion that vehicles never stop. Originally invalid entries cannot become training labels, calibration residuals or evaluation targets after filling. SUMO instead retains physical zero speeds as valid and masks empty detector intervals. Table~\ref{tab:data-statistics} reports original validity and observed-speed summaries computed directly from prepared arrays. These are descriptive data statistics, not estimates from the artificially censored reporting stream.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Descriptive prepared-data validity and observed speeds.}\label{tab:data-statistics}
 \centering\small
 \begin{tabular}{lllll}\toprule
@@ -152,7 +155,7 @@ SUMO & 99.73 & 22.31 & 16.65 & 23.66 \\
 \subsection{Chronological separation and causal features}
 Real-data boundaries are selected on the original timestamps before reindexing and window construction. The split proportions are 60\% training, 10\% tuning, 10\% initial calibration and 20\% testing. METR-LA boundaries are 11 May 2012 09:35, 23 May 07:10 and 4 June 04:45; PEMS-BAY boundaries are 19 April 2017 14:45, 7 May 17:05 and 25 May 19:20. Table~\ref{tab:partitions} provides these timestamps and the simulation episode allocations. A forecast window belongs to a partition only when all its targets remain inside that partition. Interpolation across a future boundary is prohibited.
 
-\begin{table}[H]\caption{Chronological boundaries and episode separation.}\label{tab:partitions}\centering\small
+\begin{table}[!htbp]\caption{Chronological boundaries and episode separation.}\label{tab:partitions}\centering\small
 \begin{tabular}{>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{3.4cm}}\toprule
 Data & Train/tune boundary & Tune/calibration boundary & Calibration/test boundary \\\midrule
 METR-LA & 11 May 2012 09:35 & 23 May 2012 07:10 & 4 Jun 2012 04:45 \\
@@ -177,7 +180,7 @@ The real evaluation is a fault-focused audit: origins are selected hourly and af
 \subsection{Separate physical, reporting and evaluation layers}
 Figure~\ref{fig:architecture} depicts the redesigned system in separate lanes with orthogonal routes. The upper lane produces and releases observations; the middle lane forms immutable forecasts; the lower lane matches released feedback and updates calibration. An evaluator compartment remains outside these service lanes. This organisation distinguishes data movement from statistical operations and prevents arrows from passing through module labels. Table~\ref{tab:architecture-contract} specifies the inputs, outputs and information restrictions of each module, complementing the diagram rather than relying on visual proximity to imply an interface.
 
-\begin{table}[H]\caption{Architecture interfaces and information boundary.}\label{tab:architecture-contract}\centering\small
+\begin{table}[!htbp]\caption{Architecture interfaces and information boundary.}\label{tab:architecture-contract}\centering\small
 \begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{5.5cm}}\toprule
 Module & Consumes & Produces / restriction \\\midrule
 Input store & Released speed, validity and measurement time & Past-only seven-channel history; no future packets \\
@@ -188,7 +191,7 @@ Calibration kernel & Received live and valid frozen archives & Weighted signed-t
 Evaluator & Original validity, truth and issued bounds & Scores; no return edge to service \\
 \bottomrule\end{tabular}\par\smallskip\footnotesize The diagram separates service data flow from evaluator knowledge. Recorded software/artifact checks establish replay properties, not operational latency.\end{table}
 
-\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/architecture.pdf}\caption{Causal architecture with separate input, feedback and evaluator lanes. Stored issue records feed both residual matching and the calibration query; the junction is intentional. Hidden truth feeds scoring only. All module routes avoid text and preserve the service information boundary.}\label{fig:architecture}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/architecture.pdf}\caption{Causal architecture with separate input, feedback and evaluator lanes. Stored issue records feed both residual matching and the calibration query; the junction is intentional. Hidden truth feeds scoring only. All module routes avoid text and preserve the service information boundary.}\label{fig:architecture}\end{figure}
 
 The physical source supplies speed, timestamp, sensor identity and original validity. In simulation it also supplies episode identity. An evaluator-side fault generator produces separate input and feedback release schedules before replay. Its permanent-loss markers and future schedule entries are hidden from the service. The input release queue updates a causal store, which constructs the seven-channel history described in Section~\ref{sec:data}. A separate feedback queue releases outcomes that can be matched to existing forecasts. The evaluator retains the uncensored truth and original mask exclusively for scoring.
 
@@ -211,7 +214,7 @@ The implementation checks source manifests and chunk hashes before accepting com
 \subsection{Causal information and forecast targets}
 Table~\ref{tab:notation} defines the principal symbols and units. The model distinguishes physical validity from channel availability; the former controls scoring and the latter controls service access.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Principal mathematical notation.}\label{tab:notation}
 \centering\small
 \begin{tabular}{lll}\toprule
@@ -376,7 +379,7 @@ CoRel is evaluated as a documented project adaptation on the FAR-GW prediction c
 
 FAR-GW adapts Graph WaveNet with the seven causal channels and noncrossing quantile head. STAEformer is an independent paper-based implementation because the audited official repository did not provide a licence file. STID and DCRNN are documented adaptations of their licensed references. Each backbone is trained with seeds 11, 22 and 33; fault seeds are 101, 202 and 303. Table~\ref{tab:settings} records shared settings and calibrated-method parameters. Per-backbone configurations and source audits accompany the release.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Shared protocol and locked asymmetric settings.}\label{tab:settings}
 \centering\small
 \begin{tabular}{ll}\toprule
@@ -398,7 +401,7 @@ Bootstrap resamples & 2000 \\
 \subsection{Reporting conditions, controls and stress tests}
 Table~\ref{tab:conditions} defines the six reporting conditions. C3 combines correlated input outages with delayed feedback and backlog release. C4 imposes permanent feedback loss within the affected region. The baseline connected outage affects 10\% of sensors for six bins, with two events per day and a three-bin backlog release. C4 loses half of the within-outage feedback. Physical target validity remains unchanged.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Reporting conditions.}\label{tab:conditions}
 \centering\small
 \begin{tabular}{lll}\toprule
@@ -434,7 +437,7 @@ The initially locked symmetric formulation failed held-out SUMO C3 testing. A re
 
 The subsequent signed-tail candidate was selected using split-safe tuning and locked before its fresh validation. Table~\ref{tab:primary} reports the six final FAR-GW dataset/scenario cells. The 40-episode SUMO C3 validation passes the complete rule. SUMO C4 has positive paired score effects but coverage 0.8793, narrowly below the registered floor. Neither favourable score estimates alone nor rounding coverage to two decimals changes that decision.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Final FAR-GW paired score effects and joint decisions.}\label{tab:primary}
 \centering\small
 \begin{tabular}{llllll}\toprule
@@ -454,7 +457,7 @@ METR-LA passes in both C3 and C4. PEMS-BAY C3 has small effects whose intervals 
 \subsection{Cross-backbone and relational comparisons}
 Figure~\ref{fig:benchmarks} presents every evaluated real-data comparator with the proposed method as the zero reference. Within each backbone, all calibrators use the same forecasts and masks. The plot therefore compares calibration conditional on a backbone; it is not a ranking of the predictors themselves. CoRel points appear only for FAR-GW because that is the evaluated scope. Table~\ref{tab:corel} reports the direct CoRel comparison in numerical form, including both methods' coverage and the paired score interval. All four CoRel-minus-FAR-Cal intervals are positive, but this does not overturn PEMS-BAY failures against rolling and ACI. Different comparators support different conclusions.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Direct CoRel adaptation comparison on FAR-GW caches.}\label{tab:corel}
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -468,11 +471,11 @@ PEMS-BAY & C4 & 4.723 & 5.726 & 1.004 [0.787, 1.227] & 0.9068 & 0.8743 \\
 \par\smallskip\footnotesize Dimensional scores and paired intervals are in $\ms$. Absolute scores and CoRel coverage retain the report's rounding; paired effects use full saved precision. This is not a comparison on other backbones.
 \end{table}
 
-\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/benchmarks.pdf}\caption{Paired comparator-minus-FAR-Cal interval-score effects and 95\% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW.}\label{fig:benchmarks}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/benchmarks.pdf}\caption{Paired comparator-minus-FAR-Cal interval-score effects and 95\% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW.}\label{fig:benchmarks}\end{figure}
 
 The four-backbone matrix passes in 12 of 16 registered cells: all eight METR-LA cells, and the four PEMS-BAY cells using STAEformer or DCRNN. FAR-GW and STID each fail both PEMS-BAY conditions. Table~\ref{tab:backbones} provides both paired score effects, coverage and joint decisions for every cell. Its effect columns compare calibrators within a backbone; they must not be read as point-model rankings. Consistency across METR-LA predictors supports transfer on that network, while PEMS-BAY demonstrates predictor-dependent behaviour.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{All sixteen paired backbone comparisons.}\label{tab:backbones}
 \centering\footnotesize
 \setlength{\tabcolsep}{4pt}
@@ -503,13 +506,13 @@ CoRel-minus-\FAR{} differences are positive in all four FAR-GW real-data cells. 
 \subsection{Coverage and score must be read jointly}
 Figure~\ref{fig:quality} places each final FAR-GW cell's coverage beside its interval score, using identical axes within the quality panel. It makes the SUMO C4 decision visible: positive score improvements coexist with coverage below 0.88. PEMS-BAY coverage exceeds the floor, yet superiority against rolling and ACI is not established. These are different failure modes. Table~\ref{tab:primary} therefore reports the conjunction, while the figure preserves each metric separately. The vertical separation of network scores is descriptive and not a between-network treatment effect.
 
-\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/quality.pdf}\caption{Final FAR-GW interval score and coverage for the six primary cells. Dashed and dotted lines mark the 0.88 decision floor and 0.90 nominal coverage. Absolute network scores are not a paired between-network effect.}\label{fig:quality}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/quality.pdf}\caption{Final FAR-GW interval score and coverage for the six primary cells. Dashed and dotted lines mark the 0.88 decision floor and 0.90 nominal coverage. Absolute network scores are not a paired between-network effect.}\label{fig:quality}\end{figure}
 
 
 \subsection{Core faults, independent controls and one-factor stress}
 The core and matched-control matrices complete 168 and 120 stages. Table~\ref{tab:controls} reports their paired effects and joint decisions. METR-LA passes C1, C2 and C5 and both independent C3/C4 controls; PEMS-BAY passes none. The independent-control results preserve the network-specific pattern without proving that spatial correlation itself causes the method's advantage.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Core and independent matched-rate controls.}\label{tab:controls}
 \centering\small
 \begin{tabular}{llllll}\toprule
@@ -530,7 +533,7 @@ PEMS-BAY & C4 & Independent & 0.017 [-0.009, 0.055] & 0.017 [-0.008, 0.055] & No
 
 All 1,488 one-factor stress stages finish, yielding 48 dataset/scenario/variant summaries. METR-LA passes all 24 tested cells and PEMS-BAY none of its 24; every aggregate coverage is at least 0.88. Table~\ref{tab:stress} groups the findings by factor, and Figure~\ref{fig:duration} shows score sensitivity to outage duration. Duration, connected fraction, backlog delay, permanent loss and initial archive impairment test different limits of the reporting system; they are not pooled into a single generalisation guarantee. The MNAR grid retains the same distinction: favourable performance in one network and failure in the other remain compatible with selective outcome observation.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{One-factor stress summary by network and factor.}\label{tab:stress}
 \centering\small
 \begin{tabular}{lllll}\toprule
@@ -551,13 +554,13 @@ PEMS-BAY & mnar\_low\_speed & 2 & 0 & 0.9013 \\
 \par\smallskip\footnotesize Cells comprise separately evaluated values and C3/C4 conditions; the release retains every effect estimate and interval. MNAR is a sensitivity experiment, not an identification result.
 \end{table}
 
-\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/duration.pdf}\caption{Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions.}\label{fig:duration}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/duration.pdf}\caption{Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions.}\label{fig:duration}\end{figure}
 
 
 \subsection{Additional reporting stress}
 Figure~\ref{fig:stress} displays affected fraction, extra backlog delay, permanent-loss probability, cold calibration and low-speed MNAR sensitivity. Each point compares ACI with FAR-Cal using the registered paired inference, with positive values favouring FAR-Cal. Continuous-factor lines connect tested values only; cold calibration and MNAR are separate categorical experiments. All METR-LA stress cells pass the joint rule, whereas no PEMS-BAY stress cell does. Table~\ref{tab:stress} groups these decisions; the plotted ACI contrast alone is not the full two-comparator rule. The cold archive tests whether an initially impaired calibration source changes performance, and the MNAR panel tests selective outcome suppression without claiming correction.
 
-\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/stress.pdf}\caption{Additional one-factor stress: ACI-minus-FAR-Cal effects and paired 95\% intervals for affected fraction, backlog delay, permanent loss, cold calibration and MNAR. Positive values favour FAR-Cal. Categorical panels contain only their registered conditions; continuous lines connect tested values without extrapolation.}\label{fig:stress}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/stress.pdf}\caption{Additional one-factor stress: ACI-minus-FAR-Cal effects and paired 95\% intervals for affected fraction, backlog delay, permanent loss, cold calibration and MNAR. Positive values favour FAR-Cal. Categorical panels contain only their registered conditions; continuous lines connect tested values without extrapolation.}\label{fig:stress}\end{figure}
 
 The duration curve in Figure~\ref{fig:duration} reports absolute FAR-Cal score rather than a paired treatment effect. Longer outages can change which targets enter the fault-focused audit, so the curve cannot isolate a duration effect on a fixed target population. It complements the paired stress results by showing the magnitude of interval-score penalties in each tested condition. These plots are based on completed evaluations, not simulated illustrative values or interpolated predictions of untested fault levels.
 
@@ -565,7 +568,7 @@ The duration curve in Figure~\ref{fig:duration} reports absolute FAR-Cal score r
 
 All 432 stages are complete: 54 verified full references and 378 new component evaluations. Figure~\ref{fig:ablations} displays ablation-minus-full effects. A positive interval indicates degradation after removal; a negative interval indicates an improvement. Thirteen exploratory intervals are wholly positive, four wholly negative and 25 include zero. Table~\ref{tab:ablations} identifies which components fall into these categories.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Exploratory paired ablation classifications across six cells.}\label{tab:ablations}
 \centering\small
 \begin{tabular}{llll}\toprule
@@ -581,7 +584,7 @@ frozen only & 1 & 0 & 5 \\
 \par\smallskip\footnotesize Worsens: lower 95\% bound above zero; improves: upper bound below zero. The intervals are exploratory and unadjusted for multiple comparisons. Counts refer to removals, not full-method superiority.
 \end{table}
 
-\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/ablations.pdf}\caption{Exploratory removal-minus-full interval-score effects and 95\% paired intervals. Positive values indicate deterioration after removal. Panel scales differ; the off-scale PEMS-BAY C4 stale-blend failure is explicitly labelled with its estimate and bounds.}\label{fig:ablations}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/ablations.pdf}\caption{Exploratory removal-minus-full interval-score effects and 95\% paired intervals. Positive values indicate deterioration after removal. Panel scales differ; the off-scale PEMS-BAY C4 stale-blend failure is explicitly labelled with its estimate and bounds.}\label{fig:ablations}\end{figure}
 
 Stale blending has the clearest repeated benefit. Removing it worsens score in METR-LA C3, both PEMS-BAY conditions and both SUMO conditions. The largest effect occurs in PEMS-BAY C4: removal increases score by $4.220\,\ms$, with 95\% interval [3.760, 4.699]\,$\ms$, while coverage falls to 0.549. Spatial pooling is beneficial in METR-LA C3 and PEMS-BAY C3/C4, but its remaining intervals include zero.
 
@@ -590,7 +593,7 @@ The adverse findings matter equally. Removing age weighting improves score in ME
 
 Tables~\ref{tab:ablation-metr}--\ref{tab:ablation-sumo} provide all forty-two numerical removal effects, exploratory intervals, coverage and widths. Table~\ref{tab:ablation-metr} shows that removing age weights improves METR-LA C4 score, while other small effects remain inconclusive. Table~\ref{tab:ablation-pems} shows age-weight improvements in both PEMS-BAY cells and a context-removal improvement in C4. The same table documents the severe stale-blend failure in PEMS-BAY C4. Table~\ref{tab:ablation-sumo} shows a useful stale blend in both SUMO conditions, with several remaining intervals spanning zero. These findings are more informative than treating every component as necessary.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Full METR-LA component ablations.}\label{tab:ablation-metr}
 \centering\small
 \begin{tabular}{lllll}\toprule
@@ -613,7 +616,7 @@ C4 & frozen only & 0.066 [-0.157, 0.300] & 0.8797 & 4.683 \\
 \par\smallskip\footnotesize Effects and widths are in $\ms$. Positive differences mean removal worsens score. Intervals are exploratory and unadjusted. The frozen-only and arrival-freshness rows are diagnostic alternatives.
 \end{table}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Full PEMS-BAY component ablations.}\label{tab:ablation-pems}
 \centering\small
 \begin{tabular}{lllll}\toprule
@@ -636,7 +639,7 @@ C4 & frozen only & 0.018 [-0.004, 0.034] & 0.9053 & 3.027 \\
 \par\smallskip\footnotesize Effects and widths are in $\ms$. Positive differences mean removal worsens score. Intervals are exploratory and unadjusted. The frozen-only and arrival-freshness rows are diagnostic alternatives.
 \end{table}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Full SUMO component ablations.}\label{tab:ablation-sumo}
 \centering\small
 \begin{tabular}{lllll}\toprule
@@ -665,7 +668,7 @@ Figure~\ref{fig:ablations} uses separate panel scales to preserve small effects 
 
 Eighteen timed replays compare archive caps 64, 128 and 256 with identical C3 inputs and fixed model/fault seeds 11/101. Table~\ref{tab:runtime} reports wall-clock medians, observed ranges and pooled quality. Timing includes CPU calibration, loading and output serialisation, excluding training and prediction. The cap-256 setting exactly reproduces the archived same-run quality. Smaller caps have slightly higher score in both fixed runs, but timing ranges overlap. Host workload and filesystem cache are not isolated, so these measurements do not establish a reliable speed advantage, a cross-method runtime ranking or a deployment throughput guarantee.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \caption{Descriptive CPU archive-cap replays.}\label{tab:runtime}
 \centering\small
 \begin{tabular}{lllll}\toprule
@@ -683,7 +686,7 @@ PEMS-BAY & 256 & 96.25 [91.57, 105.95] & 5.3960 & 0.8971 \\
 
 Figure~\ref{fig:compute} complements Table~\ref{tab:runtime}: horizontal ranges show three observed replay times at each cap, and colour/labels identify the cap rather than another forecasting method. The score axis uses the same-run pooled quality estimand. No error bar is a runtime confidence interval. This figure is a reproducibility and resource sensitivity diagnostic, not a speed competition among calibrators or evidence of service-level latency.
 
-\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/compute.pdf}\caption{Descriptive archive-cap quality and wall-time sensitivity, with three observed runtime repetitions per cap and network. Horizontal bars are observed ranges, not confidence intervals. These fixed-run pooled scores differ from the origin-level paired inference estimand.}\label{fig:compute}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/compute.pdf}\caption{Descriptive archive-cap quality and wall-time sensitivity, with three observed runtime repetitions per cap and network. Horizontal bars are observed ranges, not confidence intervals. These fixed-run pooled scores differ from the origin-level paired inference estimand.}\label{fig:compute}\end{figure}
 
 \section{Discussion}\label{sec:discussion}
 
@@ -722,16 +725,19 @@ A next confirmatory study could preregister network-specific eligibility for age
 
 Separating predictor-input and calibration-feedback availability enables causal assessment of traffic prediction intervals under delayed and permanently lost reports. The locked asymmetric method improves interval quality under several tested conditions, but superiority depends on network and backbone, and the full ablations reveal both useful and adverse components. The study contributes an auditable benchmark and conditional empirical evidence. It does not establish universal superiority, arbitrary-missingness coverage or identifiable MNAR correction.
 
-\section*{Acknowledgements and funding}
-The author reports that no funding or grant support was obtained for this work and that there are no additional contributors to acknowledge.
-\section*{Declaration of interest}
-The author reports no competing interests.
-\section*{Declaration of generative AI use}
-OpenAI Codex was used to assist with software implementation, experiment orchestration, artifact checking, figure generation and manuscript preparation. Numerical findings are drawn from the saved evaluation outputs rather than generated illustrative values. The author is responsible for reviewing the implementation, analysis, citations and final manuscript before submission.
-\section*{Biographical note}
-Shishir Singh Chauhan is affiliated with Manipal University Jaipur, India, and is the corresponding author of this study.
-\section*{Reproducibility and data availability statement}
-Code, locked configurations, generated SUMO prepared datasets, evidence summaries and manuscript sources are publicly available at \url{https://github.com/shishirbit/feedback-aware-traffic-calibration}. The release records seeds, environments, source provenance and artifact hashes. METR-LA and PEMS-BAY must be acquired separately using the links and SHA-256 checks in \texttt{docs/sources.md}, because redistribution rights for the exact benchmark packages remain unverified. Training checkpoints and bulky prediction/residual caches must be regenerated before running the evaluation matrices. SUMO episode XML can be regenerated from registered plans; prepared arrays for the original, replication, confirmation and fresh validation sets are included. The latest local software verification passed 77 tests. Negative and inconclusive findings are retained. These resources support reproduction of the specified replay experiments and do not establish production-service readiness.
+\printcredits
+\section*{Author contributions}
+Shishir Singh Chauhan conducted the research, implemented the method and experiments, and wrote the manuscript. Satyabrata Roy reviewed the paper and contributed to its writing. Satyabrata Roy is the corresponding author.
+\section*{Acknowledgements}
+The authors report no additional contributors to acknowledge.
+\section*{Funding}
+This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+\section*{Declaration of competing interests}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+\section*{Declaration of generative AI and AI-assisted technologies in the writing process}
+During the preparation of this work, the authors used OpenAI Codex to assist with manuscript drafting and editing. The authors reviewed and edited the content and take full responsibility for the published article. The tool also assisted with software implementation, experiment orchestration, artifact checking and figure generation; all numerical findings reported here are drawn from saved evaluation outputs.
+\section*{Reproducibility and data availability}
+Code, locked configurations, generated SUMO prepared datasets, evidence summaries and manuscript sources are publicly available at \url{https://github.com/shishirbit/feedback-aware-traffic-calibration}. The release records seeds, environments, source provenance and artifact hashes. METR-LA and PEMS-BAY must be acquired separately using the links and SHA-256 checks in \texttt{docs/sources.md}, because redistribution rights for the exact benchmark packages remain unverified. Training checkpoints and bulky prediction/residual caches must be regenerated before running the evaluation matrices. SUMO episode XML can be regenerated from registered plans; prepared arrays for the original, replication, confirmation and fresh validation sets are included. Negative and inconclusive findings are retained. These resources support reproduction of the specified replay experiments and do not establish production-service readiness.
 \begin{thebibliography}{26}
 \raggedright
 \newcommand{\enquote}[1]{``#1''}
