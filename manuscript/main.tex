@@ -3,7 +3,7 @@
 \usepackage{booktabs,array}
 \usepackage{float}
 \usepackage{amsmath,amssymb}
-\usepackage[authoryear,longnamesfirst]{natbib}
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage{url}
 \hypersetup{pdftitle={Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports},pdfauthor={Shishir Singh Chauhan and Satyabrata Roy}}
 \newcounter{algorithm}
@@ -17,12 +17,11 @@
 \author[1]{Shishir Singh Chauhan}
 \ead{shishir.chauhan@jaipur.manipal.edu}
 \credit{Investigation, Software, Writing - original draft}
-\affiliation[1]{organization={Manipal University Jaipur},addressline={Off Ajmer--Jaipur Expressway, Dahmi Kalan},city={Jaipur},postcode={303007},state={Rajasthan},country={India}}
-\author[2]{Satyabrata Roy}
+\author[1]{Satyabrata Roy}
 \cormark[1]
 \ead{satyabrata.roy@jaipur.manipal.edu}
 \credit{Writing - review and editing}
-\affiliation[2]{organization={Department of Computer Science and Engineering, Manipal University Jaipur},city={Jaipur},postcode={303007},state={Rajasthan},country={India}}
+\affiliation[1]{organization={Department of Computer Science and Engineering, Manipal University Jaipur},city={Jaipur},postcode={303007},state={Rajasthan},country={India}}
 \cortext[1]{Corresponding author: Satyabrata Roy}
 \begin{abstract}
 Traffic forecasting intervals depend on realised outcomes that may arrive late or disappear during sensor outages. We evaluate whether uncertainty can be calibrated causally when both predictor inputs and outcome feedback are impaired. Our signed-residual method combines spatial pooling, context matching, target-age weighting and historical fallback. A locked replay separates input availability from feedback release and compares calibrators on frozen backbones using METR-LA, PEMS-BAY and controlled SUMO data. The registered joint interval-score and coverage rule was met in 12 of 16 real-data backbone cells. On METR-LA C3 with FAR-GW, interval score improved by 0.355 m/s versus rolling calibration (95\% paired interval 0.192--0.551), with 0.8985 coverage. Fresh SUMO C3 validation passed; SUMO C4 missed the 0.88 coverage floor at 0.8793. FAR-GW PEMS-BAY C4 instead favoured rolling calibration by 0.119 m/s. Component ablations showed mixed effects. Benefits depend on network and reporting condition; universal superiority and correction of unobserved outcomes are unsupported.
@@ -745,60 +744,50 @@ Code, locked configurations, generated SUMO prepared datasets, evidence summarie
 \providecommand{\url}[1]{\normalfont{#1}}
 \providecommand{\urlprefix}{}
 
-\bibitem[{Alvarez Lopez} et~al.(2018)]{lopez2018}
-{Alvarez Lopez}, Pablo, Michael Behrisch, Laura Bieker-Walz, Jakob Erdmann,
-  Yun-Pang Fl{\"o}tter{\"o}d, Robert Hilbrich, Leonhard L{\"u}cken, Johannes
-  Rummel, Peter Wagner, and Evamarie Wie{\ss}ner. 2018. ``Microscopic Traffic
-  Simulation using SUMO.'' In \emph{2018 21st International Conference on
-  Intelligent Transportation Systems}, 2575--2582.
-  \urlprefix\url{https://doi.org/10.1109/ITSC.2018.8569938}.
+\bibitem[Vlahogianni, Karlaftis, and Golias(2014)]{vlahogianni2014}
+Vlahogianni, Eleni~I., Matthew~G. Karlaftis, and John~C. Golias. 2014.
+  ``Short-term traffic forecasting: Where we are and where we're going.''
+  \emph{Transportation Research Part C: Emerging Technologies} 43: 3--19.
+  https://doi.org/{10.1016/j.trc.2014.01.005}.
 
-\bibitem[Angelopoulos and Bates(2023)]{angelopoulos2023}
-Angelopoulos, Anastasios~N., and Stephen Bates. 2023. ``Conformal Prediction: A
-  Gentle Introduction.'' \emph{Foundations and Trends in Machine Learning} 16
-  (4): 494--591. https://doi.org/{10.1561/2200000101}.
+\bibitem[Khosravi et~al.(2011)]{khosravi2011}
+Khosravi, Abbas, Ehsan Mazloumi, Saeid Nahavandi, Doug Creighton, and J.~W.~C.
+  van Lint. 2011. ``Prediction Intervals to Account for Uncertainties in Travel
+  Time Prediction.'' \emph{IEEE Transactions on Intelligent Transportation
+  Systems} 12 (2): 537--547. https://doi.org/{10.1109/TITS.2011.2106209}.
 
-\bibitem[Barber et~al.(2023)]{barber2023}
-Barber, Rina~Foygel, Emmanuel~J. Cand{\`e}s, Aaditya Ramdas, and Ryan~J.
-  Tibshirani. 2023. ``Conformal prediction beyond exchangeability.'' \emph{The
-  Annals of Statistics} 51 (2): 816--845. https://doi.org/{10.1214/23-AOS2276}.
+\bibitem[Wu et~al.(2019)]{wu2019}
+Wu, Zonghan, Shirui Pan, Guodong Long, Jing Jiang, and Chengqi Zhang. 2019.
+  ``{Graph WaveNet} for Deep Spatial-Temporal Graph Modeling.'' In
+  \emph{Proceedings of the Twenty-Eighth International Joint Conference on
+  Artificial Intelligence}, 1907--1913.
+  \urlprefix\url{https://doi.org/10.24963/ijcai.2019/264}.
 
-\bibitem[Chen, Zhou, and Cheng(2026)]{chen2026}
-Chen, Baiting, Xiaofan Zhou, and Lu~Cheng. 2026. ``Post-Training Adaptive
-  Conformal Prediction for Incomplete Time Series.'' \emph{Transactions on
-  Machine Learning Research}
-  \urlprefix\url{https://openreview.net/forum?id=KMBU4wx79B}.
-
-\bibitem[Cini et~al.(2025)]{cini2025}
-Cini, Andrea, Alexander Jenkins, Danilo Mandic, Cesare Alippi, and
-  Filippo~Maria Bianchi. 2025. ``Relational Conformal Prediction for Correlated
-  Time Series.'' In \emph{Proceedings of the 42nd International Conference on
-  Machine Learning}, Vol. 267, 10949--10965. PMLR.
-  \urlprefix\url{https://proceedings.mlr.press/v267/cini25a.html}.
-
-\bibitem[Cini, Marisca, and Alippi(2022)]{cini2022}
-Cini, Andrea, Ivan Marisca, and Cesare Alippi. 2022. ``Filling the G\_ap\_s:
-  Multivariate Time Series Imputation by Graph Neural Networks.'' In
+\bibitem[Li et~al.(2018)]{li2018}
+Li, Yaguang, Rose Yu, Cyrus Shahabi, and Yan Liu. 2018. ``Diffusion
+  Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting.'' In
   \emph{International Conference on Learning Representations},
-  \urlprefix\url{https://openreview.net/forum?id=kOu3-S3wJ7}.
+  \urlprefix\url{https://openreview.net/forum?id=SJiHXGWAZ}.
+
+\bibitem[Shao et~al.(2022)]{shao2022}
+Shao, Zezhi, Zhao Zhang, Fei Wang, Wei Wei, and Yongjun Xu. 2022.
+  ``Spatial-Temporal Identity: A Simple Yet Effective Baseline for Multivariate
+  Time Series Forecasting.'' In \emph{Proceedings of the 31st ACM International
+  Conference on Information and Knowledge Management}, 4454--4458.
+  \urlprefix\url{https://doi.org/10.1145/3511808.3557702}.
+
+\bibitem[Liu et~al.(2023)]{liu2023}
+Liu, Hangchen, Zheng Dong, Renhe Jiang, Jiewen Deng, Jinliang Deng, Quanjun
+  Chen, and Xuan Song. 2023. ``Spatio-Temporal Adaptive Embedding Makes Vanilla
+  Transformer {SOTA} for Traffic Forecasting.'' In \emph{Proceedings of the
+  32nd ACM International Conference on Information and Knowledge Management},
+  4125--4129.  \urlprefix\url{https://doi.org/10.1145/3583780.3615160}.
 
 \bibitem[Gibbs and Cand{\`e}s(2021)]{gibbs2021}
 Gibbs, Isaac, and Emmanuel~J. Cand{\`e}s. 2021. ``Adaptive Conformal Inference
   Under Distribution Shift.'' In \emph{Advances in Neural Information
   Processing Systems}, Vol.~34.
   \urlprefix\url{https://proceedings.neurips.cc/paper/2021/hash/0d441de75945e5acbc865406fc9a2559-Abstract.html}.
-
-\bibitem[Gibbs and Cand{\`e}s(2024)]{gibbs2024}
-Gibbs, Isaac, and Emmanuel~J. Cand{\`e}s. 2024. ``Conformal Inference for
-  Online Prediction with Arbitrary Distribution Shifts.'' \emph{Journal of
-  Machine Learning Research} 25 (162): 1--36.
-  \urlprefix\url{https://www.jmlr.org/papers/v25/22-1218.html}.
-
-\bibitem[Gneiting and Raftery(2007)]{gneiting2007}
-Gneiting, Tilmann, and Adrian~E. Raftery. 2007. ``Strictly Proper Scoring
-  Rules, Prediction, and Estimation.'' \emph{Journal of the American
-  Statistical Association} 102 (477): 359--378.
-  https://doi.org/{10.1198/016214506000001437}.
 
 \bibitem[{Hallberg Szabadv{\'a}ry}(2024)]{hallberg2024}
 {Hallberg Szabadv{\'a}ry}, Johan. 2024. ``Adaptive Conformal Inference for
@@ -807,40 +796,23 @@ Gneiting, Tilmann, and Adrian~E. Raftery. 2007. ``Strictly Proper Scoring
   Applications}, Vol. 230, 250--263. PMLR.
   \urlprefix\url{https://proceedings.mlr.press/v230/hallberg-szabadvary24a.html}.
 
-\bibitem[Jensen, Bianchi, and Anfinsen(2024)]{jensen2024}
-Jensen, Vilde, Filippo~Maria Bianchi, and Stian~Normann Anfinsen. 2024.
-  ``Ensemble Conformalized Quantile Regression for Probabilistic Time Series
-  Forecasting.'' \emph{IEEE Transactions on Neural Networks and Learning
-  Systems} 35 (7): 9014--9025. https://doi.org/{10.1109/TNNLS.2022.3217694}.
+\bibitem[Gibbs and Cand{\`e}s(2024)]{gibbs2024}
+Gibbs, Isaac, and Emmanuel~J. Cand{\`e}s. 2024. ``Conformal Inference for
+  Online Prediction with Arbitrary Distribution Shifts.'' \emph{Journal of
+  Machine Learning Research} 25 (162): 1--36.
+  \urlprefix\url{https://www.jmlr.org/papers/v25/22-1218.html}.
 
-\bibitem[Khosravi et~al.(2011)]{khosravi2011}
-Khosravi, Abbas, Ehsan Mazloumi, Saeid Nahavandi, Doug Creighton, and J.~W.~C.
-  van Lint. 2011. ``Prediction Intervals to Account for Uncertainties in Travel
-  Time Prediction.'' \emph{IEEE Transactions on Intelligent Transportation
-  Systems} 12 (2): 537--547. https://doi.org/{10.1109/TITS.2011.2106209}.
+\bibitem[Schlembach et~al.(2025)]{schlembach2025}
+Schlembach, Filip, Evgueni Smirnov, Irena Koprinska, and Mark H.~M. Winands.
+  2025. ``Conformal multistep-ahead multivariate time-series forecasting.''
+  \emph{Machine Learning} 114 (7). Article 165,
+  https://doi.org/{10.1007/s10994-024-06722-9}.
 
-\bibitem[Koenker and Bassett(1978)]{koenker1978}
-Koenker, Roger, and Gilbert Bassett, Jr. 1978. ``Regression Quantiles.''
-  \emph{Econometrica} 46 (1): 33--50. https://doi.org/{10.2307/1913643}.
-
-\bibitem[Lei et~al.(2018)]{lei2018}
-Lei, Jing, Max G'Sell, Alessandro Rinaldo, Ryan~J. Tibshirani, and Larry
-  Wasserman. 2018. ``Distribution-Free Predictive Inference for Regression.''
-  \emph{Journal of the American Statistical Association} 113 (523): 1094--1111.
-  https://doi.org/{10.1080/01621459.2017.1307116}.
-
-\bibitem[Li et~al.(2018)]{li2018}
-Li, Yaguang, Rose Yu, Cyrus Shahabi, and Yan Liu. 2018. ``Diffusion
-  Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting.'' In
-  \emph{International Conference on Learning Representations},
-  \urlprefix\url{https://openreview.net/forum?id=SJiHXGWAZ}.
-
-\bibitem[Liu et~al.(2023)]{liu2023}
-Liu, Hangchen, Zheng Dong, Renhe Jiang, Jiewen Deng, Jinliang Deng, Quanjun
-  Chen, and Xuan Song. 2023. ``Spatio-Temporal Adaptive Embedding Makes Vanilla
-  Transformer {SOTA} for Traffic Forecasting.'' In \emph{Proceedings of the
-  32nd ACM International Conference on Information and Knowledge Management},
-  4125--4129.  \urlprefix\url{https://doi.org/10.1145/3583780.3615160}.
+\bibitem[Williams and Hoel(2003)]{williams2003}
+Williams, Billy~M., and Lester~A. Hoel. 2003. ``Modeling and Forecasting
+  Vehicular Traffic Flow as a Seasonal {ARIMA} Process: Theoretical Basis and
+  Empirical Results.'' \emph{Journal of Transportation Engineering} 129 (6):
+  664--672. https://doi.org/{10.1061/(ASCE)0733-947X(2003)129:6(664)}.
 
 \bibitem[Lv et~al.(2015)]{lv2015}
 Lv, Yisheng, Yanjie Duan, Wenwen Kang, Zhengxi Li, and Fei-Yue Wang. 2015.
@@ -853,43 +825,33 @@ Polson, Nicholas~G., and Vadim~O. Sokolov. 2017. ``Deep learning for short-term
   traffic flow prediction.'' \emph{Transportation Research Part C: Emerging
   Technologies} 79: 1--17. https://doi.org/{10.1016/j.trc.2017.02.024}.
 
+\bibitem[Cini, Marisca, and Alippi(2022)]{cini2022}
+Cini, Andrea, Ivan Marisca, and Cesare Alippi. 2022. ``Filling the G\_ap\_s:
+  Multivariate Time Series Imputation by Graph Neural Networks.'' In
+  \emph{International Conference on Learning Representations},
+  \urlprefix\url{https://openreview.net/forum?id=kOu3-S3wJ7}.
+
+\bibitem[Angelopoulos and Bates(2023)]{angelopoulos2023}
+Angelopoulos, Anastasios~N., and Stephen Bates. 2023. ``Conformal Prediction: A
+  Gentle Introduction.'' \emph{Foundations and Trends in Machine Learning} 16
+  (4): 494--591. https://doi.org/{10.1561/2200000101}.
+
+\bibitem[Lei et~al.(2018)]{lei2018}
+Lei, Jing, Max G'Sell, Alessandro Rinaldo, Ryan~J. Tibshirani, and Larry
+  Wasserman. 2018. ``Distribution-Free Predictive Inference for Regression.''
+  \emph{Journal of the American Statistical Association} 113 (523): 1094--1111.
+  https://doi.org/{10.1080/01621459.2017.1307116}.
+
 \bibitem[Romano, Patterson, and Cand{\`e}s(2019)]{romano2019}
 Romano, Yaniv, Evan Patterson, and Emmanuel~J. Cand{\`e}s. 2019.
   ``Conformalized Quantile Regression.'' In \emph{Advances in Neural
   Information Processing Systems}, Vol.~32.
   \urlprefix\url{https://proceedings.neurips.cc/paper/2019/hash/5103c3584b063c431bd1268e9b5e76fb-Abstract.html}.
 
-\bibitem[Schlembach et~al.(2025)]{schlembach2025}
-Schlembach, Filip, Evgueni Smirnov, Irena Koprinska, and Mark H.~M. Winands.
-  2025. ``Conformal multistep-ahead multivariate time-series forecasting.''
-  \emph{Machine Learning} 114 (7). Article 165,
-  https://doi.org/{10.1007/s10994-024-06722-9}.
-
-\bibitem[Shao et~al.(2022)]{shao2022}
-Shao, Zezhi, Zhao Zhang, Fei Wang, Wei Wei, and Yongjun Xu. 2022.
-  ``Spatial-Temporal Identity: A Simple Yet Effective Baseline for Multivariate
-  Time Series Forecasting.'' In \emph{Proceedings of the 31st ACM International
-  Conference on Information and Knowledge Management}, 4454--4458.
-  \urlprefix\url{https://doi.org/10.1145/3511808.3557702}.
-
-\bibitem[Vlahogianni, Karlaftis, and Golias(2014)]{vlahogianni2014}
-Vlahogianni, Eleni~I., Matthew~G. Karlaftis, and John~C. Golias. 2014.
-  ``Short-term traffic forecasting: Where we are and where we're going.''
-  \emph{Transportation Research Part C: Emerging Technologies} 43: 3--19.
-  https://doi.org/{10.1016/j.trc.2014.01.005}.
-
-\bibitem[Williams and Hoel(2003)]{williams2003}
-Williams, Billy~M., and Lester~A. Hoel. 2003. ``Modeling and Forecasting
-  Vehicular Traffic Flow as a Seasonal {ARIMA} Process: Theoretical Basis and
-  Empirical Results.'' \emph{Journal of Transportation Engineering} 129 (6):
-  664--672. https://doi.org/{10.1061/(ASCE)0733-947X(2003)129:6(664)}.
-
-\bibitem[Wu et~al.(2019)]{wu2019}
-Wu, Zonghan, Shirui Pan, Guodong Long, Jing Jiang, and Chengqi Zhang. 2019.
-  ``{Graph WaveNet} for Deep Spatial-Temporal Graph Modeling.'' In
-  \emph{Proceedings of the Twenty-Eighth International Joint Conference on
-  Artificial Intelligence}, 1907--1913.
-  \urlprefix\url{https://doi.org/10.24963/ijcai.2019/264}.
+\bibitem[Barber et~al.(2023)]{barber2023}
+Barber, Rina~Foygel, Emmanuel~J. Cand{\`e}s, Aaditya Ramdas, and Ryan~J.
+  Tibshirani. 2023. ``Conformal prediction beyond exchangeability.'' \emph{The
+  Annals of Statistics} 51 (2): 816--845. https://doi.org/{10.1214/23-AOS2276}.
 
 \bibitem[Xu and Xie(2023)]{xu2023}
 Xu, Chen, and Yao Xie. 2023. ``Sequential Predictive Conformal Inference for
@@ -897,10 +859,47 @@ Xu, Chen, and Yao Xie. 2023. ``Sequential Predictive Conformal Inference for
   Machine Learning}, Vol. 202, 38707--38727. PMLR.
   \urlprefix\url{https://proceedings.mlr.press/v202/xu23r.html}.
 
+\bibitem[Cini et~al.(2025)]{cini2025}
+Cini, Andrea, Alexander Jenkins, Danilo Mandic, Cesare Alippi, and
+  Filippo~Maria Bianchi. 2025. ``Relational Conformal Prediction for Correlated
+  Time Series.'' In \emph{Proceedings of the 42nd International Conference on
+  Machine Learning}, Vol. 267, 10949--10965. PMLR.
+  \urlprefix\url{https://proceedings.mlr.press/v267/cini25a.html}.
+
+\bibitem[Chen, Zhou, and Cheng(2026)]{chen2026}
+Chen, Baiting, Xiaofan Zhou, and Lu~Cheng. 2026. ``Post-Training Adaptive
+  Conformal Prediction for Incomplete Time Series.'' \emph{Transactions on
+  Machine Learning Research}
+  \urlprefix\url{https://openreview.net/forum?id=KMBU4wx79B}.
+
+\bibitem[Jensen, Bianchi, and Anfinsen(2024)]{jensen2024}
+Jensen, Vilde, Filippo~Maria Bianchi, and Stian~Normann Anfinsen. 2024.
+  ``Ensemble Conformalized Quantile Regression for Probabilistic Time Series
+  Forecasting.'' \emph{IEEE Transactions on Neural Networks and Learning
+  Systems} 35 (7): 9014--9025. https://doi.org/{10.1109/TNNLS.2022.3217694}.
+
 \bibitem[Zhou et~al.(2025)]{zhou2025}
 Zhou, Xiaofan, Baiting Chen, Yu~Gui, and Lu~Cheng. 2025. ``Conformal
   Prediction: A Data Perspective.'' \emph{ACM Computing Surveys} 58 (2): 1--37.
   Article 49, https://doi.org/{10.1145/3736575}.
+
+\bibitem[{Alvarez Lopez} et~al.(2018)]{lopez2018}
+{Alvarez Lopez}, Pablo, Michael Behrisch, Laura Bieker-Walz, Jakob Erdmann,
+  Yun-Pang Fl{\"o}tter{\"o}d, Robert Hilbrich, Leonhard L{\"u}cken, Johannes
+  Rummel, Peter Wagner, and Evamarie Wie{\ss}ner. 2018. ``Microscopic Traffic
+  Simulation using SUMO.'' In \emph{2018 21st International Conference on
+  Intelligent Transportation Systems}, 2575--2582.
+  \urlprefix\url{https://doi.org/10.1109/ITSC.2018.8569938}.
+
+\bibitem[Koenker and Bassett(1978)]{koenker1978}
+Koenker, Roger, and Gilbert Bassett, Jr. 1978. ``Regression Quantiles.''
+  \emph{Econometrica} 46 (1): 33--50. https://doi.org/{10.2307/1913643}.
+
+\bibitem[Gneiting and Raftery(2007)]{gneiting2007}
+Gneiting, Tilmann, and Adrian~E. Raftery. 2007. ``Strictly Proper Scoring
+  Rules, Prediction, and Estimation.'' \emph{Journal of the American
+  Statistical Association} 102 (477): 359--378.
+  https://doi.org/{10.1198/016214506000001437}.
 
 \end{thebibliography}
 

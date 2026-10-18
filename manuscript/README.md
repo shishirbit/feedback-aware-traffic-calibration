@@ -1,6 +1,6 @@
 # Results in Engineering manuscript
 
-`main.tex` is the authoritative single-file manuscript source, using the supplied Elsevier CAS `cas-sc` class. It contains every section, both algorithms, all 19 tables, eight figure environments, the declarations, and the 26-entry bibliography. Vector PDF figures are in `figures/`; the architecture is not TikZ.
+`main.tex` is the authoritative single-file manuscript source, using the supplied Elsevier CAS `cas-sc` class. It contains every section, both algorithms, all 19 tables, eight figure environments, the declarations, and the 26-entry numbered bibliography, ordered by first citation. Both authors use one shared departmental affiliation. Vector PDF figures are in `figures/`; the architecture is not TikZ.
 
 `results-in-engineering-overleaf.zip` is the self-contained Overleaf source package; `main.pdf` is the compiled preview. Open the ZIP in Overleaf and select XeLaTeX. A separate editable `highlights.txt` is included in the package. No BibTeX step is required.
 

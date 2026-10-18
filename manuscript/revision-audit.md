@@ -17,3 +17,7 @@ In response to the author, the 150-word abstract now reports the FAR-GW METR-LA 
 ## Title revision - 28 September 2026
 
 Current title: Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports. The LaTeX title and PDF metadata were updated together; the title avoids implying causal-effect estimation. Numerical results, abstract and references were unchanged.
+
+## Numeric citations and shared affiliation - 19 October 2026
+
+The Elsevier CAS source now uses bracketed numeric citations and a numbered bibliography in order of first citation. All 26 reference records and their keys are retained. Both authors share Department of Computer Science and Engineering, Manipal University Jaipur, Jaipur, Rajasthan 303007, India, with Satyabrata Roy retained as corresponding author. The 27-page PDF was recompiled and the author block, numbered citations and complete reference list were visually checked.
