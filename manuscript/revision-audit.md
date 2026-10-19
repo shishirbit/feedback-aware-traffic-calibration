@@ -21,3 +21,7 @@ Current title: Feedback-aware calibration of traffic prediction intervals under 
 ## Numeric citations and shared affiliation - 19 October 2026
 
 The Elsevier CAS source now uses bracketed numeric citations and a numbered bibliography in order of first citation. All 26 reference records and their keys are retained. Both authors share Department of Computer Science and Engineering, Manipal University Jaipur, Jaipur, Rajasthan 303007, India, with Satyabrata Roy retained as corresponding author. The 27-page PDF was recompiled and the author block, numbered citations and complete reference list were visually checked.
+
+## Figure placement correction - 19 October 2026
+
+All eight figure and nineteen table environments now use the CAS-specific `pos=!htbp` key. Per-float and section barriers prevent drift past the following source text or into the bibliography. The rebuilt manuscript has 29 pages: figures appear on pages 7, 10, 18, 19, 21, 22, 23 and 26; references begin on page 28. All figure captions appear on the same page as, or the page after, their nearby discussion. All eight figure pages were rendered and visually checked. Numeric citations, shared affiliation, scientific content and reference records are retained.
