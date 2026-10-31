@@ -1,0 +1,154 @@
+{
+  "pages": 42,
+  "abstract_words": 201,
+  "biography_word_counts": [
+    32,
+    30
+  ],
+  "figures": {
+    "fig:data-profile": [
+      1,
+      10
+    ],
+    "fig:architecture": [
+      2,
+      13
+    ],
+    "fig:benchmarks": [
+      3,
+      26
+    ],
+    "fig:quality": [
+      4,
+      28
+    ],
+    "fig:duration": [
+      5,
+      29
+    ],
+    "fig:stress": [
+      6,
+      30
+    ],
+    "fig:ablations": [
+      7,
+      32
+    ],
+    "fig:compute": [
+      8,
+      35
+    ]
+  },
+  "tables": {
+    "tab:related-models": [
+      1,
+      5
+    ],
+    "tab:related-calibration": [
+      2,
+      7
+    ],
+    "tab:data": [
+      3,
+      9
+    ],
+    "tab:data-statistics": [
+      4,
+      10
+    ],
+    "tab:partitions": [
+      5,
+      11
+    ],
+    "tab:architecture-contract": [
+      6,
+      13
+    ],
+    "tab:notation": [
+      7,
+      15
+    ],
+    "tab:notation-calibration": [
+      8,
+      16
+    ],
+    "tab:notation-training": [
+      9,
+      16
+    ],
+    "tab:settings": [
+      10,
+      22
+    ],
+    "tab:conditions": [
+      11,
+      23
+    ],
+    "tab:primary": [
+      12,
+      24
+    ],
+    "tab:corel": [
+      13,
+      25
+    ],
+    "tab:backbones": [
+      14,
+      27
+    ],
+    "tab:controls": [
+      15,
+      28
+    ],
+    "tab:stress": [
+      16,
+      29
+    ],
+    "tab:ablations": [
+      17,
+      31
+    ],
+    "tab:ablation-metr": [
+      18,
+      33
+    ],
+    "tab:ablation-pems": [
+      19,
+      33
+    ],
+    "tab:ablation-sumo": [
+      20,
+      34
+    ],
+    "tab:runtime": [
+      21,
+      35
+    ]
+  },
+  "algorithms": {
+    "alg:replay": [
+      1,
+      20
+    ],
+    "alg:kernel": [
+      2,
+      21
+    ]
+  },
+  "references_start_page": 39,
+  "reference_count": 26,
+  "figure_first_citation_order_correct": true,
+  "all_floats_before_references": true,
+  "tiff_dpi": 600,
+  "highlights_slide_count": 3,
+  "layout_errors": [],
+  "pending_author_material": [
+    "Genuine photographs for both author-biography panels; guide requests 600 dpi"
+  ],
+  "compiler": "MiKTeX pdfLaTeX 26.5",
+  "clean_package_build_passed": true,
+  "clean_package_passes": 3,
+  "result_numbers_preserved": true,
+  "highlights_counts_crosschecked_with_manuscript": true,
+  "author_photos_supplied": false
+}

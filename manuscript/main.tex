@@ -14,17 +14,19 @@
 \newcommand{\ms}{\mathrm{m\,s^{-1}}}
 \newcommand{\FAR}{\textsc{FAR-Cal}}
 \raggedbottom
+\renewcommand{\keywordname}{Key words}
 \begin{document}
-\title[Feedback-aware calibration of traffic prediction intervals]{Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports}
+\articletype{RESEARCH ARTICLE}
+\title[Feedback-aware traffic interval calibration]{Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports}
 \author[1]{\fnm{Shishir Singh} \sur{Chauhan}}\email{shishir.chauhan@jaipur.manipal.edu}
 \author*[1]{\fnm{Satyabrata} \sur{Roy}}\email{satyabrata.roy@jaipur.manipal.edu}
 \affil[1]{\orgdiv{Department of Computer Science and Engineering}, \orgname{Manipal University Jaipur}, \orgaddress{\city{Jaipur}, \postcode{303007}, \state{Rajasthan}, \country{India}}}
-\abstract{Traffic forecasting intervals depend on realised outcomes that may arrive late or disappear during sensor outages. We evaluate whether uncertainty can be calibrated causally when both predictor inputs and outcome feedback are impaired. Our signed-residual method combines spatial pooling, context matching, target-age weighting and historical fallback. A locked replay separates input availability from feedback release and compares calibrators on frozen backbones using METR-LA, PEMS-BAY and controlled SUMO data. The registered joint interval-score and coverage rule was met in 12 of 16 real-data backbone cells. On METR-LA C3 with FAR-GW, interval score improved by 0.355 m/s versus rolling calibration (95\% paired interval 0.192--0.551), with 0.8985 coverage. Fresh SUMO C3 validation passed; SUMO C4 missed the 0.88 coverage floor at 0.8793. FAR-GW PEMS-BAY C4 instead favoured rolling calibration by 0.119 m/s. Component ablations showed mixed effects. Benefits depend on network and reporting condition; universal superiority and correction of unobserved outcomes are unsupported.}
-\keywords{Traffic forecasting, Prediction intervals, Sensor outages, Delayed feedback, Uncertainty calibration, Reproducibility}
+\abstract{Traffic prediction intervals rely on forecast errors whose reports may arrive late or disappear during sensor outages. We investigate how to calibrate uncertainty when both predictor inputs and outcome feedback are impaired. The proposed signed-residual method combines spatial pooling, context matching, target-age weighting and historical fallback. A locked causal replay separates input availability from feedback release and compares calibrators on frozen forecasting backbones. Experiments use traffic speeds from Los Angeles (METR-LA), the San Francisco Bay Area (PEMS-BAY), and Simulation of Urban MObility (SUMO) episodes. The registered joint interval-score and coverage rule was met in 12 of 16 real-data backbone--condition cells. With the Graph WaveNet adaptation on METR-LA, combined input outages and delayed feedback yielded an interval-score improvement of 0.355 m/s over rolling calibration (95\% paired interval 0.192--0.551) and coverage of 0.8985. Fresh simulation validation under delayed feedback met the rule; permanent-feedback loss missed the 0.88 coverage floor at 0.8793. On PEMS-BAY with permanent-feedback loss, rolling calibration instead performed better by 0.119 m/s. Component removals worsened interval score in 13 comparisons, improved it in four and were inconclusive in 25, based on exploratory paired intervals. These findings support condition-dependent calibration benefits and do not establish universal superiority or correction of unobserved outcomes.}
+\keywords{Traffic forecasting; Prediction intervals; Sensor outages; Delayed feedback; Uncertainty calibration; Reproducibility}
 \maketitle
 
 \section{Introduction}\label{sec:introduction}
-Traffic forecasting is increasingly framed as a prediction problem on a network, but an uncertainty service also depends on a reporting process. A speed measurement has a physical timestamp, a delivery timestamp and a role in subsequent decisions. If a detector gateway stops reporting, the forecasting model loses recent inputs. The calibration module also loses the realised outcomes needed to assess forecasts already issued. Treating these two losses as interchangeable hides an important distinction: a predictor may continue producing plausible values while the residual evidence supporting its intervals becomes stale. The uncertainty problem therefore concerns information availability as well as traffic dynamics.
+Traffic forecasting is increasingly framed as a prediction problem on a network, but an uncertainty service also depends on a reporting process. A speed measurement has a physical timestamp, a delivery timestamp and a role in subsequent decisions. If a detector gateway stops reporting, the forecasting model loses recent inputs. The calibration module also loses the realised outcomes needed to assess forecasts already issued. Treating these two losses as interchangeable hides an important distinction: a predictor may continue producing plausible values while the residual evidence supporting its intervals becomes stale. The uncertainty problem therefore concerns information availability as well as traffic dynamics. The proposed feedback-aware signed-residual calibrator is named \FAR{}, and its Graph WaveNet forecasting adaptation is denoted FAR-GW.
 
 The practical motivation is straightforward \citep{vlahogianni2014,khosravi2011}. An operator receiving a forecast needs to know how much confidence to place in it during degraded sensing. A narrow interval based on a healthy historical period can be misleading after a correlated outage, even when its point forecast changes little. Conversely, widening every interval indiscriminately can make the service uninformative. A useful evaluation must consider coverage together with interval width and the penalty for missed outcomes. It must also retain difficult targets in the scoring population when their reports are unavailable to calibration. Otherwise, removing the very outcomes most affected by failure can artificially improve reported performance.
 
@@ -32,15 +34,15 @@ Delayed feedback presents a second difficulty. A backlog released after restorat
 
 Spatial information offers a possible response, but creates its own risks. Nearby sensors can supply residual evidence when a local detector is silent. Their errors can also be correlated, and their speed regimes need not match the affected location. Context matching and temporal weighting may improve relevance while reducing effective support. An historical archive can stabilise sparse updates, but can preserve obsolete residual behaviour. The methodological question is consequently not whether every available record should be pooled. It is how the usefulness of live, neighbouring and historical evidence changes under a specified reporting process, and how those choices affect interval quality on held-out data.
 
-Traffic predictors provide several ways to represent network dependence. Graph WaveNet and DCRNN use graph-based temporal modelling, whereas STID and STAEformer use identity information and adaptive embeddings \citep{wu2019,li2018,shao2022,liu2023}. The present study does not seek to replace these forecasting architectures. It holds each fitted predictor fixed and compares calibrators on identical forecasts, scales and evaluation masks. This separation makes a paired score difference interpretable as a calibration effect conditional on the backbone. Repeating the comparison across backbones then tests transfer without confusing a stronger point predictor with a better use of outcome feedback.
+Traffic predictors provide several ways to represent network dependence. Graph WaveNet and the diffusion convolutional recurrent neural network (DCRNN) use graph-based temporal modelling, whereas the Spatial-Temporal Identity (STID) model and the spatiotemporal adaptive-embedding Transformer (STAEformer) use identity information and adaptive embeddings \citep{wu2019,li2018,shao2022,liu2023}. The present study does not seek to replace these forecasting architectures. It holds each fitted predictor fixed and compares calibrators on identical forecasts, scales and evaluation masks. This separation makes a paired score difference interpretable as a calibration effect conditional on the backbone. Repeating the comparison across backbones then tests transfer without confusing a stronger point predictor with a better use of outcome feedback.
 
-Conformal and adaptive inference offer foundations, but their assumptions must be respected. ACI adjusts uncertainty from sequential coverage errors, and multistep extensions account for the wait until a forecast target occurs \citep{gibbs2021,hallberg2024}. Published work also studies online distribution shifts and multivariate multistep forecasting \citep{gibbs2024,schlembach2025}. Accordingly, feedback-aware uncertainty is not claimed as an unexplored general topic. Our focus is a traffic replay with independently impaired input and outcome channels, correlated outages, permanent loss and auditable historical fallback. The proposed weighted signed-residual method is evaluated empirically; source theorems are not transferred to its modified reporting protocol.
+Conformal prediction (CP) and adaptive conformal inference (ACI) offer foundations, but their assumptions must be respected. ACI adjusts uncertainty from sequential coverage errors, and multistep extensions account for the wait until a forecast target occurs \citep{gibbs2021,hallberg2024}. Published work also studies online distribution shifts and multivariate multistep forecasting \citep{gibbs2024,schlembach2025}. Accordingly, feedback-aware uncertainty is not claimed as an unexplored general topic. Our focus is a traffic replay with independently impaired input and outcome channels, correlated outages, permanent loss and auditable historical fallback. The proposed weighted signed-residual method is evaluated empirically; source theorems are not transferred to its modified reporting protocol.
 
 The research has three connected objectives. First, it establishes an information boundary that prevents unavailable outcomes from entering calibration while allowing originally valid targets to remain assessable by the evaluator. Second, it evaluates whether asymmetric residual pooling improves the registered interval-score endpoint without falling below a prespecified coverage floor. Third, it investigates whether the result survives changes in network, forecasting backbone, reporting severity and individual components. Each objective requires a different comparison. Fresh simulation episodes assess the locked candidate; matched-rate controls examine an alternative outage geometry; component removals assess mechanisms while retaining the same point and scale caches.
 
-The empirical design combines METR-LA, PEMS-BAY and controlled SUMO simulations. Real-data inference uses chronological partitions and fault-focused hourly origins, while simulation permits full episode evaluation under separately specified physical and reporting events. The study includes core conditions, independent controls, one-factor stress and seven complete component ablations. The breadth is useful only if scope differences remain visible. An hourly network audit is not a complete five-minute deployment trial, and controlled simulation is not proof of field effectiveness. The manuscript therefore reports sampling rules, adaptation choices, uncertainty intervals and adverse findings alongside favourable results, rather than presenting a single aggregated ranking.
+The empirical design combines METR-LA, PEMS-BAY and controlled Simulation of Urban MObility (SUMO) simulations. The principal reporting conditions are C3 (input outages with delayed and backlogged feedback) and C4 (input outages with permanent feedback loss). Real-data inference uses chronological partitions and fault-focused hourly origins, while simulation permits full episode evaluation under separately specified physical and reporting events. The study includes core conditions, independent controls, one-factor stress and seven complete component ablations. The breadth is useful only if scope differences remain visible. An hourly network audit is not a complete five-minute deployment trial, and controlled simulation is not proof of field effectiveness. The manuscript therefore reports sampling rules, adaptation choices, uncertainty intervals and adverse findings alongside favourable results, rather than presenting a single aggregated ranking.
 
-The main contribution is an executable causal benchmark coupled with a feedback-aware calibration design and a transparent account of its conditional performance. The final asymmetric method passes twelve of sixteen real-data backbone cells, but this aggregate conceals important differences between networks. Full ablations also reveal components whose removal improves score. Such findings constrain both mechanism claims and practical recommendations. No universal superiority, arbitrary-missingness coverage guarantee or identifiable correction for missing-not-at-random outcomes is asserted. Potential societal benefits motivate the work, while actual impacts on traffic control, safety, travel time or equity remain outside the demonstrated outcomes.
+The main contribution is an executable causal benchmark coupled with a feedback-aware calibration design and a transparent account of its conditional performance. The final asymmetric method passes twelve of sixteen real-data backbone cells, but this aggregate conceals important differences between networks. Full ablations also reveal components whose removal improves score. Such findings constrain both mechanism claims and practical recommendations. No universal superiority, arbitrary-missingness coverage guarantee or identifiable correction for missing-not-at-random (MNAR) outcomes is asserted. Potential societal benefits motivate the work, while actual impacts on traffic control, safety, travel time or equity remain outside the demonstrated outcomes.
 
 A reproducible comparison also needs recoverable provenance. Saved schedules, forecast identifiers, configuration hashes and originally valid masks allow readers to distinguish a statistical result from an interrupted runner or a reporting artifact. This accountability is also particularly important when evaluations are resumed, because existing verified stages remain evidence rather than being silently replaced.
 
@@ -59,7 +61,7 @@ Graph WaveNet \citep{wu2019} & Graph supports and temporal convolutions & FAR-GW
 DCRNN \citep{li2018} & Diffusion recurrent forecasting & Causal quantile adapter; data provenance \\
 STID \citep{shao2022} & Spatial and temporal identity & Causal quantile adapter \\
 STAEformer \citep{liu2023} & Adaptive embeddings and Transformer & Independent paper-based adapter \\
-GRIN \citep{cini2022} & Graph-based missing-value reconstruction & Literature context; not evaluated \\
+Graph Recurrent Imputation Network (GRIN) \citep{cini2022} & Graph-based missing-value reconstruction & Literature context; not evaluated \\
 \bottomrule\end{tabular}\par\smallskip\footnotesize Representation choices do not determine how missing outcome feedback should be handled. Source-paper performance values are not used as study results.\end{table}
 \FloatBarrier
 
@@ -72,7 +74,7 @@ Missing-input reconstruction is a related but distinct objective. GRIN uses grap
 
 Conformal prediction separates an underlying predictor from a calibration procedure, as explained by \citet{angelopoulos2023} and formalised for regression by \citet{lei2018}. A central distinction is between an empirical coverage estimate and a guarantee derived under a specified sampling assumption. Traffic observations are temporally dependent, and artificial outages further change which outcomes reach the service. Consequently, a calibration construction cannot acquire distribution-free validity merely because it uses residual quantiles. We retain the terminology of calibration while identifying the proposed rule as an empirical weighted signed-residual method. Its nominal interval level, observed coverage and registered decision tolerance are reported separately throughout the results.
 
-Conformalized quantile regression combines quantile modelling with conformal calibration to accommodate heteroscedastic responses \citep{romano2019}. This is relevant to the use of a predictive centre and scale, because residual magnitudes need not be comparable across locations or traffic regimes without normalisation. Our quantile head supplies that scale but is not itself treated as a calibrated uncertainty guarantee. The final interval comes from received signed residuals and a fallback archive. The mathematical formulation therefore distinguishes predictor quantiles from calibration quantiles, making clear which quantities are fitted before test replay and which change after causal feedback release.
+Conformalized quantile regression (CQR) combines quantile modelling with conformal calibration to accommodate heteroscedastic responses \citep{romano2019}. This is relevant to the use of a predictive centre and scale, because residual magnitudes need not be comparable across locations or traffic regimes without normalisation. Our quantile head supplies that scale but is not itself treated as a calibrated uncertainty guarantee. The final interval comes from received signed residuals and a fallback archive. The mathematical formulation therefore distinguishes predictor quantiles from calibration quantiles, making clear which quantities are fitted before test replay and which change after causal feedback release.
 
 \citet{barber2023} analyse conformal prediction beyond exchangeability, including weighted quantiles and distribution drift. Their work provides a useful caution for interpreting relevance weights. Emphasising recent or contextually similar observations can address changing distributions, but the validity of a specific weighting scheme depends on its own assumptions and construction. The exponential target-age and context weights used here are not presented as an instantiation of that paper's complete theorem. They express a testable engineering hypothesis about useful residual evidence. The full ablations are needed precisely because plausible weighting components may help one network and harm another.
 
@@ -89,12 +91,12 @@ Reference & Relevant objective & Scope here \\\midrule
 CQR \citep{romano2019} & Calibrated quantile regression & Literature; predictor quantiles distinguished from calibrated bounds \\
 Beyond exchangeability \citep{barber2023} & Weighted inference under drift & Literature; no theorem imported \\
 ACI \citep{gibbs2021} & Sequential coverage adaptation & Horizon-specific spatial-batch adapter \\
-SPCI \citep{xu2023} & Sequential residual-based intervals & Literature; not evaluated \\
+Sequential predictive conformal inference (SPCI) \citep{xu2023} & Sequential residual-based intervals & Literature; not evaluated \\
 Multistep ACI \citep{hallberg2024} & Ordinary forecast-target delay & Starting point for ACI adaptation \\
-CoRel \citep{cini2025} & Relational series calibration & Official architecture; FAR-GW only \\
+Conformal Relational Prediction (CoRel) \citep{cini2025} & Relational series calibration & Official architecture; FAR-GW only \\
 Incomplete series \citep{chen2026} & Post-training missing-input adaptation & Published 2026; literature comparison \\
 Online inference \citep{gibbs2024} & Local adaptation under distribution shifts & Journal method; not evaluated \\
-EnCQR \citep{jensen2024} & Ensemble quantile calibration for time series & Transactions method; not evaluated \\
+Ensemble conformalized quantile regression (EnCQR) \citep{jensen2024} & Ensemble quantile calibration for time series & Transactions method; not evaluated \\
 \bottomrule\end{tabular}\par\smallskip\footnotesize Entries summarise reviewed objectives, not universal capability claims or a numerical ranking. General CP background is supplied by \citet{angelopoulos2023}.\end{table}
 \FloatBarrier
 
@@ -114,7 +116,7 @@ Literature relevance does not imply experimental reproduction. Numerical claims 
 
 \section{Datasets and preprocessing}\label{sec:data}
 \subsection{METR-LA and PEMS-BAY}
-METR-LA comprises 207 sensors and 34,272 five-minute timestamp rows from 1 March to 27 June 2012. PEMS-BAY comprises 325 sensors and 52,116 original rows from 1 January to 30 June 2017. These statements describe the acquired benchmark files, whose provenance is recorded against DCRNN \citep{li2018}; the graph and speed-file hashes are retained separately. PEMS-BAY has a 65-minute timestamp gap. Reindexing inserts twelve wholly invalid five-minute rows, giving 52,128 prepared rows. METR-LA requires no inserted rows. Table~\ref{tab:data} compares the dimensions, periods, missingness convention and sampling policy. Figure~\ref{fig:data-profile} shows training-partition speed distributions and original validity, making the empirical input populations visible without treating distributional differences as a causal explanation for transfer results.
+METR-LA comprises 207 sensors and 34,272 five-minute timestamp rows from 1 March to 27 June 2012. PEMS-BAY comprises 325 sensors and 52,116 original rows from 1 January to 30 June 2017. These statements describe the acquired benchmark files, whose provenance is recorded against DCRNN \citep{li2018}; the graph and speed-file hashes are retained separately. PEMS-BAY has a 65-minute timestamp gap. Reindexing inserts twelve wholly invalid five-minute rows, giving 52,128 prepared rows. METR-LA requires no inserted rows. Table~\ref{tab:data} compares the dimensions, periods, missingness convention and sampling policy. Fig.~\ref{fig:data-profile} shows training-partition speed distributions and original validity, making the empirical input populations visible without treating distributional differences as a causal explanation for transfer results.
 
 \begin{table}[!htbp]
 \caption{Dataset dimensions, periods and evaluation sampling.}\label{tab:data}
@@ -130,7 +132,7 @@ SUMO fresh C3 & 20 & 3,840 & 40 fresh episodes & Full episode audit \\
 \end{table}
 \FloatBarrier
 
-\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/data-profile.pdf}\caption{Training-partition observed-speed distributions before forecast-window construction. Only originally valid prepared measurements are plotted; labels report original valid fractions. SUMO includes its prepared training-partition measurements. The distributions are descriptive, not an explanation of calibration transfer.}\label{fig:data-profile}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/data-profile.pdf}\caption{Training-partition observed-speed distributions before forecast-window construction. Only originally valid prepared measurements are plotted; labels report original valid fractions. SUMO includes its prepared training-partition measurements. The distributions are descriptive, not an explanation of calibration transfer. Panels (a)--(c) show METR-LA, PEMS-BAY and SUMO, respectively.}\label{fig:data-profile}\end{figure}
 \FloatBarrier
 
 The benchmark convention treats zero-valued real speeds as missing, following the audited source mask. It should not be interpreted as a physical assertion that vehicles never stop. Originally invalid entries cannot become training labels, calibration residuals or evaluation targets after filling. SUMO instead retains physical zero speeds as valid and masks empty detector intervals. Table~\ref{tab:data-statistics} reports original validity and observed-speed summaries computed directly from prepared arrays. These are descriptive data statistics, not estimates from the artificially censored reporting stream.
@@ -175,7 +177,7 @@ The real evaluation is a fault-focused audit: origins are selected hourly and af
 
 \section{System architecture}\label{sec:architecture}
 \subsection{Separate physical, reporting and evaluation layers}
-Figure~\ref{fig:architecture} depicts the redesigned system in separate lanes with orthogonal routes. The upper lane produces and releases observations; the middle lane forms immutable forecasts; the lower lane matches released feedback and updates calibration. An evaluator compartment remains outside these service lanes. This organisation distinguishes data movement from statistical operations and prevents arrows from passing through module labels. Table~\ref{tab:architecture-contract} specifies the inputs, outputs and information restrictions of each module, complementing the diagram rather than relying on visual proximity to imply an interface.
+Fig.~\ref{fig:architecture} depicts the redesigned system in separate lanes with orthogonal routes. The upper lane produces and releases observations; the middle lane forms immutable forecasts; the lower lane matches released feedback and updates calibration. An evaluator compartment remains outside these service lanes. This organisation distinguishes data movement from statistical operations and prevents arrows from passing through module labels. Table~\ref{tab:architecture-contract} specifies the inputs, outputs and information restrictions of each module, complementing the diagram rather than relying on visual proximity to imply an interface.
 
 \begin{table}[!htbp]\caption{Architecture interfaces and information boundary.}\label{tab:architecture-contract}\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.227642\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.325203\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.447154\linewidth-2\tabcolsep\relax}}\toprule
@@ -205,16 +207,16 @@ When a valid feedback packet arrives, the matcher retrieves its eligible forecas
 The calibration kernel queries a local graph group, applies target-age and context weights, measures timestamp-block support and computes a freshness gap. The real-data path uses capped local pools; the SUMO path also includes a global pool. These paths are explicit in the diagram and algorithm because their sampling and pooling estimands differ. The mixture shifts mass towards frozen evidence when live support is stale or insufficient. Signed-tail quantiles, bounded inflation and nonnegative clipping then produce the final interval. The output is stored before evaluator scoring can occur.
 
 \subsection{Execution and reproducibility boundary}
-Replay advances in five-minute bins: release packets, update causal inputs, ingest feedback, expire live records, query the frozen predictor and issue intervals. Evaluator-only scoring compares saved intervals with originally valid outcomes. Figure~\ref{fig:architecture} shows scoring as a terminal branch without a return edge to the service. This ordering is the core protection against information leakage, not a claim that every proposed weight is statistically optimal.
+Replay advances in five-minute bins: release packets, update causal inputs, ingest feedback, expire live records, query the frozen predictor and issue intervals. Evaluator-only scoring compares saved intervals with originally valid outcomes. Fig.~\ref{fig:architecture} shows scoring as a terminal branch without a return edge to the service. This ordering is the core protection against information leakage, not a claim that every proposed weight is statistically optimal.
 
 The implementation checks source manifests and chunk hashes before accepting completed evaluations. Resumed runners may revisit artifact manifests without discarding verified work. This is an execution property rather than an additional statistical replicate. Similarly, the gateway smoke tests establish limited replay-equivalence behaviour, not production latency, network reliability or operational readiness. Table~\ref{tab:architecture-contract} makes those boundaries reviewable: the source and evaluator may know truth, but the predictor and calibrator receive only the information already released to their respective channels.
 
 \section{Mathematical modelling}\label{sec:math}
 \subsection{Causal information and forecast targets}
-Table~\ref{tab:notation} defines the principal symbols and units. The model distinguishes physical validity from channel availability; the former controls scoring and the latter controls service access.
+Table~\ref{tab:notation} defines the principal symbols and units; Tables~\ref{tab:notation-calibration} and~\ref{tab:notation-training} complete the nomenclature for calibration, prediction, training and replay. The model distinguishes physical validity from channel availability; the former controls scoring and the latter controls service access.
 
 \begin{table}[!htbp]
-\caption{Principal mathematical notation.}\label{tab:notation}
+\caption{Nomenclature: principal mathematical symbols.}\label{tab:notation}
 \centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lll}\toprule
 Symbol & Meaning & Units \\\midrule
@@ -233,15 +235,55 @@ $\eta,\lambda,\kappa$ & Archive mixture, local mixture, inflation & Dimensionles
 $L,U,\mathrm{IS}$ & Interval bounds and interval score & $\ms$ \\
 $\alpha$ & Nominal miscoverage & Probability \\
 \bottomrule\end{tabular}
-\par\smallskip\footnotesize SI conversion uses exactly 0.44704 metres per second per mph. Dimensionless mixture weights and coverage remain unchanged.
+\par\smallskip\footnotesize International System of Units (SI) conversion uses exactly 0.44704 metres per second per mile per hour (mph). Dimensionless mixture weights and coverage remain unchanged.
+\end{table}
+\FloatBarrier
+
+
+\begin{table}[!htbp]
+\caption{Nomenclature: residual records and calibration distributions.}\label{tab:notation-calibration}
+\centering\setlength{\tabcolsep}{3pt}\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr .27\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr .73\linewidth-2\tabcolsep\relax}}\toprule
+Symbol & Meaning \\\midrule
+$i,k$ & Sensor index and retained residual-record index \\
+$u_k,c_k$ & Target timestamp and stored issue context of record $k$ \\
+$w_k,\widetilde w_k$ & Unnormalised and normalised relevance weights \\
+$W_u$ & Sum of relevance weights for records with target timestamp $u$ \\
+$P,Q$ & Local and global eligible live-residual pools \\
+$F_P,F_Q$ & Empirical weighted distributions of the local and global live pools \\
+$F_A$ & Frozen-archive distribution used by the stated implementation path \\
+$F$ & Mixture distribution queried for signed-tail quantiles \\
+$Q_p(F),p$ & Empirical inverse-distribution quantile and its probability level \\
+\bottomrule\end{tabular}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!htbp]
+\caption{Nomenclature: predictor, training and replay quantities.}\label{tab:notation-training}
+\centering\setlength{\tabcolsep}{3pt}\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr .27\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr .73\linewidth-2\tabcolsep\relax}}\toprule
+Symbol & Meaning \\\midrule
+$x_{i,u},o^x_{i,u}(t)$ & Input measurement and its valid-and-released indicator at issue time $t$ \\
+$\mathcal I_t,\mathcal L$ & Service information set and immutable forecast ledger \\
+$f_\theta,\theta$ & Frozen forecasting function and its fitted parameters \\
+$\widehat q_{p,i,t,h},s_0$ & Predictor quantile and positive scale floor, in speed units \\
+$X_t$ & Twelve-bin, seven-channel causal predictor-input tensor \\
+$A_{\rm adaptive},E_1,E_2$ & Learned graph support and trainable node factors \\
+$W_f,W_g,*,\odot$ & Temporal filter/gate parameters, convolution and elementwise product \\
+$\sigma,\operatorname{ReLU},\operatorname{softplus}$ & Logistic sigmoid, rectified linear unit and softplus activations \\
+$a,b,c$ & Local raw head coordinates; distinct from context-bandwidth $b$ \\
+$\mathcal M,\mathcal P$ & Valid training-target index set and fitted quantile-level set \\
+$e,\rho_p(e),\mathcal J(\theta)$ & Prediction error, pinball loss and masked training objective \\
+$\mathbf1(\cdot)$ & Indicator of whether the stated event occurs \\
+\bottomrule\end{tabular}
 \end{table}
 \FloatBarrier
 
 Let $G=(V,E)$ represent the sensor graph, $y_{i,u}$ the speed at sensor $i$ and target bin $u$, and $t$ an issue bin. The reporting channel assigns input arrival $a^x_{i,u}$ and feedback arrival $a^f_{i,u}$. Permanent loss is represented by an infinite arrival time. A value may enter the predictor only when $a^x_{i,u}\le t$ and may update calibration only when $a^f_{i,u}\le t$. The service information set is
 \begin{equation}
 \mathcal I_t=\{x_{i,u}:a^x_{i,u}\le t\}\cup\{y_{i,u}:a^f_{i,u}\le t\}\cup\{\text{previously issued records}\}.
-\end{equation}
 \label{eq:information}
+\end{equation}
 The predictor $f_\theta$ is frozen and depends only on $\mathcal I_t$. For horizon $h$, define its centre $m_{i,t,h}$ and scale
 \begin{equation}
 m_{i,t,h}=\widehat q_{0.50,i,t,h},\qquad
@@ -317,7 +359,7 @@ With valid training target index set $\mathcal M$ and $\mathcal P=\{.05,.50,.95\
 \rho_p(y_{i,t+h}-\widehat q_{p,i,t,h}),\quad
 \rho_p(e)=\max\{pe,(p-1)e\}.
 \end{equation}
-The implementation evaluates this loss in standardised training units. Empty-validity batches are skipped, and tuning loss selects the checkpoint without test outcomes. The fitted head supplies the centre and scale in Equation~\eqref{eq:scale}; received residuals, rather than further predictor training, update the uncertainty layer during replay.
+The implementation evaluates this loss in standardised training units. Empty-validity batches are skipped, and tuning loss selects the checkpoint without test outcomes. The fitted head supplies the centre and scale in Eq.~\eqref{eq:scale}; received residuals, rather than further predictor training, update the uncertainty layer during replay.
 
 \subsection{Identifiability and computational assumptions}
 The empirical mixture requires a nonempty valid initial archive. Its normalised weights are computed after subtracting the largest log weight for numerical stability, which leaves relative weights unchanged. Zero-mass entries are excluded before quantile lookup. Timestamp-block support reduces the tendency to treat simultaneous neighbouring records as separate independent observations, but is not an independence proof. No finite-sample correction beyond the stated empirical inverse-distribution quantile is applied.
@@ -350,7 +392,7 @@ Algorithm~\ref{alg:replay} specifies the state transitions needed to reproduce t
 The ingestion key is defined per issued forecast and horizon, not merely per measured target. This allows one outcome to assess multiple previously issued horizons without counting the same residual twice. The immutable ledger also prevents a restoration-time forecast from replacing an outage-time forecast during scoring. If no outcome arrives, the loop performs no residual update for that target. These cases explain why release ordering and matching are substantive parts of the method rather than administrative details.
 
 \subsection{Weighted asymmetric calibration kernel}
-Algorithm~\ref{alg:kernel} expands the residual-to-interval calculation. It follows Equations~\eqref{eq:weights}--\eqref{eq:interval} and makes local versus local/global processing explicit. Weighted quantiles are empirical left-continuous inverse-distribution queries; they do not add an unimplemented conformal correction. The frozen fallback ensures that loss of live support does not force an empty query, provided the valid initial archive exists. Inflation is the implemented signed-tail scaling and need not widen both sides when the two selected quantiles have the same sign.
+Algorithm~\ref{alg:kernel} expands the residual-to-interval calculation. It follows Eqs.~\eqref{eq:weights}--\eqref{eq:interval} and makes local versus local/global processing explicit. Weighted quantiles are empirical left-continuous inverse-distribution queries; they do not add an unimplemented conformal correction. The frozen fallback ensures that loss of live support does not force an empty query, provided the valid initial archive exists. Inflation is the implemented signed-tail scaling and need not widen both sides when the two selected quantiles have the same sign.
 
 \begin{center}\refstepcounter{algorithm}
 \fbox{\begin{minipage}{0.94\linewidth}\small
@@ -369,7 +411,7 @@ Algorithm~\ref{alg:kernel} expands the residual-to-interval calculation. It foll
 \end{enumerate}
 \end{minipage}}\end{center}
 
-With $K$ retained records, weight formation is linear in $K$ and the direct stable quantile sort costs $O(K\log K)$ per query. These are algorithmic operation counts, not measured throughput. Capped real queries bound the number of local records by $C|G_i|$; they do not guarantee equal allocation of records to each group sensor. Table~\ref{tab:runtime} and Figure~\ref{fig:compute} provide the separate descriptive timing experiment. No asymptotic argument is used to claim a speed advantage over the other calibrators.
+With $K$ retained records, weight formation is linear in $K$ and the direct stable quantile sort costs $O(K\log K)$ per query. These are algorithmic operation counts, not measured throughput. Capped real queries bound the number of local records by $C|G_i|$; they do not guarantee equal allocation of records to each group sensor. Section~\ref{sec:runtime} reports the separate descriptive timing experiment. No asymptotic argument is used to claim a speed advantage over the other calibrators.
 
 \section{Experimental protocol}\label{sec:protocol}
 \subsection{Comparators and adaptation scope}
@@ -458,7 +500,7 @@ PEMS-BAY & C4 & -0.119 [-0.194, -0.043] & -0.130 [-0.216, -0.047] & 0.9068 & No 
 METR-LA passes in both C3 and C4. PEMS-BAY C3 has small effects whose intervals include zero; PEMS-BAY C4 favours both comparators. These negative transfer results are principal findings. The method is left locked rather than retuned using the evaluated test outcomes.
 
 \subsection{Cross-backbone and relational comparisons}
-Figure~\ref{fig:benchmarks} presents every evaluated real-data comparator with the proposed method as the zero reference. Within each backbone, all calibrators use the same forecasts and masks. The plot therefore compares calibration conditional on a backbone; it is not a ranking of the predictors themselves. CoRel points appear only for FAR-GW because that is the evaluated scope. Table~\ref{tab:corel} reports the direct CoRel comparison in numerical form, including both methods' coverage and the paired score interval. All four CoRel-minus-FAR-Cal intervals are positive, but this does not overturn PEMS-BAY failures against rolling and ACI. Different comparators support different conclusions.
+Fig.~\ref{fig:benchmarks} presents every evaluated real-data comparator with the proposed method as the zero reference. Within each backbone, all calibrators use the same forecasts and masks. The plot therefore compares calibration conditional on a backbone; it is not a ranking of the predictors themselves. CoRel points appear only for FAR-GW because that is the evaluated scope. Table~\ref{tab:corel} reports the direct CoRel comparison in numerical form, including both methods' coverage and the paired score interval. All four CoRel-minus-FAR-Cal intervals are positive, but this does not overturn PEMS-BAY failures against rolling and ACI. Different comparators support different conclusions.
 
 \begin{table}[!htbp]
 \caption{Direct CoRel adaptation comparison on FAR-GW caches.}\label{tab:corel}
@@ -475,7 +517,7 @@ PEMS-BAY & C4 & 4.723 & 5.726 & 1.004 [0.787, 1.227] & 0.9068 & 0.8743 \\
 \end{table}
 \FloatBarrier
 
-\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/benchmarks.pdf}\caption{Paired comparator-minus-FAR-Cal interval-score effects and 95\% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW.}\label{fig:benchmarks}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/benchmarks.pdf}\caption{Paired comparator-minus-FAR-Cal interval-score effects and 95\% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW. Panels (a) and (b) show METR-LA and PEMS-BAY.}\label{fig:benchmarks}\end{figure}
 \FloatBarrier
 
 The four-backbone matrix passes in 12 of 16 registered cells: all eight METR-LA cells, and the four PEMS-BAY cells using STAEformer or DCRNN. FAR-GW and STID each fail both PEMS-BAY conditions. Table~\ref{tab:backbones} provides both paired score effects, coverage and joint decisions for every cell. Its effect columns compare calibrators within a backbone; they must not be read as point-model rankings. Consistency across METR-LA predictors supports transfer on that network, while PEMS-BAY demonstrates predictor-dependent behaviour.
@@ -510,9 +552,9 @@ DCRNN & PEMS-BAY & C4 & 0.323 [0.212, 0.442] & 0.314 [0.207, 0.429] & 0.9144 & Y
 CoRel-minus-\FAR{} differences are positive in all four FAR-GW real-data cells. After SI conversion, the estimates are 0.758, 0.973, 1.008 and 1.004\,$\ms$ for METR-LA C3/C4 and PEMS-BAY C3/C4. Their respective intervals are [0.518, 1.030], [0.616, 1.403], [0.814, 1.215] and [0.787, 1.227]\,$\ms$. CoRel coverage is 0.8743, 0.8725, 0.8837 and 0.8743. This direct comparison supports an advantage over this adaptation; it does not imply that \FAR{} beats rolling or ACI in the PEMS-BAY cells.
 
 \subsection{Coverage and score must be read jointly}
-Figure~\ref{fig:quality} places each final FAR-GW cell's coverage beside its interval score, using identical axes within the quality panel. It makes the SUMO C4 decision visible: positive score improvements coexist with coverage below 0.88. PEMS-BAY coverage exceeds the floor, yet superiority against rolling and ACI is not established. These are different failure modes. Table~\ref{tab:primary} therefore reports the conjunction, while the figure preserves each metric separately. The vertical separation of network scores is descriptive and not a between-network treatment effect.
+Fig.~\ref{fig:quality} places each final FAR-GW cell's coverage beside its interval score, using identical axes within the quality panel. It makes the SUMO C4 decision visible: positive score improvements coexist with coverage below 0.88. PEMS-BAY coverage exceeds the floor, yet superiority against rolling and ACI is not established. These are different failure modes. Table~\ref{tab:primary} therefore reports the conjunction, while the figure preserves each metric separately. The vertical separation of network scores is descriptive and not a between-network treatment effect.
 
-\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/quality.pdf}\caption{Final FAR-GW interval score and coverage for the six primary cells. Dashed and dotted lines mark the 0.88 decision floor and 0.90 nominal coverage. Absolute network scores are not a paired between-network effect.}\label{fig:quality}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/quality.pdf}\caption{Final FAR-GW interval score and coverage for the six primary cells. Dashed and dotted lines mark the 0.88 decision floor and 0.90 nominal coverage. Absolute network scores are not a paired between-network effect. Panels (a) and (b) show interval score and coverage.}\label{fig:quality}\end{figure}
 \FloatBarrier
 
 
@@ -539,7 +581,7 @@ PEMS-BAY & C4 & Independent & 0.017 [-0.009, 0.055] & 0.017 [-0.008, 0.055] & No
 \end{table}
 \FloatBarrier
 
-All 1,488 one-factor stress stages finish, yielding 48 dataset/scenario/variant summaries. METR-LA passes all 24 tested cells and PEMS-BAY none of its 24; every aggregate coverage is at least 0.88. Table~\ref{tab:stress} groups the findings by factor, and Figure~\ref{fig:duration} shows score sensitivity to outage duration. Duration, connected fraction, backlog delay, permanent loss and initial archive impairment test different limits of the reporting system; they are not pooled into a single generalisation guarantee. The MNAR grid retains the same distinction: favourable performance in one network and failure in the other remain compatible with selective outcome observation.
+All 1,488 one-factor stress stages finish, yielding 48 dataset/scenario/variant summaries. METR-LA passes all 24 tested cells and PEMS-BAY none of its 24; every aggregate coverage is at least 0.88. Table~\ref{tab:stress} groups the findings by factor, and Fig.~\ref{fig:duration} shows score sensitivity to outage duration. Duration, connected fraction, backlog delay, permanent loss and initial archive impairment test different limits of the reporting system; they are not pooled into a single generalisation guarantee. The MNAR grid retains the same distinction: favourable performance in one network and failure in the other remain compatible with selective outcome observation.
 
 \begin{table}[!htbp]
 \caption{One-factor stress summary by network and factor.}\label{tab:stress}
@@ -563,21 +605,21 @@ PEMS-BAY & mnar\_low\_speed & 2 & 0 & 0.9013 \\
 \end{table}
 \FloatBarrier
 
-\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/duration.pdf}\caption{Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions.}\label{fig:duration}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/duration.pdf}\caption{Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions. Panels (a) and (b) show METR-LA and PEMS-BAY.}\label{fig:duration}\end{figure}
 \FloatBarrier
 
 
 \subsection{Additional reporting stress}
-Figure~\ref{fig:stress} displays affected fraction, extra backlog delay, permanent-loss probability, cold calibration and low-speed MNAR sensitivity. Each point compares ACI with FAR-Cal using the registered paired inference, with positive values favouring FAR-Cal. Continuous-factor lines connect tested values only; cold calibration and MNAR are separate categorical experiments. All METR-LA stress cells pass the joint rule, whereas no PEMS-BAY stress cell does. Table~\ref{tab:stress} groups these decisions; the plotted ACI contrast alone is not the full two-comparator rule. The cold archive tests whether an initially impaired calibration source changes performance, and the MNAR panel tests selective outcome suppression without claiming correction.
+Fig.~\ref{fig:stress} displays affected fraction, extra backlog delay, permanent-loss probability, cold calibration and low-speed MNAR sensitivity. Each point compares ACI with FAR-Cal using the registered paired inference, with positive values favouring FAR-Cal. Continuous-factor lines connect tested values only; cold calibration and MNAR are separate categorical experiments. All METR-LA stress cells pass the joint rule, whereas no PEMS-BAY stress cell does. Table~\ref{tab:stress} groups these decisions; the plotted ACI contrast alone is not the full two-comparator rule. The cold archive tests whether an initially impaired calibration source changes performance, and the MNAR panel tests selective outcome suppression without claiming correction.
 
-\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/stress.pdf}\caption{Additional one-factor stress: ACI-minus-FAR-Cal effects and paired 95\% intervals for affected fraction, backlog delay, permanent loss, cold calibration and MNAR. Positive values favour FAR-Cal. Categorical panels contain only their registered conditions; continuous lines connect tested values without extrapolation.}\label{fig:stress}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/stress.pdf}\caption{Additional one-factor stress: ACI-minus-FAR-Cal effects and paired 95\% intervals for affected fraction, backlog delay, permanent loss, cold calibration and MNAR. Positive values favour FAR-Cal. Categorical panels contain only their registered conditions; continuous lines connect tested values without extrapolation. Panels (a)--(e) show affected fraction, backlog delay, permanent loss, cold calibration and MNAR, respectively.}\label{fig:stress}\end{figure}
 \FloatBarrier
 
-The duration curve in Figure~\ref{fig:duration} reports absolute FAR-Cal score rather than a paired treatment effect. Longer outages can change which targets enter the fault-focused audit, so the curve cannot isolate a duration effect on a fixed target population. It complements the paired stress results by showing the magnitude of interval-score penalties in each tested condition. These plots are based on completed evaluations, not simulated illustrative values or interpolated predictions of untested fault levels.
+The duration curve in Fig.~\ref{fig:duration} reports absolute FAR-Cal score rather than a paired treatment effect. Longer outages can change which targets enter the fault-focused audit, so the curve cannot isolate a duration effect on a fixed target population. It complements the paired stress results by showing the magnitude of interval-score penalties in each tested condition. These plots are based on completed evaluations, not simulated illustrative values or interpolated predictions of untested fault levels.
 
 \section{Full component ablation study}\label{sec:ablation}
 
-All 432 stages are complete: 54 verified full references and 378 new component evaluations. Figure~\ref{fig:ablations} displays ablation-minus-full effects. A positive interval indicates degradation after removal; a negative interval indicates an improvement. Thirteen exploratory intervals are wholly positive, four wholly negative and 25 include zero. Table~\ref{tab:ablations} identifies which components fall into these categories.
+All 432 stages are complete: 54 verified full references and 378 new component evaluations. Fig.~\ref{fig:ablations} displays ablation-minus-full effects. A positive interval indicates degradation after removal; a negative interval indicates an improvement. Thirteen exploratory intervals are wholly positive, four wholly negative and 25 include zero. Table~\ref{tab:ablations} identifies which components fall into these categories.
 
 \begin{table}[!htbp]
 \caption{Exploratory paired ablation classifications across six cells.}\label{tab:ablations}
@@ -596,7 +638,7 @@ frozen only & 1 & 0 & 5 \\
 \end{table}
 \FloatBarrier
 
-\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/ablations.pdf}\caption{Exploratory removal-minus-full interval-score effects and 95\% paired intervals. Positive values indicate deterioration after removal. Panel scales differ; the off-scale PEMS-BAY C4 stale-blend failure is explicitly labelled with its estimate and bounds.}\label{fig:ablations}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/ablations.pdf}\caption{Exploratory removal-minus-full interval-score effects and 95\% paired intervals. Positive values indicate deterioration after removal. Panel scales differ; the off-scale PEMS-BAY C4 stale-blend failure is explicitly labelled with its estimate and bounds. Panels (a)--(f) show METR-LA C3, METR-LA C4, PEMS-BAY C3, PEMS-BAY C4, SUMO C3 and SUMO C4.}\label{fig:ablations}\end{figure}
 \FloatBarrier
 
 Stale blending has the clearest repeated benefit. Removing it worsens score in METR-LA C3, both PEMS-BAY conditions and both SUMO conditions. The largest effect occurs in PEMS-BAY C4: removal increases score by $4.220\,\ms$, with 95\% interval [3.760, 4.699]\,$\ms$, while coverage falls to 0.549. Spatial pooling is beneficial in METR-LA C3 and PEMS-BAY C3/C4, but its remaining intervals include zero.
@@ -610,7 +652,7 @@ Tables~\ref{tab:ablation-metr}--\ref{tab:ablation-sumo} provide all forty-two nu
 \caption{Full METR-LA component ablations.}\label{tab:ablation-metr}
 \centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
-Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
+Cell & Removal / diagnostic & Removal minus full (95\% interval) & Coverage & Width \\\midrule
 C3 & no spatial & 0.156 [0.066, 0.273] & 0.8904 & 4.945 \\
 C3 & no context & 0.001 [-0.039, 0.040] & 0.8996 & 4.919 \\
 C3 & no age & -0.018 [-0.113, 0.075] & 0.9025 & 4.875 \\
@@ -634,7 +676,7 @@ C4 & frozen only & 0.066 [-0.157, 0.300] & 0.8797 & 4.683 \\
 \caption{Full PEMS-BAY component ablations.}\label{tab:ablation-pems}
 \centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
-Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
+Cell & Removal / diagnostic & Removal minus full (95\% interval) & Coverage & Width \\\midrule
 C3 & no spatial & 0.069 [0.029, 0.120] & 0.8941 & 2.825 \\
 C3 & no context & 0.000 [-0.001, 0.001] & 0.9008 & 2.799 \\
 C3 & no age & -0.054 [-0.085, -0.011] & 0.9054 & 2.795 \\
@@ -658,7 +700,7 @@ C4 & frozen only & 0.018 [-0.004, 0.034] & 0.9053 & 3.027 \\
 \caption{Full SUMO component ablations.}\label{tab:ablation-sumo}
 \centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
-Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
+Cell & Removal / diagnostic & Removal minus full (95\% interval) & Coverage & Width \\\midrule
 C3 & no spatial & 0.007 [-0.011, 0.024] & 0.8875 & 2.082 \\
 C3 & no context & 0.001 [-0.001, 0.005] & 0.8889 & 2.080 \\
 C3 & no age & 0.044 [-0.031, 0.111] & 0.8994 & 2.290 \\
@@ -678,11 +720,11 @@ C4 & frozen only & -0.104 [-0.284, 0.044] & 0.8961 & 2.617 \\
 \end{table}
 \FloatBarrier
 
-Figure~\ref{fig:ablations} uses separate panel scales to preserve small effects while explicitly labelling the off-scale PEMS-BAY C4 stale-blend difference. Its zero line corresponds to no paired score change. A beneficial removal is evidence against claiming that the removed component uniformly improves quality. Conversely, an inconclusive interval does not prove redundancy. Dependence between components, limited episode/day replication and multiple exploratory comparisons prevent a simple causal ranking of design choices. The locked full method is not retrospectively retuned to maximise these test-set results.
+Fig.~\ref{fig:ablations} uses separate panel scales to preserve small effects while explicitly labelling the off-scale PEMS-BAY C4 stale-blend difference. Its zero line corresponds to no paired score change. A beneficial removal is evidence against claiming that the removed component uniformly improves quality. Conversely, an inconclusive interval does not prove redundancy. Dependence between components, limited episode/day replication and multiple exploratory comparisons prevent a simple causal ranking of design choices. The locked full method is not retrospectively retuned to maximise these test-set results.
 
-\subsection{Descriptive archive-cap sensitivity}
+\subsection{Descriptive archive-cap sensitivity}\label{sec:runtime}
 
-Eighteen timed replays compare archive caps 64, 128 and 256 with identical C3 inputs and fixed model/fault seeds 11/101. Table~\ref{tab:runtime} reports wall-clock medians, observed ranges and pooled quality. Timing includes CPU calibration, loading and output serialisation, excluding training and prediction. The cap-256 setting exactly reproduces the archived same-run quality. Smaller caps have slightly higher score in both fixed runs, but timing ranges overlap. Host workload and filesystem cache are not isolated, so these measurements do not establish a reliable speed advantage, a cross-method runtime ranking or a deployment throughput guarantee.
+Eighteen timed replays compare archive caps 64, 128 and 256 with identical C3 inputs and fixed model/fault seeds 11/101. Table~\ref{tab:runtime} reports wall-clock medians, observed ranges and pooled quality. Timing includes central processing unit (CPU) calibration, loading and output serialisation, excluding training and prediction. The cap-256 setting exactly reproduces the archived same-run quality. Smaller caps have slightly higher score in both fixed runs, but timing ranges overlap. Host workload and filesystem cache are not isolated, so these measurements do not establish a reliable speed advantage, a cross-method runtime ranking or a deployment throughput guarantee.
 
 \begin{table}[!htbp]
 \caption{Descriptive CPU archive-cap replays.}\label{tab:runtime}
@@ -701,9 +743,9 @@ PEMS-BAY & 256 & 96.25 [91.57, 105.95] & 5.3960 & 0.8971 \\
 \FloatBarrier
 
 
-Figure~\ref{fig:compute} complements Table~\ref{tab:runtime}: horizontal ranges show three observed replay times at each cap, and colour/labels identify the cap rather than another forecasting method. The score axis uses the same-run pooled quality estimand. No error bar is a runtime confidence interval. This figure is a reproducibility and resource sensitivity diagnostic, not a speed competition among calibrators or evidence of service-level latency.
+Fig.~\ref{fig:compute} complements Table~\ref{tab:runtime}: horizontal ranges show three observed replay times at each cap, and colour/labels identify the cap rather than another forecasting method. The score axis uses the same-run pooled quality estimand. No error bar is a runtime confidence interval. This figure is a reproducibility and resource sensitivity diagnostic, not a speed competition among calibrators or evidence of service-level latency.
 
-\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/compute.pdf}\caption{Descriptive archive-cap quality and wall-time sensitivity, with three observed runtime repetitions per cap and network. Horizontal bars are observed ranges, not confidence intervals. These fixed-run pooled scores differ from the origin-level paired inference estimand.}\label{fig:compute}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/compute.pdf}\caption{Descriptive archive-cap quality and wall-time sensitivity, with three observed runtime repetitions per cap and network. Horizontal bars are observed ranges, not confidence intervals. These fixed-run pooled scores differ from the origin-level paired inference estimand. Panels (a) and (b) show METR-LA and PEMS-BAY.}\label{fig:compute}\end{figure}
 \FloatBarrier
 
 \section{Discussion}\label{sec:discussion}
@@ -752,7 +794,7 @@ The authors report no additional contributors to acknowledge.
 \bmhead{Funding}
 This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 \bmhead{Competing interests}
-The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+The authors declare that they have no competing interests or financial conflicts to disclose.
 \bmhead{Ethics approval and consent to participate}
 Not applicable to the benchmark-data and simulation experiments reported here.
 \bmhead{Consent for publication}
@@ -1231,5 +1273,12 @@ pp. \bfpage{2575}--\blpage{2582}
 \endbibitem
 
 \end{thebibliography}
+
+\clearpage
+\section*{Author biographies}
+\noindent\textbf{Shishir Singh Chauhan} is affiliated with the Department of Computer Science and Engineering, Manipal University Jaipur, India. His contributions to this study include the research, software implementation, experimental evaluation and manuscript writing.
+
+\noindent\textbf{Satyabrata Roy} is affiliated with the Department of Computer Science and Engineering, Manipal University Jaipur, India. He contributed to reviewing and writing the manuscript and serves as its corresponding author.
+
 
 \end{document}
