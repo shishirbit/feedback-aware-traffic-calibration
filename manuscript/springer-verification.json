@@ -1,0 +1,164 @@
+{
+  "pages": 40,
+  "references_start_page": 37,
+  "figures": [
+    {
+      "key": "fig:data-profile",
+      "n": 1,
+      "page": 9
+    },
+    {
+      "key": "fig:architecture",
+      "n": 2,
+      "page": 13
+    },
+    {
+      "key": "fig:benchmarks",
+      "n": 3,
+      "page": 25
+    },
+    {
+      "key": "fig:quality",
+      "n": 4,
+      "page": 27
+    },
+    {
+      "key": "fig:duration",
+      "n": 5,
+      "page": 28
+    },
+    {
+      "key": "fig:stress",
+      "n": 6,
+      "page": 29
+    },
+    {
+      "key": "fig:ablations",
+      "n": 7,
+      "page": 30
+    },
+    {
+      "key": "fig:compute",
+      "n": 8,
+      "page": 34
+    }
+  ],
+  "tables": [
+    {
+      "key": "tab:related-models",
+      "n": 1,
+      "page": 4
+    },
+    {
+      "key": "tab:related-calibration",
+      "n": 2,
+      "page": 7
+    },
+    {
+      "key": "tab:data",
+      "n": 3,
+      "page": 9
+    },
+    {
+      "key": "tab:data-statistics",
+      "n": 4,
+      "page": 10
+    },
+    {
+      "key": "tab:partitions",
+      "n": 5,
+      "page": 10
+    },
+    {
+      "key": "tab:architecture-contract",
+      "n": 6,
+      "page": 12
+    },
+    {
+      "key": "tab:notation",
+      "n": 7,
+      "page": 15
+    },
+    {
+      "key": "tab:settings",
+      "n": 8,
+      "page": 21
+    },
+    {
+      "key": "tab:conditions",
+      "n": 9,
+      "page": 22
+    },
+    {
+      "key": "tab:primary",
+      "n": 10,
+      "page": 23
+    },
+    {
+      "key": "tab:corel",
+      "n": 11,
+      "page": 24
+    },
+    {
+      "key": "tab:backbones",
+      "n": 12,
+      "page": 26
+    },
+    {
+      "key": "tab:controls",
+      "n": 13,
+      "page": 27
+    },
+    {
+      "key": "tab:stress",
+      "n": 14,
+      "page": 28
+    },
+    {
+      "key": "tab:ablations",
+      "n": 15,
+      "page": 30
+    },
+    {
+      "key": "tab:ablation-metr",
+      "n": 16,
+      "page": 31
+    },
+    {
+      "key": "tab:ablation-pems",
+      "n": 17,
+      "page": 32
+    },
+    {
+      "key": "tab:ablation-sumo",
+      "n": 18,
+      "page": 32
+    },
+    {
+      "key": "tab:runtime",
+      "n": 19,
+      "page": 33
+    }
+  ],
+  "algorithms": [
+    {
+      "key": "alg:replay",
+      "n": 1,
+      "page": 19
+    },
+    {
+      "key": "alg:kernel",
+      "n": 2,
+      "page": 20
+    }
+  ],
+  "layout_errors": [],
+  "compiler": "MiKTeX pdfLaTeX 26.5",
+  "scientific_body_preserved": true,
+  "reference_count": 26,
+  "single_tex_source": true,
+  "template": "Springer Nature sn-jnl, supplied template version 3.1 (December 2024)",
+  "clean_package_build_passed": true,
+  "clean_package_passes": 3,
+  "bibtex_required_for_final_package": false
+}

@@ -1,37 +1,26 @@
-\documentclass[a4paper,fleqn]{cas-sc}
+% Springer Nature template supplied by the author, version 3.1 (December 2024).
+% One TeX source: all sections, algorithms, tables and references are included.
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}
 \usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{xurl}
 \usepackage{booktabs,array}
-\usepackage{float}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage[section]{placeins}
-% CAS float environments require the explicit pos= placement key.
-% Barriers keep each figure/table before the prose that follows its source.
-\usepackage{amsmath,amssymb}
-\usepackage[numbers,sort&compress]{natbib}
-\usepackage{url}
-\hypersetup{pdftitle={Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports},pdfauthor={Shishir Singh Chauhan and Satyabrata Roy}}
+% Standard Springer floats; barriers keep figures and tables near their discussion.
+\hypersetup{hidelinks,bookmarksdepth=2,pdftitle={Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports},pdfauthor={Shishir Singh Chauhan and Satyabrata Roy}}
+\providecommand{\burl}[1]{\url{#1}}
 \newcounter{algorithm}
 \newcommand{\ms}{\mathrm{m\,s^{-1}}}
 \newcommand{\FAR}{\textsc{FAR-Cal}}
+\raggedbottom
 \begin{document}
-\let\WriteBookmarks\relax
-\shorttitle{Feedback-aware calibration of traffic prediction intervals}
-\shortauthors{Chauhan and Roy}
-\title[mode=title]{Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports}
-\author[1]{Shishir Singh Chauhan}
-\ead{shishir.chauhan@jaipur.manipal.edu}
-\credit{Investigation, Software, Writing - original draft}
-\author[1]{Satyabrata Roy}
-\cormark[1]
-\ead{satyabrata.roy@jaipur.manipal.edu}
-\credit{Writing - review and editing}
-\affiliation[1]{organization={Department of Computer Science and Engineering, Manipal University Jaipur},city={Jaipur},postcode={303007},state={Rajasthan},country={India}}
-\cortext[1]{Corresponding author: Satyabrata Roy}
-\begin{abstract}
-Traffic forecasting intervals depend on realised outcomes that may arrive late or disappear during sensor outages. We evaluate whether uncertainty can be calibrated causally when both predictor inputs and outcome feedback are impaired. Our signed-residual method combines spatial pooling, context matching, target-age weighting and historical fallback. A locked replay separates input availability from feedback release and compares calibrators on frozen backbones using METR-LA, PEMS-BAY and controlled SUMO data. The registered joint interval-score and coverage rule was met in 12 of 16 real-data backbone cells. On METR-LA C3 with FAR-GW, interval score improved by 0.355 m/s versus rolling calibration (95\% paired interval 0.192--0.551), with 0.8985 coverage. Fresh SUMO C3 validation passed; SUMO C4 missed the 0.88 coverage floor at 0.8793. FAR-GW PEMS-BAY C4 instead favoured rolling calibration by 0.119 m/s. Component ablations showed mixed effects. Benefits depend on network and reporting condition; universal superiority and correction of unobserved outcomes are unsupported.
-\end{abstract}
-\begin{keywords}
-Traffic forecasting \sep Prediction intervals \sep Sensor outages \sep Delayed feedback \sep Uncertainty calibration \sep Reproducibility
-\end{keywords}
+\title[Feedback-aware calibration of traffic prediction intervals]{Feedback-aware calibration of traffic prediction intervals under delayed and missing sensor reports}
+\author[1]{\fnm{Shishir Singh} \sur{Chauhan}}\email{shishir.chauhan@jaipur.manipal.edu}
+\author*[1]{\fnm{Satyabrata} \sur{Roy}}\email{satyabrata.roy@jaipur.manipal.edu}
+\affil[1]{\orgdiv{Department of Computer Science and Engineering}, \orgname{Manipal University Jaipur}, \orgaddress{\city{Jaipur}, \postcode{303007}, \state{Rajasthan}, \country{India}}}
+\abstract{Traffic forecasting intervals depend on realised outcomes that may arrive late or disappear during sensor outages. We evaluate whether uncertainty can be calibrated causally when both predictor inputs and outcome feedback are impaired. Our signed-residual method combines spatial pooling, context matching, target-age weighting and historical fallback. A locked replay separates input availability from feedback release and compares calibrators on frozen backbones using METR-LA, PEMS-BAY and controlled SUMO data. The registered joint interval-score and coverage rule was met in 12 of 16 real-data backbone cells. On METR-LA C3 with FAR-GW, interval score improved by 0.355 m/s versus rolling calibration (95\% paired interval 0.192--0.551), with 0.8985 coverage. Fresh SUMO C3 validation passed; SUMO C4 missed the 0.88 coverage floor at 0.8793. FAR-GW PEMS-BAY C4 instead favoured rolling calibration by 0.119 m/s. Component ablations showed mixed effects. Benefits depend on network and reporting condition; universal superiority and correction of unobserved outcomes are unsupported.}
+\keywords{Traffic forecasting, Prediction intervals, Sensor outages, Delayed feedback, Uncertainty calibration, Reproducibility}
 \maketitle
 
 \section{Introduction}\label{sec:introduction}
@@ -63,8 +52,8 @@ Journal research places these algorithms within a longer forecasting history. \c
 
 Graph WaveNet combines temporal modelling with learned spatial dependence \citep{wu2019}. Its relevance here is the separation between a forecasting backbone and the uncertainty layer attached to its outputs. A graph predictor can exploit relationships between sensors, yet this does not determine how prediction errors should be used when their reports arrive late. The FAR-GW adapter adds causal validity and age channels and a noncrossing quantile head. These are documented study modifications rather than claims about the original implementation. Table~\ref{tab:related-models} distinguishes the forecasting references from the uncertainty mechanisms evaluated on their frozen outputs.
 
-\begin{table}[pos=!htbp]\caption{Forecasting and input-reconstruction literature: role in this study.}\label{tab:related-models}\centering\small
-\begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{5.0cm}}\toprule
+\begin{table}[!htbp]\caption{Forecasting and input-reconstruction literature: role in this study.}\label{tab:related-models}\centering\setlength{\tabcolsep}{3pt}\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.243902\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.349593\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.406504\linewidth-2\tabcolsep\relax}}\toprule
 Reference & Representation or objective & Numerical study role \\\midrule
 Graph WaveNet \citep{wu2019} & Graph supports and temporal convolutions & FAR-GW causal quantile adapter \\
 DCRNN \citep{li2018} & Diffusion recurrent forecasting & Causal quantile adapter; data provenance \\
@@ -94,8 +83,8 @@ Sequential predictive conformal inference develops adaptive prediction intervals
 
 Multistep adaptive conformal inference accounts for the fact that the outcome of a forecast is unavailable until its target time \citep{hallberg2024}. This ordinary horizon delay should not be confused with an additional communication backlog. A fifteen-minute forecast can have its outcome physically realised after fifteen minutes yet delivered much later. Our replay records both target and release timestamps and permits permanent loss. The ACI implementation uses the multistep reference as its starting point but changes spatial batching and reporting availability. Table~\ref{tab:related-calibration} records this distinction without implying that the source method ignores ordinary forecasting delay.
 
-\begin{table}[pos=!htbp]\caption{Calibration literature and feedback scope.}\label{tab:related-calibration}\centering\small
-\begin{tabular}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{4.7cm}}\toprule
+\begin{table}[!htbp]\caption{Calibration literature and feedback scope.}\label{tab:related-calibration}\centering\setlength{\tabcolsep}{3pt}\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.292683\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.325203\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.382114\linewidth-2\tabcolsep\relax}}\toprule
 Reference & Relevant objective & Scope here \\\midrule
 CQR \citep{romano2019} & Calibrated quantile regression & Literature; predictor quantiles distinguished from calibrated bounds \\
 Beyond exchangeability \citep{barber2023} & Weighted inference under drift & Literature; no theorem imported \\
@@ -127,9 +116,9 @@ Literature relevance does not imply experimental reproduction. Numerical claims 
 \subsection{METR-LA and PEMS-BAY}
 METR-LA comprises 207 sensors and 34,272 five-minute timestamp rows from 1 March to 27 June 2012. PEMS-BAY comprises 325 sensors and 52,116 original rows from 1 January to 30 June 2017. These statements describe the acquired benchmark files, whose provenance is recorded against DCRNN \citep{li2018}; the graph and speed-file hashes are retained separately. PEMS-BAY has a 65-minute timestamp gap. Reindexing inserts twelve wholly invalid five-minute rows, giving 52,128 prepared rows. METR-LA requires no inserted rows. Table~\ref{tab:data} compares the dimensions, periods, missingness convention and sampling policy. Figure~\ref{fig:data-profile} shows training-partition speed distributions and original validity, making the empirical input populations visible without treating distributional differences as a causal explanation for transfer results.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Dataset dimensions, periods and evaluation sampling.}\label{tab:data}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
 Data & Sensors & Rows & Acquired/prepared period & Test sampling \\\midrule
 METR-LA & 207 & 34,272 & 1 Mar--27 Jun 2012 & Hourly fault audit \\
@@ -141,14 +130,14 @@ SUMO fresh C3 & 20 & 3,840 & 40 fresh episodes & Full episode audit \\
 \end{table}
 \FloatBarrier
 
-\begin{figure}[pos=!htbp]\centering\includegraphics[width=\linewidth]{figures/data-profile.pdf}\caption{Training-partition observed-speed distributions before forecast-window construction. Only originally valid prepared measurements are plotted; labels report original valid fractions. SUMO includes its prepared training-partition measurements. The distributions are descriptive, not an explanation of calibration transfer.}\label{fig:data-profile}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/data-profile.pdf}\caption{Training-partition observed-speed distributions before forecast-window construction. Only originally valid prepared measurements are plotted; labels report original valid fractions. SUMO includes its prepared training-partition measurements. The distributions are descriptive, not an explanation of calibration transfer.}\label{fig:data-profile}\end{figure}
 \FloatBarrier
 
 The benchmark convention treats zero-valued real speeds as missing, following the audited source mask. It should not be interpreted as a physical assertion that vehicles never stop. Originally invalid entries cannot become training labels, calibration residuals or evaluation targets after filling. SUMO instead retains physical zero speeds as valid and masks empty detector intervals. Table~\ref{tab:data-statistics} reports original validity and observed-speed summaries computed directly from prepared arrays. These are descriptive data statistics, not estimates from the artificially censored reporting stream.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Descriptive prepared-data validity and observed speeds.}\label{tab:data-statistics}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
 Data & Valid (\%) & Median & 5th percentile & 95th percentile \\\midrule
 METR-LA & 91.89 & 28.26 & 11.46 & 30.80 \\
@@ -162,8 +151,8 @@ SUMO & 99.73 & 22.31 & 16.65 & 23.66 \\
 \subsection{Chronological separation and causal features}
 Real-data boundaries are selected on the original timestamps before reindexing and window construction. The split proportions are 60\% training, 10\% tuning, 10\% initial calibration and 20\% testing. METR-LA boundaries are 11 May 2012 09:35, 23 May 07:10 and 4 June 04:45; PEMS-BAY boundaries are 19 April 2017 14:45, 7 May 17:05 and 25 May 19:20. Table~\ref{tab:partitions} provides these timestamps and the simulation episode allocations. A forecast window belongs to a partition only when all its targets remain inside that partition. Interpolation across a future boundary is prohibited.
 
-\begin{table}[pos=!htbp]\caption{Chronological boundaries and episode separation.}\label{tab:partitions}\centering\small
-\begin{tabular}{>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{3.4cm}}\toprule
+\begin{table}[!htbp]\caption{Chronological boundaries and episode separation.}\label{tab:partitions}\centering\setlength{\tabcolsep}{3pt}\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.186992\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.268293\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.268293\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.276423\linewidth-2\tabcolsep\relax}}\toprule
 Data & Train/tune boundary & Tune/calibration boundary & Calibration/test boundary \\\midrule
 METR-LA & 11 May 2012 09:35 & 23 May 2012 07:10 & 4 Jun 2012 04:45 \\
 PEMS-BAY & 19 Apr 2017 14:45 & 7 May 2017 17:05 & 25 May 2017 19:20 \\
@@ -188,8 +177,8 @@ The real evaluation is a fault-focused audit: origins are selected hourly and af
 \subsection{Separate physical, reporting and evaluation layers}
 Figure~\ref{fig:architecture} depicts the redesigned system in separate lanes with orthogonal routes. The upper lane produces and releases observations; the middle lane forms immutable forecasts; the lower lane matches released feedback and updates calibration. An evaluator compartment remains outside these service lanes. This organisation distinguishes data movement from statistical operations and prevents arrows from passing through module labels. Table~\ref{tab:architecture-contract} specifies the inputs, outputs and information restrictions of each module, complementing the diagram rather than relying on visual proximity to imply an interface.
 
-\begin{table}[pos=!htbp]\caption{Architecture interfaces and information boundary.}\label{tab:architecture-contract}\centering\small
-\begin{tabular}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{5.5cm}}\toprule
+\begin{table}[!htbp]\caption{Architecture interfaces and information boundary.}\label{tab:architecture-contract}\centering\setlength{\tabcolsep}{3pt}\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.227642\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.325203\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.447154\linewidth-2\tabcolsep\relax}}\toprule
 Module & Consumes & Produces / restriction \\\midrule
 Input store & Released speed, validity and measurement time & Past-only seven-channel history; no future packets \\
 Frozen predictor & Available history and fitted parameters & Median and floored scale; no test-time training \\
@@ -200,7 +189,7 @@ Evaluator & Original validity, truth and issued bounds & Scores; no return edge 
 \bottomrule\end{tabular}\par\smallskip\footnotesize The diagram separates service data flow from evaluator knowledge. Recorded software/artifact checks establish replay properties, not operational latency.\end{table}
 \FloatBarrier
 
-\begin{figure}[pos=!htbp]\centering\includegraphics[width=\linewidth]{figures/architecture.pdf}\caption{Causal architecture with separate input, feedback and evaluator lanes. Stored issue records feed both residual matching and the calibration query; the junction is intentional. Hidden truth feeds scoring only. All module routes avoid text and preserve the service information boundary.}\label{fig:architecture}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/architecture.pdf}\caption{Causal architecture with separate input, feedback and evaluator lanes. Stored issue records feed both residual matching and the calibration query; the junction is intentional. Hidden truth feeds scoring only. All module routes avoid text and preserve the service information boundary.}\label{fig:architecture}\end{figure}
 \FloatBarrier
 
 The physical source supplies speed, timestamp, sensor identity and original validity. In simulation it also supplies episode identity. An evaluator-side fault generator produces separate input and feedback release schedules before replay. Its permanent-loss markers and future schedule entries are hidden from the service. The input release queue updates a causal store, which constructs the seven-channel history described in Section~\ref{sec:data}. A separate feedback queue releases outcomes that can be matched to existing forecasts. The evaluator retains the uncensored truth and original mask exclusively for scoring.
@@ -224,9 +213,9 @@ The implementation checks source manifests and chunk hashes before accepting com
 \subsection{Causal information and forecast targets}
 Table~\ref{tab:notation} defines the principal symbols and units. The model distinguishes physical validity from channel availability; the former controls scoring and the latter controls service access.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Principal mathematical notation.}\label{tab:notation}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lll}\toprule
 Symbol & Meaning & Units \\\midrule
 $G=(V,E)$ & Sensor graph & -- \\
@@ -390,9 +379,9 @@ CoRel is evaluated as a documented project adaptation on the FAR-GW prediction c
 
 FAR-GW adapts Graph WaveNet with the seven causal channels and noncrossing quantile head. STAEformer is an independent paper-based implementation because the audited official repository did not provide a licence file. STID and DCRNN are documented adaptations of their licensed references. Each backbone is trained with seeds 11, 22 and 33; fault seeds are 101, 202 and 303. Table~\ref{tab:settings} records shared settings and calibrated-method parameters. Per-backbone configurations and source audits accompany the release.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Shared protocol and locked asymmetric settings.}\label{tab:settings}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{ll}\toprule
 Quantity & Setting \\\midrule
 Nominal coverage / decision floor & 0.90 / 0.88 \\
@@ -413,9 +402,9 @@ Bootstrap resamples & 2000 \\
 \subsection{Reporting conditions, controls and stress tests}
 Table~\ref{tab:conditions} defines the six reporting conditions. C3 combines correlated input outages with delayed feedback and backlog release. C4 imposes permanent feedback loss within the affected region. The baseline connected outage affects 10\% of sensors for six bins, with two events per day and a three-bin backlog release. C4 loses half of the within-outage feedback. Physical target validity remains unchanged.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Reporting conditions.}\label{tab:conditions}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lll}\toprule
 Condition & Predictor input & Calibration feedback \\\midrule
 C0 & Available & Available \\
@@ -450,9 +439,9 @@ The initially locked symmetric formulation failed held-out SUMO C3 testing. A re
 
 The subsequent signed-tail candidate was selected using split-safe tuning and locked before its fresh validation. Table~\ref{tab:primary} reports the six final FAR-GW dataset/scenario cells. The 40-episode SUMO C3 validation passes the complete rule. SUMO C4 has positive paired score effects but coverage 0.8793, narrowly below the registered floor. Neither favourable score estimates alone nor rounding coverage to two decimals changes that decision.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Final FAR-GW paired score effects and joint decisions.}\label{tab:primary}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{llllll}\toprule
 Data & Cell & Rolling minus FAR & ACI minus FAR & Coverage & Pass \\\midrule
 SUMO & C3 & 0.266 [0.105, 0.450] & 0.259 [0.104, 0.427] & 0.8890 & Yes \\
@@ -471,9 +460,9 @@ METR-LA passes in both C3 and C4. PEMS-BAY C3 has small effects whose intervals 
 \subsection{Cross-backbone and relational comparisons}
 Figure~\ref{fig:benchmarks} presents every evaluated real-data comparator with the proposed method as the zero reference. Within each backbone, all calibrators use the same forecasts and masks. The plot therefore compares calibration conditional on a backbone; it is not a ranking of the predictors themselves. CoRel points appear only for FAR-GW because that is the evaluated scope. Table~\ref{tab:corel} reports the direct CoRel comparison in numerical form, including both methods' coverage and the paired score interval. All four CoRel-minus-FAR-Cal intervals are positive, but this does not overturn PEMS-BAY failures against rolling and ACI. Different comparators support different conclusions.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Direct CoRel adaptation comparison on FAR-GW caches.}\label{tab:corel}
-\centering\footnotesize
+\centering\setlength{\tabcolsep}{3pt}\footnotesize
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lllllll}\toprule
 Data & Cell & FAR score & CoRel score & CoRel minus FAR & FAR cov. & CoRel cov. \\\midrule
@@ -486,14 +475,14 @@ PEMS-BAY & C4 & 4.723 & 5.726 & 1.004 [0.787, 1.227] & 0.9068 & 0.8743 \\
 \end{table}
 \FloatBarrier
 
-\begin{figure}[pos=!htbp]\centering\includegraphics[width=\linewidth]{figures/benchmarks.pdf}\caption{Paired comparator-minus-FAR-Cal interval-score effects and 95\% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW.}\label{fig:benchmarks}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/benchmarks.pdf}\caption{Paired comparator-minus-FAR-Cal interval-score effects and 95\% intervals in SI units. Positive values favour FAR-Cal. Comparisons share frozen forecasts within each backbone; CoRel is restricted to FAR-GW.}\label{fig:benchmarks}\end{figure}
 \FloatBarrier
 
 The four-backbone matrix passes in 12 of 16 registered cells: all eight METR-LA cells, and the four PEMS-BAY cells using STAEformer or DCRNN. FAR-GW and STID each fail both PEMS-BAY conditions. Table~\ref{tab:backbones} provides both paired score effects, coverage and joint decisions for every cell. Its effect columns compare calibrators within a backbone; they must not be read as point-model rankings. Consistency across METR-LA predictors supports transfer on that network, while PEMS-BAY demonstrates predictor-dependent behaviour.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{All sixteen paired backbone comparisons.}\label{tab:backbones}
-\centering\footnotesize
+\centering\setlength{\tabcolsep}{3pt}\footnotesize
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lllllll}\toprule
 Backbone & Data & Cell & Rolling minus FAR & ACI minus FAR & Coverage & Pass \\\midrule
@@ -523,16 +512,16 @@ CoRel-minus-\FAR{} differences are positive in all four FAR-GW real-data cells. 
 \subsection{Coverage and score must be read jointly}
 Figure~\ref{fig:quality} places each final FAR-GW cell's coverage beside its interval score, using identical axes within the quality panel. It makes the SUMO C4 decision visible: positive score improvements coexist with coverage below 0.88. PEMS-BAY coverage exceeds the floor, yet superiority against rolling and ACI is not established. These are different failure modes. Table~\ref{tab:primary} therefore reports the conjunction, while the figure preserves each metric separately. The vertical separation of network scores is descriptive and not a between-network treatment effect.
 
-\begin{figure}[pos=!htbp]\centering\includegraphics[width=\linewidth]{figures/quality.pdf}\caption{Final FAR-GW interval score and coverage for the six primary cells. Dashed and dotted lines mark the 0.88 decision floor and 0.90 nominal coverage. Absolute network scores are not a paired between-network effect.}\label{fig:quality}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/quality.pdf}\caption{Final FAR-GW interval score and coverage for the six primary cells. Dashed and dotted lines mark the 0.88 decision floor and 0.90 nominal coverage. Absolute network scores are not a paired between-network effect.}\label{fig:quality}\end{figure}
 \FloatBarrier
 
 
 \subsection{Core faults, independent controls and one-factor stress}
 The core and matched-control matrices complete 168 and 120 stages. Table~\ref{tab:controls} reports their paired effects and joint decisions. METR-LA passes C1, C2 and C5 and both independent C3/C4 controls; PEMS-BAY passes none. The independent-control results preserve the network-specific pattern without proving that spatial correlation itself causes the method's advantage.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Core and independent matched-rate controls.}\label{tab:controls}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{llllll}\toprule
 Data & Cell & Schedule & Rolling effect & ACI effect & Pass \\\midrule
 METR-LA & C1 & Core & 0.356 [0.194, 0.553] & 0.347 [0.187, 0.540] & Yes \\
@@ -552,9 +541,9 @@ PEMS-BAY & C4 & Independent & 0.017 [-0.009, 0.055] & 0.017 [-0.008, 0.055] & No
 
 All 1,488 one-factor stress stages finish, yielding 48 dataset/scenario/variant summaries. METR-LA passes all 24 tested cells and PEMS-BAY none of its 24; every aggregate coverage is at least 0.88. Table~\ref{tab:stress} groups the findings by factor, and Figure~\ref{fig:duration} shows score sensitivity to outage duration. Duration, connected fraction, backlog delay, permanent loss and initial archive impairment test different limits of the reporting system; they are not pooled into a single generalisation guarantee. The MNAR grid retains the same distinction: favourable performance in one network and failure in the other remain compatible with selective outcome observation.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{One-factor stress summary by network and factor.}\label{tab:stress}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
 Data & Factor & Cells & Passes & Min coverage \\\midrule
 METR-LA & duration\_bins & 6 & 6 & 0.8956 \\
@@ -574,14 +563,14 @@ PEMS-BAY & mnar\_low\_speed & 2 & 0 & 0.9013 \\
 \end{table}
 \FloatBarrier
 
-\begin{figure}[pos=!htbp]\centering\includegraphics[width=\linewidth]{figures/duration.pdf}\caption{Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions.}\label{fig:duration}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/duration.pdf}\caption{Interval score across the registered outage-duration grid. Lines connect descriptive scores, not interpolation guarantees; C3 and C4 are distinct feedback conditions.}\label{fig:duration}\end{figure}
 \FloatBarrier
 
 
 \subsection{Additional reporting stress}
 Figure~\ref{fig:stress} displays affected fraction, extra backlog delay, permanent-loss probability, cold calibration and low-speed MNAR sensitivity. Each point compares ACI with FAR-Cal using the registered paired inference, with positive values favouring FAR-Cal. Continuous-factor lines connect tested values only; cold calibration and MNAR are separate categorical experiments. All METR-LA stress cells pass the joint rule, whereas no PEMS-BAY stress cell does. Table~\ref{tab:stress} groups these decisions; the plotted ACI contrast alone is not the full two-comparator rule. The cold archive tests whether an initially impaired calibration source changes performance, and the MNAR panel tests selective outcome suppression without claiming correction.
 
-\begin{figure}[pos=!htbp]\centering\includegraphics[width=\linewidth]{figures/stress.pdf}\caption{Additional one-factor stress: ACI-minus-FAR-Cal effects and paired 95\% intervals for affected fraction, backlog delay, permanent loss, cold calibration and MNAR. Positive values favour FAR-Cal. Categorical panels contain only their registered conditions; continuous lines connect tested values without extrapolation.}\label{fig:stress}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/stress.pdf}\caption{Additional one-factor stress: ACI-minus-FAR-Cal effects and paired 95\% intervals for affected fraction, backlog delay, permanent loss, cold calibration and MNAR. Positive values favour FAR-Cal. Categorical panels contain only their registered conditions; continuous lines connect tested values without extrapolation.}\label{fig:stress}\end{figure}
 \FloatBarrier
 
 The duration curve in Figure~\ref{fig:duration} reports absolute FAR-Cal score rather than a paired treatment effect. Longer outages can change which targets enter the fault-focused audit, so the curve cannot isolate a duration effect on a fixed target population. It complements the paired stress results by showing the magnitude of interval-score penalties in each tested condition. These plots are based on completed evaluations, not simulated illustrative values or interpolated predictions of untested fault levels.
@@ -590,9 +579,9 @@ The duration curve in Figure~\ref{fig:duration} reports absolute FAR-Cal score r
 
 All 432 stages are complete: 54 verified full references and 378 new component evaluations. Figure~\ref{fig:ablations} displays ablation-minus-full effects. A positive interval indicates degradation after removal; a negative interval indicates an improvement. Thirteen exploratory intervals are wholly positive, four wholly negative and 25 include zero. Table~\ref{tab:ablations} identifies which components fall into these categories.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Exploratory paired ablation classifications across six cells.}\label{tab:ablations}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{llll}\toprule
 Removal/diagnostic & Worsens & Improves & Inconclusive \\\midrule
 no spatial & 3 & 0 & 3 \\
@@ -607,7 +596,7 @@ frozen only & 1 & 0 & 5 \\
 \end{table}
 \FloatBarrier
 
-\begin{figure}[pos=!htbp]\centering\includegraphics[width=\linewidth]{figures/ablations.pdf}\caption{Exploratory removal-minus-full interval-score effects and 95\% paired intervals. Positive values indicate deterioration after removal. Panel scales differ; the off-scale PEMS-BAY C4 stale-blend failure is explicitly labelled with its estimate and bounds.}\label{fig:ablations}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/ablations.pdf}\caption{Exploratory removal-minus-full interval-score effects and 95\% paired intervals. Positive values indicate deterioration after removal. Panel scales differ; the off-scale PEMS-BAY C4 stale-blend failure is explicitly labelled with its estimate and bounds.}\label{fig:ablations}\end{figure}
 \FloatBarrier
 
 Stale blending has the clearest repeated benefit. Removing it worsens score in METR-LA C3, both PEMS-BAY conditions and both SUMO conditions. The largest effect occurs in PEMS-BAY C4: removal increases score by $4.220\,\ms$, with 95\% interval [3.760, 4.699]\,$\ms$, while coverage falls to 0.549. Spatial pooling is beneficial in METR-LA C3 and PEMS-BAY C3/C4, but its remaining intervals include zero.
@@ -617,9 +606,9 @@ The adverse findings matter equally. Removing age weighting improves score in ME
 
 Tables~\ref{tab:ablation-metr}--\ref{tab:ablation-sumo} provide all forty-two numerical removal effects, exploratory intervals, coverage and widths. Table~\ref{tab:ablation-metr} shows that removing age weights improves METR-LA C4 score, while other small effects remain inconclusive. Table~\ref{tab:ablation-pems} shows age-weight improvements in both PEMS-BAY cells and a context-removal improvement in C4. The same table documents the severe stale-blend failure in PEMS-BAY C4. Table~\ref{tab:ablation-sumo} shows a useful stale blend in both SUMO conditions, with several remaining intervals spanning zero. These findings are more informative than treating every component as necessary.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Full METR-LA component ablations.}\label{tab:ablation-metr}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
 Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
 C3 & no spatial & 0.156 [0.066, 0.273] & 0.8904 & 4.945 \\
@@ -641,9 +630,9 @@ C4 & frozen only & 0.066 [-0.157, 0.300] & 0.8797 & 4.683 \\
 \end{table}
 \FloatBarrier
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Full PEMS-BAY component ablations.}\label{tab:ablation-pems}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
 Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
 C3 & no spatial & 0.069 [0.029, 0.120] & 0.8941 & 2.825 \\
@@ -665,9 +654,9 @@ C4 & frozen only & 0.018 [-0.004, 0.034] & 0.9053 & 3.027 \\
 \end{table}
 \FloatBarrier
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Full SUMO component ablations.}\label{tab:ablation-sumo}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
 Cell & Removal / diagnostic & Removal minus full (95\% CI) & Coverage & Width \\\midrule
 C3 & no spatial & 0.007 [-0.011, 0.024] & 0.8875 & 2.082 \\
@@ -695,9 +684,9 @@ Figure~\ref{fig:ablations} uses separate panel scales to preserve small effects 
 
 Eighteen timed replays compare archive caps 64, 128 and 256 with identical C3 inputs and fixed model/fault seeds 11/101. Table~\ref{tab:runtime} reports wall-clock medians, observed ranges and pooled quality. Timing includes CPU calibration, loading and output serialisation, excluding training and prediction. The cap-256 setting exactly reproduces the archived same-run quality. Smaller caps have slightly higher score in both fixed runs, but timing ranges overlap. Host workload and filesystem cache are not isolated, so these measurements do not establish a reliable speed advantage, a cross-method runtime ranking or a deployment throughput guarantee.
 
-\begin{table}[pos=!htbp]
+\begin{table}[!htbp]
 \caption{Descriptive CPU archive-cap replays.}\label{tab:runtime}
-\centering\small
+\centering\setlength{\tabcolsep}{3pt}\small
 \begin{tabular}{lllll}\toprule
 Data & Cap & Median seconds [range] & Score ($\ms$) & Coverage \\\midrule
 METR-LA & 64 & 19.28 [19.25, 19.89] & 9.4872 & 0.9114 \\
@@ -714,7 +703,7 @@ PEMS-BAY & 256 & 96.25 [91.57, 105.95] & 5.3960 & 0.8971 \\
 
 Figure~\ref{fig:compute} complements Table~\ref{tab:runtime}: horizontal ranges show three observed replay times at each cap, and colour/labels identify the cap rather than another forecasting method. The score axis uses the same-run pooled quality estimand. No error bar is a runtime confidence interval. This figure is a reproducibility and resource sensitivity diagnostic, not a speed competition among calibrators or evidence of service-level latency.
 
-\begin{figure}[pos=!htbp]\centering\includegraphics[width=\linewidth]{figures/compute.pdf}\caption{Descriptive archive-cap quality and wall-time sensitivity, with three observed runtime repetitions per cap and network. Horizontal bars are observed ranges, not confidence intervals. These fixed-run pooled scores differ from the origin-level paired inference estimand.}\label{fig:compute}\end{figure}
+\begin{figure}[!htbp]\centering\includegraphics[width=\linewidth]{figures/compute.pdf}\caption{Descriptive archive-cap quality and wall-time sensitivity, with three observed runtime repetitions per cap and network. Horizontal bars are observed ranges, not confidence intervals. These fixed-run pooled scores differ from the origin-level paired inference estimand.}\label{fig:compute}\end{figure}
 \FloatBarrier
 
 \section{Discussion}\label{sec:discussion}
@@ -755,188 +744,492 @@ A next confirmatory study could preregister network-specific eligibility for age
 Separating predictor-input and calibration-feedback availability enables causal assessment of traffic prediction intervals under delayed and permanently lost reports. The locked asymmetric method improves interval quality under several tested conditions, but superiority depends on network and backbone, and the full ablations reveal both useful and adverse components. The study contributes an auditable benchmark and conditional empirical evidence. It does not establish universal superiority, arbitrary-missingness coverage or identifiable MNAR correction.
 
 \FloatBarrier
-\printcredits
-\section*{Author contributions}
-Shishir Singh Chauhan conducted the research, implemented the method and experiments, and wrote the manuscript. Satyabrata Roy reviewed the paper and contributed to its writing. Satyabrata Roy is the corresponding author.
-\section*{Acknowledgements}
+\FloatBarrier
+\backmatter
+\bmhead{Acknowledgements}
 The authors report no additional contributors to acknowledge.
-\section*{Funding}
+\section*{Declarations}
+\bmhead{Funding}
 This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
-\section*{Declaration of competing interests}
+\bmhead{Competing interests}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
-\section*{Declaration of generative AI and AI-assisted technologies in the writing process}
+\bmhead{Ethics approval and consent to participate}
+Not applicable to the benchmark-data and simulation experiments reported here.
+\bmhead{Consent for publication}
+Not applicable; the manuscript reports no identifiable individual participant data.
+\bmhead{Author contributions}
+Shishir Singh Chauhan conducted the research, implemented the method and experiments, and wrote the manuscript. Satyabrata Roy reviewed the paper and contributed to its writing. Satyabrata Roy is the corresponding author.
+\bmhead{Use of generative AI and AI-assisted technologies}
 During the preparation of this work, the authors used OpenAI Codex to assist with manuscript drafting and editing. The authors reviewed and edited the content and take full responsibility for the published article. The tool also assisted with software implementation, experiment orchestration, artifact checking and figure generation; all numerical findings reported here are drawn from saved evaluation outputs.
-\section*{Reproducibility and data availability}
+\bmhead{Reproducibility, data and code availability}
 Code, locked configurations, generated SUMO prepared datasets, evidence summaries and manuscript sources are publicly available at \url{https://github.com/shishirbit/feedback-aware-traffic-calibration}. The release records seeds, environments, source provenance and artifact hashes. METR-LA and PEMS-BAY must be acquired separately using the links and SHA-256 checks in \texttt{docs/sources.md}, because redistribution rights for the exact benchmark packages remain unverified. Training checkpoints and bulky prediction/residual caches must be regenerated before running the evaluation matrices. SUMO episode XML can be regenerated from registered plans; prepared arrays for the original, replication, confirmation and fresh validation sets are included. Negative and inconclusive findings are retained. These resources support reproduction of the specified replay experiments and do not establish production-service readiness.
 \FloatBarrier
+% Bibliography generated with the supplied sn-mathphys-num style and embedded
+% to keep the submission in one TeX file. No BibTeX run is needed.
+%% BioMed_Central_Bib_Style_v1.01
+
 \begin{thebibliography}{26}
-\raggedright
-\newcommand{\enquote}[1]{``#1''}
-\providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{\normalfont{#1}}
-\providecommand{\urlprefix}{}
+% BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
+\ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
+\ifx \binits  \undefined \def \binits#1{#1}\fi
+\ifx \bauthor  \undefined \def \bauthor#1{#1}\fi
+\ifx \batitle  \undefined \def \batitle#1{#1}\fi
+\ifx \bjtitle  \undefined \def \bjtitle#1{#1}\fi
+\ifx \bvolume  \undefined \def \bvolume#1{\textbf{#1}}\fi
+\ifx \byear  \undefined \def \byear#1{#1}\fi
+\ifx \bissue  \undefined \def \bissue#1{#1}\fi
+\ifx \bfpage  \undefined \def \bfpage#1{#1}\fi
+\ifx \blpage  \undefined \def \blpage #1{#1}\fi
+\ifx \burl  \undefined \def \burl#1{\textsf{#1}}\fi
+\ifx \doiurl  \undefined \def \doiurl#1{\url{https://doi.org/#1}}\fi
+\ifx \betal  \undefined \def \betal{\textit{et al.}}\fi
+\ifx \binstitute  \undefined \def \binstitute#1{#1}\fi
+\ifx \binstitutionaled  \undefined \def \binstitutionaled#1{#1}\fi
+\ifx \bctitle  \undefined \def \bctitle#1{#1}\fi
+\ifx \beditor  \undefined \def \beditor#1{#1}\fi
+\ifx \bpublisher  \undefined \def \bpublisher#1{#1}\fi
+\ifx \bbtitle  \undefined \def \bbtitle#1{#1}\fi
+\ifx \bedition  \undefined \def \bedition#1{#1}\fi
+\ifx \bseriesno  \undefined \def \bseriesno#1{#1}\fi
+\ifx \blocation  \undefined \def \blocation#1{#1}\fi
+\ifx \bsertitle  \undefined \def \bsertitle#1{#1}\fi
+\ifx \bsnm \undefined \def \bsnm#1{#1}\fi
+\ifx \bsuffix \undefined \def \bsuffix#1{#1}\fi
+\ifx \bparticle \undefined \def \bparticle#1{#1}\fi
+\ifx \barticle \undefined \def \barticle#1{#1}\fi
+\bibcommenthead
+\ifx \bconfdate \undefined \def \bconfdate #1{#1}\fi
+\ifx \botherref \undefined \def \botherref #1{#1}\fi
+\ifx \url \undefined \def \url#1{\textsf{#1}}\fi
+\ifx \bchapter \undefined \def \bchapter#1{#1}\fi
+\ifx \bbook \undefined \def \bbook#1{#1}\fi
+\ifx \bcomment \undefined \def \bcomment#1{#1}\fi
+\ifx \oauthor \undefined \def \oauthor#1{#1}\fi
+\ifx \citeauthoryear \undefined \def \citeauthoryear#1{#1}\fi
+\ifx \endbibitem  \undefined \def \endbibitem {}\fi
+\ifx \bconflocation  \undefined \def \bconflocation#1{#1}\fi
+\ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
+\csname PreBibitemsHook\endcsname
 
-\bibitem[Vlahogianni, Karlaftis, and Golias(2014)]{vlahogianni2014}
-Vlahogianni, Eleni~I., Matthew~G. Karlaftis, and John~C. Golias. 2014.
-  ``Short-term traffic forecasting: Where we are and where we're going.''
-  \emph{Transportation Research Part C: Emerging Technologies} 43: 3--19.
-  https://doi.org/{10.1016/j.trc.2014.01.005}.
+%%% 1
+\bibitem[\protect\citeauthoryear{Vlahogianni et~al.}{2014}]{vlahogianni2014}
+\begin{barticle}
+\bauthor{\bsnm{Vlahogianni}, \binits{E.I.}},
+\bauthor{\bsnm{Karlaftis}, \binits{M.G.}},
+\bauthor{\bsnm{Golias}, \binits{J.C.}}:
+\batitle{Short-term traffic forecasting: Where we are and where we're going}.
+\bjtitle{Transportation Research Part C: Emerging Technologies}
+\bvolume{43},
+\bfpage{3}--\blpage{19}
+(\byear{2014})
+\doiurl{10.1016/j.trc.2014.01.005}
+\end{barticle}
+\endbibitem
 
-\bibitem[Khosravi et~al.(2011)]{khosravi2011}
-Khosravi, Abbas, Ehsan Mazloumi, Saeid Nahavandi, Doug Creighton, and J.~W.~C.
-  van Lint. 2011. ``Prediction Intervals to Account for Uncertainties in Travel
-  Time Prediction.'' \emph{IEEE Transactions on Intelligent Transportation
-  Systems} 12 (2): 537--547. https://doi.org/{10.1109/TITS.2011.2106209}.
+%%% 2
+\bibitem[\protect\citeauthoryear{Khosravi et~al.}{2011}]{khosravi2011}
+\begin{barticle}
+\bauthor{\bsnm{Khosravi}, \binits{A.}},
+\bauthor{\bsnm{Mazloumi}, \binits{E.}},
+\bauthor{\bsnm{Nahavandi}, \binits{S.}},
+\bauthor{\bsnm{Creighton}, \binits{D.}},
+\bauthor{\bsnm{Lint}, \binits{J.W.C.}}:
+\batitle{Prediction intervals to account for uncertainties in travel time
+  prediction}.
+\bjtitle{IEEE Transactions on Intelligent Transportation Systems}
+\bvolume{12}(\bissue{2}),
+\bfpage{537}--\blpage{547}
+(\byear{2011})
+\doiurl{10.1109/TITS.2011.2106209}
+\end{barticle}
+\endbibitem
 
-\bibitem[Wu et~al.(2019)]{wu2019}
-Wu, Zonghan, Shirui Pan, Guodong Long, Jing Jiang, and Chengqi Zhang. 2019.
-  ``{Graph WaveNet} for Deep Spatial-Temporal Graph Modeling.'' In
-  \emph{Proceedings of the Twenty-Eighth International Joint Conference on
-  Artificial Intelligence}, 1907--1913.
-  \urlprefix\url{https://doi.org/10.24963/ijcai.2019/264}.
+%%% 3
+\bibitem[\protect\citeauthoryear{Wu et~al.}{2019}]{wu2019}
+\begin{bchapter}
+\bauthor{\bsnm{Wu}, \binits{Z.}},
+\bauthor{\bsnm{Pan}, \binits{S.}},
+\bauthor{\bsnm{Long}, \binits{G.}},
+\bauthor{\bsnm{Jiang}, \binits{J.}},
+\bauthor{\bsnm{Zhang}, \binits{C.}}:
+\bctitle{{Graph WaveNet} for deep spatial-temporal graph modeling}.
+In: \bbtitle{Proceedings of the Twenty-Eighth International Joint Conference on
+  Artificial Intelligence},
+pp. \bfpage{1907}--\blpage{1913}
+(\byear{2019}).
+\doiurl{10.24963/ijcai.2019/264} .
+\burl{https://doi.org/10.24963/ijcai.2019/264}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Li et~al.(2018)]{li2018}
-Li, Yaguang, Rose Yu, Cyrus Shahabi, and Yan Liu. 2018. ``Diffusion
-  Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting.'' In
-  \emph{International Conference on Learning Representations},
-  \urlprefix\url{https://openreview.net/forum?id=SJiHXGWAZ}.
+%%% 4
+\bibitem[\protect\citeauthoryear{Li et~al.}{2018}]{li2018}
+\begin{bchapter}
+\bauthor{\bsnm{Li}, \binits{Y.}},
+\bauthor{\bsnm{Yu}, \binits{R.}},
+\bauthor{\bsnm{Shahabi}, \binits{C.}},
+\bauthor{\bsnm{Liu}, \binits{Y.}}:
+\bctitle{Diffusion convolutional recurrent neural network: Data-driven traffic
+  forecasting}.
+In: \bbtitle{International Conference on Learning Representations}
+(\byear{2018}).
+\burl{https://openreview.net/forum?id=SJiHXGWAZ}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Shao et~al.(2022)]{shao2022}
-Shao, Zezhi, Zhao Zhang, Fei Wang, Wei Wei, and Yongjun Xu. 2022.
-  ``Spatial-Temporal Identity: A Simple Yet Effective Baseline for Multivariate
-  Time Series Forecasting.'' In \emph{Proceedings of the 31st ACM International
-  Conference on Information and Knowledge Management}, 4454--4458.
-  \urlprefix\url{https://doi.org/10.1145/3511808.3557702}.
+%%% 5
+\bibitem[\protect\citeauthoryear{Shao et~al.}{2022}]{shao2022}
+\begin{bchapter}
+\bauthor{\bsnm{Shao}, \binits{Z.}},
+\bauthor{\bsnm{Zhang}, \binits{Z.}},
+\bauthor{\bsnm{Wang}, \binits{F.}},
+\bauthor{\bsnm{Wei}, \binits{W.}},
+\bauthor{\bsnm{Xu}, \binits{Y.}}:
+\bctitle{Spatial-temporal identity: A simple yet effective baseline for
+  multivariate time series forecasting}.
+In: \bbtitle{Proceedings of the 31st ACM International Conference on
+  Information and Knowledge Management},
+pp. \bfpage{4454}--\blpage{4458}
+(\byear{2022}).
+\doiurl{10.1145/3511808.3557702} .
+\burl{https://doi.org/10.1145/3511808.3557702}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Liu et~al.(2023)]{liu2023}
-Liu, Hangchen, Zheng Dong, Renhe Jiang, Jiewen Deng, Jinliang Deng, Quanjun
-  Chen, and Xuan Song. 2023. ``Spatio-Temporal Adaptive Embedding Makes Vanilla
-  Transformer {SOTA} for Traffic Forecasting.'' In \emph{Proceedings of the
-  32nd ACM International Conference on Information and Knowledge Management},
-  4125--4129.  \urlprefix\url{https://doi.org/10.1145/3583780.3615160}.
+%%% 6
+\bibitem[\protect\citeauthoryear{Liu et~al.}{2023}]{liu2023}
+\begin{bchapter}
+\bauthor{\bsnm{Liu}, \binits{H.}},
+\bauthor{\bsnm{Dong}, \binits{Z.}},
+\bauthor{\bsnm{Jiang}, \binits{R.}},
+\bauthor{\bsnm{Deng}, \binits{J.}},
+\bauthor{\bsnm{Deng}, \binits{J.}},
+\bauthor{\bsnm{Chen}, \binits{Q.}},
+\bauthor{\bsnm{Song}, \binits{X.}}:
+\bctitle{Spatio-temporal adaptive embedding makes vanilla transformer {SOTA}
+  for traffic forecasting}.
+In: \bbtitle{Proceedings of the 32nd ACM International Conference on
+  Information and Knowledge Management},
+pp. \bfpage{4125}--\blpage{4129}
+(\byear{2023}).
+\doiurl{10.1145/3583780.3615160} .
+\burl{https://doi.org/10.1145/3583780.3615160}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Gibbs and Cand{\`e}s(2021)]{gibbs2021}
-Gibbs, Isaac, and Emmanuel~J. Cand{\`e}s. 2021. ``Adaptive Conformal Inference
-  Under Distribution Shift.'' In \emph{Advances in Neural Information
-  Processing Systems}, Vol.~34.
-  \urlprefix\url{https://proceedings.neurips.cc/paper/2021/hash/0d441de75945e5acbc865406fc9a2559-Abstract.html}.
+%%% 7
+\bibitem[\protect\citeauthoryear{Gibbs and Cand{\`e}s}{2021}]{gibbs2021}
+\begin{bchapter}
+\bauthor{\bsnm{Gibbs}, \binits{I.}},
+\bauthor{\bsnm{Cand{\`e}s}, \binits{E.J.}}:
+\bctitle{Adaptive conformal inference under distribution shift}.
+In: \bbtitle{Advances in Neural Information Processing Systems},
+vol. \bseriesno{34}
+(\byear{2021}).
+\burl{https://proceedings.neurips.cc/paper/2021/hash/0d441de75945e5acbc865406fc9a2559-Abstract.html}
+\end{bchapter}
+\endbibitem
 
-\bibitem[{Hallberg Szabadv{\'a}ry}(2024)]{hallberg2024}
-{Hallberg Szabadv{\'a}ry}, Johan. 2024. ``Adaptive Conformal Inference for
-  Multi-Step Ahead Time-Series Forecasting Online.'' In \emph{Proceedings of
-  the Thirteenth Symposium on Conformal and Probabilistic Prediction with
-  Applications}, Vol. 230, 250--263. PMLR.
-  \urlprefix\url{https://proceedings.mlr.press/v230/hallberg-szabadvary24a.html}.
+%%% 8
+\bibitem[\protect\citeauthoryear{{Hallberg
+  Szabadv{\'a}ry}}{2024}]{hallberg2024}
+\begin{bchapter}
+\bauthor{\bsnm{{Hallberg Szabadv{\'a}ry}}, \binits{J.}}:
+\bctitle{Adaptive conformal inference for multi-step ahead time-series
+  forecasting online}.
+In: \bbtitle{Proceedings of the Thirteenth Symposium on Conformal and
+  Probabilistic Prediction with Applications},
+vol. \bseriesno{230},
+pp. \bfpage{250}--\blpage{263}.
+\bpublisher{PMLR}
+(\byear{2024}).
+\burl{https://proceedings.mlr.press/v230/hallberg-szabadvary24a.html}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Gibbs and Cand{\`e}s(2024)]{gibbs2024}
-Gibbs, Isaac, and Emmanuel~J. Cand{\`e}s. 2024. ``Conformal Inference for
-  Online Prediction with Arbitrary Distribution Shifts.'' \emph{Journal of
-  Machine Learning Research} 25 (162): 1--36.
-  \urlprefix\url{https://www.jmlr.org/papers/v25/22-1218.html}.
+%%% 9
+\bibitem[\protect\citeauthoryear{Gibbs and Cand{\`e}s}{2024}]{gibbs2024}
+\begin{barticle}
+\bauthor{\bsnm{Gibbs}, \binits{I.}},
+\bauthor{\bsnm{Cand{\`e}s}, \binits{E.J.}}:
+\batitle{Conformal inference for online prediction with arbitrary distribution
+  shifts}.
+\bjtitle{Journal of Machine Learning Research}
+\bvolume{25}(\bissue{162}),
+\bfpage{1}--\blpage{36}
+(\byear{2024})
+\end{barticle}
+\endbibitem
 
-\bibitem[Schlembach et~al.(2025)]{schlembach2025}
-Schlembach, Filip, Evgueni Smirnov, Irena Koprinska, and Mark H.~M. Winands.
-  2025. ``Conformal multistep-ahead multivariate time-series forecasting.''
-  \emph{Machine Learning} 114 (7). Article 165,
-  https://doi.org/{10.1007/s10994-024-06722-9}.
+%%% 10
+\bibitem[\protect\citeauthoryear{Schlembach et~al.}{2025}]{schlembach2025}
+\begin{botherref}
+\oauthor{\bsnm{Schlembach}, \binits{F.}},
+\oauthor{\bsnm{Smirnov}, \binits{E.}},
+\oauthor{\bsnm{Koprinska}, \binits{I.}},
+\oauthor{\bsnm{Winands}, \binits{M.H.M.}}:
+Conformal multistep-ahead multivariate time-series forecasting.
+Machine Learning
+\textbf{114}(7)
+(2025)
+\doiurl{10.1007/s10994-024-06722-9} .
+Article 165
+\end{botherref}
+\endbibitem
 
-\bibitem[Williams and Hoel(2003)]{williams2003}
-Williams, Billy~M., and Lester~A. Hoel. 2003. ``Modeling and Forecasting
-  Vehicular Traffic Flow as a Seasonal {ARIMA} Process: Theoretical Basis and
-  Empirical Results.'' \emph{Journal of Transportation Engineering} 129 (6):
-  664--672. https://doi.org/{10.1061/(ASCE)0733-947X(2003)129:6(664)}.
+%%% 11
+\bibitem[\protect\citeauthoryear{Williams and Hoel}{2003}]{williams2003}
+\begin{barticle}
+\bauthor{\bsnm{Williams}, \binits{B.M.}},
+\bauthor{\bsnm{Hoel}, \binits{L.A.}}:
+\batitle{Modeling and forecasting vehicular traffic flow as a seasonal {ARIMA}
+  process: Theoretical basis and empirical results}.
+\bjtitle{Journal of Transportation Engineering}
+\bvolume{129}(\bissue{6}),
+\bfpage{664}--\blpage{672}
+(\byear{2003})
+\doiurl{10.1061/(ASCE)0733-947X(2003)129:6(664)}
+\end{barticle}
+\endbibitem
 
-\bibitem[Lv et~al.(2015)]{lv2015}
-Lv, Yisheng, Yanjie Duan, Wenwen Kang, Zhengxi Li, and Fei-Yue Wang. 2015.
-  ``Traffic Flow Prediction With Big Data: A Deep Learning Approach.''
-  \emph{IEEE Transactions on Intelligent Transportation Systems} 16 (2):
-  865--873. https://doi.org/{10.1109/TITS.2014.2345663}.
+%%% 12
+\bibitem[\protect\citeauthoryear{Lv et~al.}{2015}]{lv2015}
+\begin{barticle}
+\bauthor{\bsnm{Lv}, \binits{Y.}},
+\bauthor{\bsnm{Duan}, \binits{Y.}},
+\bauthor{\bsnm{Kang}, \binits{W.}},
+\bauthor{\bsnm{Li}, \binits{Z.}},
+\bauthor{\bsnm{Wang}, \binits{F.-Y.}}:
+\batitle{Traffic flow prediction with big data: A deep learning approach}.
+\bjtitle{IEEE Transactions on Intelligent Transportation Systems}
+\bvolume{16}(\bissue{2}),
+\bfpage{865}--\blpage{873}
+(\byear{2015})
+\doiurl{10.1109/TITS.2014.2345663}
+\end{barticle}
+\endbibitem
 
-\bibitem[Polson and Sokolov(2017)]{polson2017}
-Polson, Nicholas~G., and Vadim~O. Sokolov. 2017. ``Deep learning for short-term
-  traffic flow prediction.'' \emph{Transportation Research Part C: Emerging
-  Technologies} 79: 1--17. https://doi.org/{10.1016/j.trc.2017.02.024}.
+%%% 13
+\bibitem[\protect\citeauthoryear{Polson and Sokolov}{2017}]{polson2017}
+\begin{barticle}
+\bauthor{\bsnm{Polson}, \binits{N.G.}},
+\bauthor{\bsnm{Sokolov}, \binits{V.O.}}:
+\batitle{Deep learning for short-term traffic flow prediction}.
+\bjtitle{Transportation Research Part C: Emerging Technologies}
+\bvolume{79},
+\bfpage{1}--\blpage{17}
+(\byear{2017})
+\doiurl{10.1016/j.trc.2017.02.024}
+\end{barticle}
+\endbibitem
 
-\bibitem[Cini, Marisca, and Alippi(2022)]{cini2022}
-Cini, Andrea, Ivan Marisca, and Cesare Alippi. 2022. ``Filling the G\_ap\_s:
-  Multivariate Time Series Imputation by Graph Neural Networks.'' In
-  \emph{International Conference on Learning Representations},
-  \urlprefix\url{https://openreview.net/forum?id=kOu3-S3wJ7}.
+%%% 14
+\bibitem[\protect\citeauthoryear{Cini et~al.}{2022}]{cini2022}
+\begin{bchapter}
+\bauthor{\bsnm{Cini}, \binits{A.}},
+\bauthor{\bsnm{Marisca}, \binits{I.}},
+\bauthor{\bsnm{Alippi}, \binits{C.}}:
+\bctitle{Filling the g\_ap\_s: Multivariate time series imputation by graph
+  neural networks}.
+In: \bbtitle{International Conference on Learning Representations}
+(\byear{2022}).
+\burl{https://openreview.net/forum?id=kOu3-S3wJ7}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Angelopoulos and Bates(2023)]{angelopoulos2023}
-Angelopoulos, Anastasios~N., and Stephen Bates. 2023. ``Conformal Prediction: A
-  Gentle Introduction.'' \emph{Foundations and Trends in Machine Learning} 16
-  (4): 494--591. https://doi.org/{10.1561/2200000101}.
+%%% 15
+\bibitem[\protect\citeauthoryear{Angelopoulos and
+  Bates}{2023}]{angelopoulos2023}
+\begin{barticle}
+\bauthor{\bsnm{Angelopoulos}, \binits{A.N.}},
+\bauthor{\bsnm{Bates}, \binits{S.}}:
+\batitle{Conformal prediction: A gentle introduction}.
+\bjtitle{Foundations and Trends in Machine Learning}
+\bvolume{16}(\bissue{4}),
+\bfpage{494}--\blpage{591}
+(\byear{2023})
+\doiurl{10.1561/2200000101}
+\end{barticle}
+\endbibitem
 
-\bibitem[Lei et~al.(2018)]{lei2018}
-Lei, Jing, Max G'Sell, Alessandro Rinaldo, Ryan~J. Tibshirani, and Larry
-  Wasserman. 2018. ``Distribution-Free Predictive Inference for Regression.''
-  \emph{Journal of the American Statistical Association} 113 (523): 1094--1111.
-  https://doi.org/{10.1080/01621459.2017.1307116}.
+%%% 16
+\bibitem[\protect\citeauthoryear{Lei et~al.}{2018}]{lei2018}
+\begin{barticle}
+\bauthor{\bsnm{Lei}, \binits{J.}},
+\bauthor{\bsnm{G'Sell}, \binits{M.}},
+\bauthor{\bsnm{Rinaldo}, \binits{A.}},
+\bauthor{\bsnm{Tibshirani}, \binits{R.J.}},
+\bauthor{\bsnm{Wasserman}, \binits{L.}}:
+\batitle{Distribution-free predictive inference for regression}.
+\bjtitle{Journal of the American Statistical Association}
+\bvolume{113}(\bissue{523}),
+\bfpage{1094}--\blpage{1111}
+(\byear{2018})
+\doiurl{10.1080/01621459.2017.1307116}
+\end{barticle}
+\endbibitem
 
-\bibitem[Romano, Patterson, and Cand{\`e}s(2019)]{romano2019}
-Romano, Yaniv, Evan Patterson, and Emmanuel~J. Cand{\`e}s. 2019.
-  ``Conformalized Quantile Regression.'' In \emph{Advances in Neural
-  Information Processing Systems}, Vol.~32.
-  \urlprefix\url{https://proceedings.neurips.cc/paper/2019/hash/5103c3584b063c431bd1268e9b5e76fb-Abstract.html}.
+%%% 17
+\bibitem[\protect\citeauthoryear{Romano et~al.}{2019}]{romano2019}
+\begin{bchapter}
+\bauthor{\bsnm{Romano}, \binits{Y.}},
+\bauthor{\bsnm{Patterson}, \binits{E.}},
+\bauthor{\bsnm{Cand{\`e}s}, \binits{E.J.}}:
+\bctitle{Conformalized quantile regression}.
+In: \bbtitle{Advances in Neural Information Processing Systems},
+vol. \bseriesno{32}
+(\byear{2019}).
+\burl{https://proceedings.neurips.cc/paper/2019/hash/5103c3584b063c431bd1268e9b5e76fb-Abstract.html}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Barber et~al.(2023)]{barber2023}
-Barber, Rina~Foygel, Emmanuel~J. Cand{\`e}s, Aaditya Ramdas, and Ryan~J.
-  Tibshirani. 2023. ``Conformal prediction beyond exchangeability.'' \emph{The
-  Annals of Statistics} 51 (2): 816--845. https://doi.org/{10.1214/23-AOS2276}.
+%%% 18
+\bibitem[\protect\citeauthoryear{Barber et~al.}{2023}]{barber2023}
+\begin{barticle}
+\bauthor{\bsnm{Barber}, \binits{R.F.}},
+\bauthor{\bsnm{Cand{\`e}s}, \binits{E.J.}},
+\bauthor{\bsnm{Ramdas}, \binits{A.}},
+\bauthor{\bsnm{Tibshirani}, \binits{R.J.}}:
+\batitle{Conformal prediction beyond exchangeability}.
+\bjtitle{The Annals of Statistics}
+\bvolume{51}(\bissue{2}),
+\bfpage{816}--\blpage{845}
+(\byear{2023})
+\doiurl{10.1214/23-AOS2276}
+\end{barticle}
+\endbibitem
 
-\bibitem[Xu and Xie(2023)]{xu2023}
-Xu, Chen, and Yao Xie. 2023. ``Sequential Predictive Conformal Inference for
-  Time Series.'' In \emph{Proceedings of the 40th International Conference on
-  Machine Learning}, Vol. 202, 38707--38727. PMLR.
-  \urlprefix\url{https://proceedings.mlr.press/v202/xu23r.html}.
+%%% 19
+\bibitem[\protect\citeauthoryear{Xu and Xie}{2023}]{xu2023}
+\begin{bchapter}
+\bauthor{\bsnm{Xu}, \binits{C.}},
+\bauthor{\bsnm{Xie}, \binits{Y.}}:
+\bctitle{Sequential predictive conformal inference for time series}.
+In: \bbtitle{Proceedings of the 40th International Conference on Machine
+  Learning},
+vol. \bseriesno{202},
+pp. \bfpage{38707}--\blpage{38727}.
+\bpublisher{PMLR}
+(\byear{2023}).
+\burl{https://proceedings.mlr.press/v202/xu23r.html}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Cini et~al.(2025)]{cini2025}
-Cini, Andrea, Alexander Jenkins, Danilo Mandic, Cesare Alippi, and
-  Filippo~Maria Bianchi. 2025. ``Relational Conformal Prediction for Correlated
-  Time Series.'' In \emph{Proceedings of the 42nd International Conference on
-  Machine Learning}, Vol. 267, 10949--10965. PMLR.
-  \urlprefix\url{https://proceedings.mlr.press/v267/cini25a.html}.
+%%% 20
+\bibitem[\protect\citeauthoryear{Cini et~al.}{2025}]{cini2025}
+\begin{bchapter}
+\bauthor{\bsnm{Cini}, \binits{A.}},
+\bauthor{\bsnm{Jenkins}, \binits{A.}},
+\bauthor{\bsnm{Mandic}, \binits{D.}},
+\bauthor{\bsnm{Alippi}, \binits{C.}},
+\bauthor{\bsnm{Bianchi}, \binits{F.M.}}:
+\bctitle{Relational conformal prediction for correlated time series}.
+In: \bbtitle{Proceedings of the 42nd International Conference on Machine
+  Learning},
+vol. \bseriesno{267},
+pp. \bfpage{10949}--\blpage{10965}.
+\bpublisher{PMLR}
+(\byear{2025}).
+\burl{https://proceedings.mlr.press/v267/cini25a.html}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Chen, Zhou, and Cheng(2026)]{chen2026}
-Chen, Baiting, Xiaofan Zhou, and Lu~Cheng. 2026. ``Post-Training Adaptive
-  Conformal Prediction for Incomplete Time Series.'' \emph{Transactions on
-  Machine Learning Research}
-  \urlprefix\url{https://openreview.net/forum?id=KMBU4wx79B}.
+%%% 21
+\bibitem[\protect\citeauthoryear{Chen et~al.}{2026}]{chen2026}
+\begin{botherref}
+\oauthor{\bsnm{Chen}, \binits{B.}},
+\oauthor{\bsnm{Zhou}, \binits{X.}},
+\oauthor{\bsnm{Cheng}, \binits{L.}}:
+Post-training adaptive conformal prediction for incomplete time series.
+Transactions on Machine Learning Research
+(2026)
+\end{botherref}
+\endbibitem
 
-\bibitem[Jensen, Bianchi, and Anfinsen(2024)]{jensen2024}
-Jensen, Vilde, Filippo~Maria Bianchi, and Stian~Normann Anfinsen. 2024.
-  ``Ensemble Conformalized Quantile Regression for Probabilistic Time Series
-  Forecasting.'' \emph{IEEE Transactions on Neural Networks and Learning
-  Systems} 35 (7): 9014--9025. https://doi.org/{10.1109/TNNLS.2022.3217694}.
+%%% 22
+\bibitem[\protect\citeauthoryear{Jensen et~al.}{2024}]{jensen2024}
+\begin{barticle}
+\bauthor{\bsnm{Jensen}, \binits{V.}},
+\bauthor{\bsnm{Bianchi}, \binits{F.M.}},
+\bauthor{\bsnm{Anfinsen}, \binits{S.N.}}:
+\batitle{Ensemble conformalized quantile regression for probabilistic time
+  series forecasting}.
+\bjtitle{IEEE Transactions on Neural Networks and Learning Systems}
+\bvolume{35}(\bissue{7}),
+\bfpage{9014}--\blpage{9025}
+(\byear{2024})
+\doiurl{10.1109/TNNLS.2022.3217694}
+\end{barticle}
+\endbibitem
 
-\bibitem[Zhou et~al.(2025)]{zhou2025}
-Zhou, Xiaofan, Baiting Chen, Yu~Gui, and Lu~Cheng. 2025. ``Conformal
-  Prediction: A Data Perspective.'' \emph{ACM Computing Surveys} 58 (2): 1--37.
-  Article 49, https://doi.org/{10.1145/3736575}.
+%%% 23
+\bibitem[\protect\citeauthoryear{Zhou et~al.}{2025}]{zhou2025}
+\begin{barticle}
+\bauthor{\bsnm{Zhou}, \binits{X.}},
+\bauthor{\bsnm{Chen}, \binits{B.}},
+\bauthor{\bsnm{Gui}, \binits{Y.}},
+\bauthor{\bsnm{Cheng}, \binits{L.}}:
+\batitle{Conformal prediction: A data perspective}.
+\bjtitle{ACM Computing Surveys}
+\bvolume{58}(\bissue{2}),
+\bfpage{1}--\blpage{37}
+(\byear{2025})
+\doiurl{10.1145/3736575} .
+\bcomment{Article 49}
+\end{barticle}
+\endbibitem
 
-\bibitem[{Alvarez Lopez} et~al.(2018)]{lopez2018}
-{Alvarez Lopez}, Pablo, Michael Behrisch, Laura Bieker-Walz, Jakob Erdmann,
-  Yun-Pang Fl{\"o}tter{\"o}d, Robert Hilbrich, Leonhard L{\"u}cken, Johannes
-  Rummel, Peter Wagner, and Evamarie Wie{\ss}ner. 2018. ``Microscopic Traffic
-  Simulation using SUMO.'' In \emph{2018 21st International Conference on
-  Intelligent Transportation Systems}, 2575--2582.
-  \urlprefix\url{https://doi.org/10.1109/ITSC.2018.8569938}.
+%%% 24
+\bibitem[\protect\citeauthoryear{{Alvarez Lopez} et~al.}{2018}]{lopez2018}
+\begin{bchapter}
+\bauthor{\bsnm{{Alvarez Lopez}}, \binits{P.}},
+\bauthor{\bsnm{Behrisch}, \binits{M.}},
+\bauthor{\bsnm{Bieker-Walz}, \binits{L.}},
+\bauthor{\bsnm{Erdmann}, \binits{J.}},
+\bauthor{\bsnm{Fl{\"o}tter{\"o}d}, \binits{Y.-P.}},
+\bauthor{\bsnm{Hilbrich}, \binits{R.}},
+\bauthor{\bsnm{L{\"u}cken}, \binits{L.}},
+\bauthor{\bsnm{Rummel}, \binits{J.}},
+\bauthor{\bsnm{Wagner}, \binits{P.}},
+\bauthor{\bsnm{Wie{\ss}ner}, \binits{E.}}:
+\bctitle{Microscopic traffic simulation using sumo}.
+In: \bbtitle{2018 21st International Conference on Intelligent Transportation
+  Systems},
+pp. \bfpage{2575}--\blpage{2582}
+(\byear{2018}).
+\doiurl{10.1109/ITSC.2018.8569938} .
+\burl{https://doi.org/10.1109/ITSC.2018.8569938}
+\end{bchapter}
+\endbibitem
 
-\bibitem[Koenker and Bassett(1978)]{koenker1978}
-Koenker, Roger, and Gilbert Bassett, Jr. 1978. ``Regression Quantiles.''
-  \emph{Econometrica} 46 (1): 33--50. https://doi.org/{10.2307/1913643}.
+%%% 25
+\bibitem[\protect\citeauthoryear{Koenker and Bassett}{1978}]{koenker1978}
+\begin{barticle}
+\bauthor{\bsnm{Koenker}, \binits{R.}},
+\bauthor{\bsnm{Bassett}, \binits{G.} \bsuffix{Jr.}}:
+\batitle{Regression quantiles}.
+\bjtitle{Econometrica}
+\bvolume{46}(\bissue{1}),
+\bfpage{33}--\blpage{50}
+(\byear{1978})
+\doiurl{10.2307/1913643}
+\end{barticle}
+\endbibitem
 
-\bibitem[Gneiting and Raftery(2007)]{gneiting2007}
-Gneiting, Tilmann, and Adrian~E. Raftery. 2007. ``Strictly Proper Scoring
-  Rules, Prediction, and Estimation.'' \emph{Journal of the American
-  Statistical Association} 102 (477): 359--378.
-  https://doi.org/{10.1198/016214506000001437}.
+%%% 26
+\bibitem[\protect\citeauthoryear{Gneiting and Raftery}{2007}]{gneiting2007}
+\begin{barticle}
+\bauthor{\bsnm{Gneiting}, \binits{T.}},
+\bauthor{\bsnm{Raftery}, \binits{A.E.}}:
+\batitle{Strictly proper scoring rules, prediction, and estimation}.
+\bjtitle{Journal of the American Statistical Association}
+\bvolume{102}(\bissue{477}),
+\bfpage{359}--\blpage{378}
+(\byear{2007})
+\doiurl{10.1198/016214506000001437}
+\end{barticle}
+\endbibitem
 
 \end{thebibliography}
-
-
-
-
 
 \end{document}
